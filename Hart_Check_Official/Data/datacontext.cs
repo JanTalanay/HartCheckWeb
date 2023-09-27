@@ -44,21 +44,21 @@ namespace Hart_Check_Official.Data
                 .IsRequired();
 
             modelBuilder.Entity<BugReport>()//many to one
-                .HasMany(e => e.User)
-                .WithOne(e => e.bugreport)
+                .HasOne(e => e.User)
+                .WithMany(e => e.bugreport)
                 .HasForeignKey(e => e.usersID)
                 .IsRequired();
 
             modelBuilder.Entity<Patients>()//one to  one
                 .HasOne(e => e.User)
-                .WithOne(e => e.patients)
-                .HasForeignKey<Users>(e => e.usersID)
+                .WithMany(e => e.patients)
+                .HasForeignKey(e => e.usersID)
                 .IsRequired();
 
             modelBuilder.Entity<HealthCareProfessional>()
                 .HasOne(e => e.User)
-                .WithOne(e => e.doctor)
-                .HasForeignKey<Users>(e => e.usersID)
+                .WithMany(e => e.doctor)
+                .HasForeignKey(e => e.usersID)
                 .IsRequired();
 
             //Doctor

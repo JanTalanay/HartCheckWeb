@@ -19,9 +19,9 @@ namespace Hart_Check_Official.Models
         public int role { get; set; }
 
 
-        public BugReport bugreport { get; set; }
-        public Patients patients { get; set; }
-        public HealthCareProfessional doctor { get; set; }
+        public ICollection<BugReport> bugreport { get; set; }
+        public ICollection<Patients> patients { get; set; }
+        public ICollection<HealthCareProfessional> doctor { get; set; }
 
     }
 }

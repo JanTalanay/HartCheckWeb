@@ -11,6 +11,6 @@ namespace Hart_Check_Official.Models
         public int featureID { get; set; }
         public string description { get; set; }
 
-        public ICollection<Users> User { get; set; }
+        public Users User { get; set; }
     }
 }
