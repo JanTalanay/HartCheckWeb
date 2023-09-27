@@ -7,7 +7,6 @@ namespace Hart_Check_Official.Models
         [Key]
         public int patientID { get; set; }
         public int usersID { get; set; }
-
         public Users User { get; set; }
         public PatientsDoctor patientDoctor { get; set; }
         public BodyMass BodyMass { get; set; }

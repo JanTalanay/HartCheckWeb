@@ -37,25 +37,29 @@ namespace Hart_Check_Official.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<BugReport>()//many to one
-                .HasMany(e => e.User)
-                .WithOne(e => e.BugReports)
-                .HasForeignKey(e => e.usersID);
-
             modelBuilder.Entity<BMIType>()
                 .HasOne(e => e.BodyMass)
                 .WithOne(e => e.BMIType)
-                .HasForeignKey<BMIType>(e => e.BMITypeID);
+                .HasForeignKey<BMIType>(e => e.BMITypeID)
+                .IsRequired();
 
-            modelBuilder.Entity<Users>()//one to  one
-                .HasOne(e => e.patients)
-                .WithOne(e => e.User)
-                .HasForeignKey<Users>(e => e.usersID);
+            modelBuilder.Entity<BugReport>()//many to one
+                .HasMany(e => e.User)
+                .WithOne(e => e.bugreport)
+                .HasForeignKey(e => e.usersID)
+                .IsRequired();
 
-            modelBuilder.Entity<Users>()
-                .HasOne(e => e.doctor)
-                .WithOne(e => e.User)
-                .HasForeignKey<Users>(e => e.usersID);
+            modelBuilder.Entity<Patients>()//one to  one
+                .HasOne(e => e.User)
+                .WithOne(e => e.patients)
+                .HasForeignKey<Users>(e => e.usersID)
+                .IsRequired();
+
+            modelBuilder.Entity<HealthCareProfessional>()
+                .HasOne(e => e.User)
+                .WithOne(e => e.doctor)
+                .HasForeignKey<Users>(e => e.usersID)
+                .IsRequired();
 
             //Doctor
             modelBuilder.Entity<HealthCareClinic>()

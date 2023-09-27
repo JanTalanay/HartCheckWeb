@@ -1,13 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Numerics;
-
-namespace Hart_Check_Official.Models
+﻿namespace Hart_Check_Official.DTO
 {
-    public class Users
+    public class UserDto
     {
-        //many is always ICOLLECTION
-        //one is calling to the Model
-        [Key]
         public int usersID { get; set; }
         public string email { get; set; }
         public string firstName { get; set; }
@@ -17,11 +11,5 @@ namespace Hart_Check_Official.Models
         public int gender { get; set; }
         public long phoneNumber { get; set; }
         public int role { get; set; }
-
-
-        public BugReport bugreport { get; set; }
-        public Patients patients { get; set; }
-        public HealthCareProfessional doctor { get; set; }
-
     }
 }
