@@ -15,7 +15,14 @@ namespace Hart_Check_Official.Repository
 
         public bool CreateUsers(Users users)
         {
+
             _context.Add(users);
+            return Save();
+        }
+
+        public bool DeleteUser(Users users)
+        {
+            _context.Remove(users);
             return Save();
         }
 
@@ -44,6 +51,12 @@ namespace Hart_Check_Official.Repository
         {
             var saved = _context.SaveChanges();
             return saved > 0 ? true : false;
+        }
+
+        public bool UpdateUsers(Users users)
+        {
+            _context.Update(users);
+            return Save();
         }
 
         public bool UserExists(int userID)

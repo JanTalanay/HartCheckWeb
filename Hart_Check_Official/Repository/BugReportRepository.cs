@@ -20,6 +20,12 @@ namespace Hart_Check_Official.Repository
             return Save();
         }
 
+        public bool DeleteBugReport(BugReport bugReport)
+        {
+            _context.Remove(bugReport);
+            return Save();
+        }
+
         public BugReport GetBugReport(int bugID)
         {
             return _context.BugReport.Where(e => e.bugID == bugID).FirstOrDefault();
@@ -39,6 +45,11 @@ namespace Hart_Check_Official.Repository
         {
             var saved = _context.SaveChanges();
             return saved > 0 ? true : false;
+        }
+
+        public bool BugExists(int bugID)
+        {
+            return _context.BugReport.Any(e => e.bugID == bugID);
         }
     }
 }

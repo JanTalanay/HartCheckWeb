@@ -53,7 +53,8 @@ namespace Hart_Check_Official.Controllers
             }
             return Ok(user);
         }
-        [HttpPost]
+
+        [HttpPost]//register
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         public IActionResult CreateUser([FromBody] UserDto userCreate)
@@ -85,5 +86,61 @@ namespace Hart_Check_Official.Controllers
             }
             return Ok("Successfully created");
         }
+        [HttpDelete("{userID}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteUsers(int userID)
+        {
+            if (!_userRepository.UserExists(userID))
+            {
+                return NotFound();
+            }
+            var usersToDelete = _userRepository.GetUsers(userID);
+
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!_userRepository.DeleteUser(usersToDelete))
+            {
+                ModelState.AddModelError("", "Something Went wrong deleting");
+            }
+            return NoContent();
+        }
+        [HttpPut("{userID}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult UpdateUser(int userID, [FromBody] UserDto updateUser)
+        {
+            if(updateUser == null)
+            {
+                return BadRequest(ModelState);
+            }
+            if (userID != updateUser.usersID)
+            {
+                return BadRequest(ModelState);
+            }
+            if (!_userRepository.UserExists(userID))
+            {
+                return NotFound();
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            var userMap = _mapper.Map<Users>(updateUser);
+
+            if (!_userRepository.UpdateUsers(userMap))
+            {
+                ModelState.AddModelError("", "Something Went Wrong");
+                return StatusCode(500, ModelState);
+            }
+            return NoContent();
+
+        }
     }
 }
+

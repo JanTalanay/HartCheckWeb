@@ -2,6 +2,7 @@
 using Hart_Check_Official.DTO;
 using Hart_Check_Official.Interface;
 using Hart_Check_Official.Models;
+using Hart_Check_Official.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -65,6 +66,8 @@ namespace Hart_Check_Official.Controllers
             }
             return Ok("Successfully created");
         }
+
+
         [HttpPost("{userID}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -96,6 +99,31 @@ namespace Hart_Check_Official.Controllers
                 return StatusCode(500, ModelState);
             }
             return Ok("Successfully created");
+        }
+
+
+        [HttpDelete("{bugID}")]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteBugReport(int bugID)
+        {
+            if (!_bugRepository.BugExists(bugID))
+            {
+                return NotFound();
+            }
+            var bugToDelete = _bugRepository.GetBugReport(bugID);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!_bugRepository.DeleteBugReport(bugToDelete))
+            {
+                ModelState.AddModelError("", "Something Went wrong deleting");
+            }
+            return NoContent();
         }
     }
 }

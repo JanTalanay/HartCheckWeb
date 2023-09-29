@@ -10,9 +10,12 @@ namespace Hart_Check_Official.Interface
 
         int GetUsersRole (int patientID);
 
-        bool UserExists(int userID);
+        bool UserExists(int userID); 
 
         bool CreateUsers(Users users);
+        bool UpdateUsers(Users users);
+
+        bool DeleteUser(Users users);
 
         bool Save();
     }
