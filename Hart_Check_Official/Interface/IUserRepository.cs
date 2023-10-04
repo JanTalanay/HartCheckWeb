@@ -13,6 +13,8 @@ namespace Hart_Check_Official.Interface
         bool UserExists(int userID); 
 
         bool CreateUsers(Users users);
+        bool LoginUsers(Users users);
+        Task<bool> CreateUsersAsync(Users users);
         bool UpdateUsers(Users users);
 
         bool DeleteUser(Users users);

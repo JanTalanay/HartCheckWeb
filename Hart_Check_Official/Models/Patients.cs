@@ -11,14 +11,14 @@ namespace Hart_Check_Official.Models
 
         public Users User { get; set; }
         public PatientsDoctor patientDoctor { get; set; }
-        public BodyMass BodyMass { get; set; }
+        public ICollection<BodyMass> BodyMass { get; set; }
         public BloodPressureThreshold BloodPressureThreshold { get; set; }
-        public MedicalCondition MedicalConditions { get; set; }
-        public PreviousMedication PreviousMedication { get; set; }
-        public MedicalHistory MedicalHistory { get; set; }
-        public BloodPressure BloodPressure { get; set; }
-        public Consultation Consultation { get; set; }
-        public ArchievedRecord archievedrecord { get; set; }
-        public AuditLog auditlog { get; set; }
+        public ICollection<MedicalCondition> MedicalConditions { get; set; }
+        public ICollection<PreviousMedication> PreviousMedication { get; set; }
+        public ICollection<MedicalHistory> MedicalHistory { get; set; }
+        public ICollection<BloodPressure> BloodPressure { get; set; }
+        public ICollection<Consultation> Consultation { get; set; }
+        public ICollection<ArchievedRecord> archievedrecord { get; set; }
+        public ICollection<AuditLog> auditlog { get; set; }
     }
 }

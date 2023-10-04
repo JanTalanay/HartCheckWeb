@@ -67,41 +67,6 @@ namespace Hart_Check_Official.Controllers
             return Ok("Successfully created");
         }
 
-
-        [HttpPost("{userID}")]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(400)]
-        public IActionResult CreateBugReportID([FromBody] BugReportDto bugreportCreate)
-        {
-            if (bugreportCreate == null)
-            {
-                return BadRequest(ModelState);
-            }
-            var bugReport = _bugRepository.GetBugReports()
-                .Where(e => e.description.Trim().ToUpper() == bugreportCreate.description.TrimEnd().ToUpper())
-                .FirstOrDefault();
-
-            if (bugReport != null)
-            {
-                ModelState.AddModelError("", "Already Exist");
-                return StatusCode(422, ModelState);
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            var bugReportMap = _mapper.Map<BugReport>(bugreportCreate);
-
-            if (!_bugRepository.CreateBugReport(bugReportMap))
-            {
-                ModelState.AddModelError("", "Something Went Wrong while saving");
-                return StatusCode(500, ModelState);
-            }
-            return Ok("Successfully created");
-        }
-
-
         [HttpDelete("{bugID}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]

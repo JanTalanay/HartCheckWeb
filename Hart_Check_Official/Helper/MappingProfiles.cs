@@ -13,6 +13,15 @@ namespace Hart_Check_Official.Helper
 
             CreateMap<BugReport, BugReportDto>();
             CreateMap<BugReportDto, BugReport>();
+
+            CreateMap<LoginDto, Users>();
+            CreateMap<Users, LoginDto>();
+
+            CreateMap<BodyMass, BodyMassDto>();
+            CreateMap<BodyMassDto, BodyMass>();
+
+            CreateMap<MedicalCondition, MedicalConditionDto>();
+            CreateMap<MedicalConditionDto, MedicalCondition>();
         }
     }
    

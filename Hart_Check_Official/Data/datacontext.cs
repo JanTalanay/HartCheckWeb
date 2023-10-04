@@ -40,103 +40,111 @@ namespace Hart_Check_Official.Data
             modelBuilder.Entity<BMIType>()
                 .HasOne(e => e.BodyMass)
                 .WithOne(e => e.BMIType)
-                .HasForeignKey<BMIType>(e => e.BMITypeID)
-                .IsRequired();
+                .HasForeignKey<BMIType>(e => e.BMITypeID);
 
-            modelBuilder.Entity<BugReport>()//many to one
+            modelBuilder.Entity<BugReport>()
                 .HasOne(e => e.User)
                 .WithMany(e => e.bugreport)
-                .HasForeignKey(e => e.usersID)
-                .IsRequired();
+                .HasForeignKey(e => e.usersID);
 
-            modelBuilder.Entity<Patients>()//one to  one
-                .HasOne(e => e.User)
-                .WithMany(e => e.patients)
-                .HasForeignKey(e => e.usersID)
-                .IsRequired();
 
+            //Doctor
             modelBuilder.Entity<HealthCareProfessional>()
                 .HasOne(e => e.User)
                 .WithMany(e => e.doctor)
-                .HasForeignKey(e => e.usersID)
-                .IsRequired();
+                .HasForeignKey(e => e.usersID);
 
-            //Doctor
             modelBuilder.Entity<HealthCareClinic>()
-                .HasMany(e => e.doctor)
-                .WithOne(e => e.HealthcareClinic)
+                .HasOne(e => e.doctor)
+                .WithMany(e => e.HealthcareClinic)
                 .HasForeignKey(e => e.doctorID);
 
             modelBuilder.Entity<HealthCareProfessional>()
                 .HasOne(e => e.BloodPressureThreshold)
                 .WithOne(e => e.doctor)
-                .HasForeignKey<HealthCareProfessional>(e => e.doctorID);
+                .HasForeignKey<BloodPressureThreshold>(e => e.doctorID);
 
-            modelBuilder.Entity<HealthCareClinic>()
-                .HasMany(e => e.clinic)
-                .WithOne(e => e.HealthcareClinic)
-                .HasForeignKey(e => e.clinicID);
-
-            modelBuilder.Entity<DoctorLicense>()
+            modelBuilder.Entity<PatientsDoctor>()
                 .HasOne(e => e.doctor)
-                .WithOne(e => e.Doctorlicense)
-                .HasForeignKey<DoctorLicense>(e => e.licenseID);
-
-            modelBuilder.Entity<DoctorSchedule>()
-                .HasMany(e => e.doctor)
-                .WithOne(e => e.DoctorSchedule)
+                .WithMany(e => e.patientDoctor)
                 .HasForeignKey(e => e.doctorID);
 
+            modelBuilder.Entity<HealthCareProfessional>()//goods
+                .HasOne(e => e.Doctorlicense)
+                .WithOne(e => e.doctor)
+                .HasForeignKey<HealthCareProfessional>(e => e.licenseID);
+
+            modelBuilder.Entity<DoctorSchedule>()//goods
+                .HasOne(e => e.doctor)
+                .WithMany(e => e.DoctorSchedule)
+                .HasForeignKey(e => e.doctorID);
+
+            modelBuilder.Entity<AuditLog>()//goods
+                .HasOne(e => e.doctor)
+                .WithMany(e => e.auditlog)
+                .HasForeignKey(e => e.doctorID);
+
+            /////
+            modelBuilder.Entity<Clinic>()
+                .HasOne(e => e.HealthcareClinic)
+                .WithMany(e => e.clinic)
+                .HasForeignKey(e => e.clinicID);
+
             //Patient
+            modelBuilder.Entity<Patients>()
+                .HasOne(e => e.User)
+                .WithMany(e => e.patients)
+                .HasForeignKey(e => e.usersID);
+
             modelBuilder.Entity<PatientsDoctor>()
-                .HasOne(e  => e.patient)
+                .HasOne(e => e.patient)
                 .WithOne(e => e.patientDoctor)
                 .HasForeignKey<PatientsDoctor>(e => e.patientID);
 
             modelBuilder.Entity<BodyMass>()
-                .HasMany(e => e.patient)
-                .WithOne(e => e.BodyMass)
+                .HasOne(e => e.patient)
+                .WithMany(e => e.BodyMass)
                 .HasForeignKey(e => e.patientID);
 
-            modelBuilder.Entity<Patients>()
-                .HasOne(e => e.BloodPressureThreshold)
-                .WithMany(e => e.patients)
+            modelBuilder.Entity<BloodPressureThreshold>()
+                .HasOne(e => e.patients)
+                .WithOne(e => e.BloodPressureThreshold)
+                .HasForeignKey<BloodPressureThreshold>(e => e.patientID);
+
+            modelBuilder.Entity<MedicalCondition>()
+                .HasOne(e => e.patients)
+                .WithMany(e => e.MedicalConditions)
                 .HasForeignKey(e => e.patientID);
 
-            modelBuilder.Entity<Patients>()
-                .HasOne(e => e.MedicalConditions)
-                .WithMany(e => e.patients)
+            modelBuilder.Entity<PreviousMedication>()
+                .HasOne(e => e.patients)
+                .WithMany(e => e.PreviousMedication)
                 .HasForeignKey(e => e.patientID);
 
-            modelBuilder.Entity<Patients>()
-                .HasOne(e => e.PreviousMedication)
-                .WithMany(e => e.patients)
+            modelBuilder.Entity<MedicalHistory>()
+                .HasOne(e => e.patients)
+                .WithMany(e => e.MedicalHistory)
                 .HasForeignKey(e => e.patientID);
 
-            modelBuilder.Entity<Patients>()
-                .HasOne(e => e.MedicalHistory)
-                .WithMany(e => e.patients)
+            modelBuilder.Entity<BloodPressure>()
+                .HasOne(e => e.patients)
+                .WithMany(e => e.BloodPressure)
                 .HasForeignKey(e => e.patientID);
 
-            modelBuilder.Entity<Patients>()
-                .HasOne(e => e.BloodPressure)
-                .WithMany(e => e.patients)
+            modelBuilder.Entity<Consultation>()
+                .HasOne(e => e.patients)
+                .WithMany(e => e.Consultation)
                 .HasForeignKey(e => e.patientID);
 
-            modelBuilder.Entity<Patients>()
-                .HasOne(e => e.Consultation)
-                .WithMany(e => e.patients)
+            modelBuilder.Entity<ArchievedRecord>()
+                .HasOne(e => e.patients)
+                .WithMany(e => e.archievedrecord)
                 .HasForeignKey(e => e.patientID);
-
-            modelBuilder.Entity<Patients>()
-                .HasOne(e => e.archievedrecord)
-                .WithOne(e => e.patients)
-                .HasForeignKey<Patients>(e => e.patientID);
 
             modelBuilder.Entity<Consultation>()
                 .HasMany(e => e.doctorsched)
                 .WithOne(e => e.consultation)
-                .HasForeignKey(e => e.doctorScheduleID);
+                .HasForeignKey(e => e.doctorSchedID);
 
             //consultation child
             modelBuilder.Entity<Consultation>()
@@ -167,18 +175,14 @@ namespace Hart_Check_Official.Data
 
             //audits
             modelBuilder.Entity<AuditLog>()
-                .HasMany(e => e.patients)
-                .WithOne(e => e.auditlog)
+                .HasOne(e => e.patients)
+                .WithMany(e => e.auditlog)
                 .HasForeignKey(e => e.patientID);
 
-            modelBuilder.Entity<AuditLog>()
-                .HasMany(e => e.doctor)
-                .WithOne(e => e.auditlog)
-                .HasForeignKey(e => e.doctorID);
 
             modelBuilder.Entity<AuditLog>()
-                .HasMany(e => e.admin)
-                .WithOne(e => e.auditlog)
+                .HasOne(e => e.admin)
+                .WithMany(e => e.auditlog)
                 .HasForeignKey(e => e.adminID);
 
             modelBuilder.Entity<AuditLogValue>()

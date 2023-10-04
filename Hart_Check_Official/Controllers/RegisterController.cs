@@ -54,6 +54,39 @@ namespace Hart_Check_Official.Controllers
             return Ok(user);
         }
 
+        //[HttpPost]//register also adding what role
+        //[ProducesResponseType(204)]
+        //[ProducesResponseType(400)]
+        //public async Task<IActionResult> CreateUserAsync([FromBody] UserDto userCreate)
+        //{
+        //    if (userCreate == null)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+        //    var users = _userRepository.GetUser()
+        //        .Where(e => e.firstName.Trim().ToUpper() == userCreate.lastName.TrimEnd().ToUpper())
+        //        .FirstOrDefault();
+
+        //    if (users != null)
+        //    {
+        //        ModelState.AddModelError("", "Already Exist");
+        //        return StatusCode(422, ModelState);
+        //    }
+
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+        //    var userMap = _mapper.Map<Users>(userCreate);
+
+        //    if (!await _userRepository.CreateUsersAsync(userMap))
+        //    {
+        //        ModelState.AddModelError("", "Something Went Wrong while saving");
+        //        return StatusCode(500, ModelState);
+        //    }
+        //    return Ok("Successfully created");
+        //}
+
         [HttpPost]//register
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -86,6 +119,7 @@ namespace Hart_Check_Official.Controllers
             }
             return Ok("Successfully created");
         }
+
         [HttpDelete("{userID}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]

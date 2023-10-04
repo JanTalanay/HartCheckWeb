@@ -15,9 +15,9 @@ namespace Hart_Check_Official.Models
         public DateTime? eventTimeStamp { get; set; }
 
 
-        public ICollection<Patients> patients { get; set; }
-        public ICollection<HealthCareProfessional> doctor { get; set; }
-        public ICollection<Admin> admin { get; set; }
+        public Patients patients { get; set; }
+        public HealthCareProfessional doctor { get; set; }
+        public Admin admin { get; set; }
         public ICollection<AuditLogValue> auditlogsvalue { get; set; }
 
 

@@ -15,8 +15,58 @@ namespace Hart_Check_Official.Repository
 
         public bool CreateUsers(Users users)
         {
+            int userID = users.usersID;
 
+            if (users.role == 1)
+            {
+                var patient = new Patients
+                {
+                    usersID = userID,
+                };
+                _context.Add(users);
+                _context.Add(patient);
+            }
+            else if (users.role == 2)
+            {
+                var doctor = new HealthCareProfessional
+                {
+                    usersID = userID,
+                };
+                _context.Add(users);
+                _context.Add(doctor);
+            }
+            return Save();
+        }
+
+        public async Task<bool> CreateUsersAsync(Users users)//it works, but doctor does add but idunno
+        {
             _context.Add(users);
+            await _context.SaveChangesAsync();
+
+            int userID = users.usersID;
+
+            if (users.role == 1)
+            {
+                var patient = new Patients
+                {
+                    usersID = userID,
+                };
+                _context.Add(patient);
+                await _context.SaveChangesAsync();
+            }
+            else if (users.role == 2)
+            {
+                var doctor = new HealthCareProfessional
+                {
+                    usersID = userID,
+                    //licenseID = null,
+                    //clinic = null,
+                    //verification = null,
+                };
+                _context.Add(doctor);
+                await _context.SaveChangesAsync();
+
+            }
             return Save();
         }
 
@@ -45,6 +95,16 @@ namespace Hart_Check_Official.Repository
                 return 0;
             }
             return patient.Count();
+        }
+
+        public bool LoginUsers(Users users)
+        {
+            var user = new Users();
+            if (_context.Users.Any(users => users.email.Equals(users.email)))
+            {
+                user = _context.Users.Where(user => user.email.Equals(users.email)).First();
+            }
+            return Save();
         }
 
         public bool Save()

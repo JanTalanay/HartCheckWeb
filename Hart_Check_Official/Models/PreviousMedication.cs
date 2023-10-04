@@ -9,6 +9,6 @@ namespace Hart_Check_Official.Models
         public int patientID { get; set; }
         public string previousMed {  get; set; }
 
-        public ICollection<Patients> patients { get; set; }
+        public Patients patients { get; set; }
     }
 }

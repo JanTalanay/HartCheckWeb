@@ -11,7 +11,7 @@ namespace Hart_Check_Official.Models
         public int sytolicThreshold { get; set; }
         public int diastolicThreshold { get; set; }
 
-        public ICollection<Patients> patients { get; set; }
+        public Patients patients { get; set; }
         public HealthCareProfessional doctor { get; set; }
     }
 }

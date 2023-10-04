@@ -10,7 +10,7 @@ namespace Hart_Check_Official.Models
         public string medicalHistory {  get; set; }
         public string pastSurgicalHistory { get; set; }
 
-        public ICollection<Patients> patients { get; set; }
+        public Patients patients { get; set; }
 
     }
 }

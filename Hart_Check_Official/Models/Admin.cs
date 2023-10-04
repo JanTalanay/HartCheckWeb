@@ -9,6 +9,6 @@ namespace Hart_Check_Official.Models
         public string email { get; set; }
         public string password { get; set; }
 
-        public AuditLog auditlog { get; set; }
+        public ICollection<AuditLog> auditlog { get; set; }
     }
 }
