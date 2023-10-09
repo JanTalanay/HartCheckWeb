@@ -22,6 +22,12 @@ namespace Hart_Check_Official.Helper
 
             CreateMap<MedicalCondition, MedicalConditionDto>();
             CreateMap<MedicalConditionDto, MedicalCondition>();
+
+            CreateMap<PreviousMedication, PreviousMedDto>();
+            CreateMap<PreviousMedDto, PreviousMedication>();
+
+            CreateMap<MedicalHistory, MedicalConditionDto>();
+            CreateMap<MedicalConditionDto, MedicalHistory>();
         }
     }
    

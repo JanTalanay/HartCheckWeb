@@ -1,6 +1,7 @@
 ﻿using Hart_Check_Official.Data;
 using Hart_Check_Official.Interface;
 using Hart_Check_Official.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hart_Check_Official.Repository
 {
@@ -15,30 +16,31 @@ namespace Hart_Check_Official.Repository
 
         public bool CreateUsers(Users users)
         {
-            int userID = users.usersID;
+            _context.Add(users);
+            //int userID = users.usersID;
 
-            if (users.role == 1)
-            {
-                var patient = new Patients
-                {
-                    usersID = userID,
-                };
-                _context.Add(users);
-                _context.Add(patient);
-            }
-            else if (users.role == 2)
-            {
-                var doctor = new HealthCareProfessional
-                {
-                    usersID = userID,
-                };
-                _context.Add(users);
-                _context.Add(doctor);
-            }
+            //if (users.role == 1)
+            //{
+            //    var patient = new Patients
+            //    {
+            //        usersID = userID,
+            //    };
+            //    _context.Add(users);
+            //    _context.Add(patient);
+            //}
+            //else if (users.role == 2)
+            //{
+            //    var doctor = new HealthCareProfessional
+            //    {
+            //        usersID = userID,
+            //    };
+            //    _context.Add(users);
+            //    _context.Add(doctor);
+            //}
             return Save();
         }
 
-        public async Task<bool> CreateUsersAsync(Users users)//it works, but doctor does add but idunno
+        public async Task<bool> CreateUsersAsync(Users users)//it works, causing 500 error
         {
             _context.Add(users);
             await _context.SaveChangesAsync();
@@ -59,9 +61,9 @@ namespace Hart_Check_Official.Repository
                 var doctor = new HealthCareProfessional
                 {
                     usersID = userID,
-                    //licenseID = null,
-                    //clinic = null,
-                    //verification = null,
+                    licenseID = null,
+                    clinic = null,
+                    verification = null,
                 };
                 _context.Add(doctor);
                 await _context.SaveChangesAsync();
@@ -86,17 +88,6 @@ namespace Hart_Check_Official.Repository
             return _context.Users.Where(e => e.usersID == userID).FirstOrDefault();
         }
 
-        public int GetUsersRole(int patientID)
-        {
-            var patient = _context.Patients.Where(e => e.User.usersID == patientID);
-
-            if (patient.Count() <= 0)
-            {
-                return 0;
-            }
-            return patient.Count();
-        }
-
         public bool LoginUsers(Users users)
         {
             var user = new Users();
@@ -115,6 +106,7 @@ namespace Hart_Check_Official.Repository
 
         public bool UpdateUsers(Users users)
         {
+
             _context.Update(users);
             return Save();
         }

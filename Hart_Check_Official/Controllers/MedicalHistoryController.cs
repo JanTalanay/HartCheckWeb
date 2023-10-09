@@ -10,23 +10,23 @@ namespace Hart_Check_Official.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BugReportController : ControllerBase
+    public class MedicalHistoryController : ControllerBase
     {
-        private readonly IBugReportRepository _bugRepository;
+        private readonly IMedicalHistoryRepository _medicalHistoryRepository;
+
 
         private readonly IMapper _mapper;
 
-        public BugReportController(IBugReportRepository bugRepository, IMapper mapper)
+        public MedicalHistoryController(IMedicalHistoryRepository medicalHistoryRepository, IMapper mapper)
         {
-            _bugRepository = bugRepository;
+            _medicalHistoryRepository = medicalHistoryRepository;
             _mapper = mapper;
         }
-
         [HttpGet]//getting list all the data of the Users table
         [ProducesResponseType(200, Type = typeof(IEnumerable<Users>))]
-        public IActionResult getUsers()
+        public IActionResult GetMedicalHistory()
         {
-            var bug = _mapper.Map<List<BugReportDto>>(_bugRepository.GetBugReports());
+            var bug = _mapper.Map<List<MedicalHistoryDto>>(_medicalHistoryRepository.GetMedicalHistories());
 
             if (!ModelState.IsValid)
             {
@@ -37,29 +37,29 @@ namespace Hart_Check_Official.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateBugReport([FromBody] BugReportDto bugreportCreate)
+        public IActionResult CreateMedicalHistory([FromBody] MedicalHistoryDto medicalHistoryCreate)
         {
-            if(bugreportCreate == null)
+            if (medicalHistoryCreate == null)
             {
                 return BadRequest(ModelState);
             }
-            var bugReport = _bugRepository.GetBugReports()
-                .Where(e => e.description.Trim().ToUpper() == bugreportCreate.description.TrimEnd().ToUpper())
+            var bugReport = _medicalHistoryRepository.GetMedicalHistories()
+                .Where(e => e.pastSurgicalHistory.Trim().ToUpper() == medicalHistoryCreate.pastSurgicalHistory.TrimEnd().ToUpper())
                 .FirstOrDefault();
 
-            if(bugReport != null)
+            if (bugReport != null)
             {
                 ModelState.AddModelError("", "Already Exist");
                 return StatusCode(422, ModelState);
             }
 
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var bugReportMap = _mapper.Map<BugReport>(bugreportCreate);
+            var medicalHistoryMap = _mapper.Map<MedicalHistory>(medicalHistoryCreate);
 
-            if (!_bugRepository.CreateBugReport(bugReportMap))
+            if (!_medicalHistoryRepository.CreatemedHistory(medicalHistoryMap))
             {
                 ModelState.AddModelError("", "Something Went Wrong while saving");
                 return StatusCode(500, ModelState);
@@ -67,44 +67,44 @@ namespace Hart_Check_Official.Controllers
             return Ok("Successfully created");
         }
 
-        [HttpDelete("{bugID}")]
+        [HttpDelete("{medicalHistoryID}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public IActionResult DeleteBugReport(int bugID)
+        public IActionResult DeleteMedicalHistory(int medicalHistoryID)
         {
-            if (!_bugRepository.BugExists(bugID))
+            if (!_medicalHistoryRepository.medHistoryExsist(medicalHistoryID))
             {
                 return NotFound();
             }
-            var bugToDelete = _bugRepository.GetBugReport(bugID);
+            var medicalHistoryToDelete = _medicalHistoryRepository.GetMedicalHistory(medicalHistoryID);
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (!_bugRepository.DeleteBugReport(bugToDelete))
+            if (!_medicalHistoryRepository.DeletemedHistory(medicalHistoryToDelete))
             {
                 ModelState.AddModelError("", "Something Went wrong deleting");
             }
             return NoContent();
         }
-        [HttpPut("{bugID}")]
+        [HttpPut("{medicalHistoryID}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public IActionResult UpdateBugReport(int bugID, [FromBody] BugReportDto updateBugReport)
+        public IActionResult UpdateMedicalHistory(int medicalHistoryID, [FromBody] MedicalHistoryDto updateMedicalHistory)
         {
-            if (updateBugReport == null)
+            if (updateMedicalHistory == null)
             {
                 return BadRequest(ModelState);
             }
-            if (bugID != updateBugReport.bugID)
+            if (medicalHistoryID != updateMedicalHistory.medicalHistoryID)
             {
                 return BadRequest(ModelState);
             }
-            if (!_bugRepository.BugExists(bugID))
+            if (!_medicalHistoryRepository.medHistoryExsist(medicalHistoryID))
             {
                 return NotFound();
             }
@@ -112,9 +112,9 @@ namespace Hart_Check_Official.Controllers
             {
                 return BadRequest();
             }
-            var bugMap = _mapper.Map<BugReport>(updateBugReport);
+            var medicalHistoryMap = _mapper.Map<MedicalHistory>(updateMedicalHistory);
 
-            if (!_bugRepository.UpdateBugReport(bugMap))
+            if (!_medicalHistoryRepository.UpdatemedHistory(medicalHistoryMap))
             {
                 ModelState.AddModelError("", "Something Went Wrong");
                 return StatusCode(500, ModelState);

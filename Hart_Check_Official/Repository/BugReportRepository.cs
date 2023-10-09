@@ -51,5 +51,11 @@ namespace Hart_Check_Official.Repository
         {
             return _context.BugReport.Any(e => e.bugID == bugID);
         }
+
+        public bool UpdateBugReport(BugReport bugReport)
+        {
+            _context.Update(bugReport);
+            return Save();
+        }
     }
 }

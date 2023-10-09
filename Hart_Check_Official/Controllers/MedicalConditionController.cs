@@ -88,5 +88,38 @@ namespace Hart_Check_Official.Controllers
             return NoContent();
 
         }
+
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateMedicalCond([FromBody] MedicalConditionDto medCondCreate)
+        {
+            if (medCondCreate == null)
+            {
+                return BadRequest(ModelState);
+            }
+            var medCond = _medicalConditionRepository.GetMedicalConditions()
+                .Where(e => e.medicalCondition.Trim().ToUpper() == medCondCreate.conditionName.Trim().ToUpper())
+                .FirstOrDefault();
+
+            if (medCond != null)
+            {
+                ModelState.AddModelError("", "Already Exist");
+                return StatusCode(422, ModelState);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var medCondMap = _mapper.Map<MedicalCondition>(medCondCreate);
+
+            if (!_medicalConditionRepository.CreateMedicalCondition(medCondMap))
+            {
+                ModelState.AddModelError("", "Something Went Wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+            return Ok("Successfully created");
+        }
     }
 }

@@ -15,7 +15,6 @@ namespace Hart_Check_Official.Interface
         bool CreateMedicalCondition(MedicalCondition medicalCondition);
         bool UpdateMedicalCondition(MedicalCondition medicalCondition);
         bool DeleteMedicalCondition(MedicalCondition medicalCondition);
-        Task<bool> CreateUsersAsync(MedicalCondition medicalCondition);
         bool Save();
     }
 }

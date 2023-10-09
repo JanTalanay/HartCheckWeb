@@ -5,8 +5,6 @@ namespace Hart_Check_Official.Models
 {
     public class Users
     {
-        //many is always ICOLLECTION
-        //one is calling to the Model
         [Key]
         public int usersID { get; set; }
         public string email { get; set; }

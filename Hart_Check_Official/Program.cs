@@ -13,6 +13,8 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IBugReportRepository, BugReportRepository>();
 builder.Services.AddScoped<IBodyMassRepository, BodyMassRepository>();
 builder.Services.AddScoped<IMedicalConditionRepository, MedicalConditionRepository>();
+builder.Services.AddScoped<IPreviousMedRepository, PreviousMedRepository>();
+builder.Services.AddScoped<IMedicalHistoryRepository, MedicalHistoryRepository>();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

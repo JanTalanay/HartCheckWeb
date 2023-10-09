@@ -13,6 +13,7 @@ namespace Hart_Check_Official.Interface
 
         bool CreateBugReport(BugReport bugReport);
         bool DeleteBugReport(BugReport bugReport);
+        bool UpdateBugReport(BugReport bugReport);
 
         bool Save();
     }

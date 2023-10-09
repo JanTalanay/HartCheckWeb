@@ -34,7 +34,7 @@ namespace Hart_Check_Official.Controllers
             }
             return Ok(user);
         }
-        [HttpPost]//to be fix
+        [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         public IActionResult CreateBodyMass([FromBody] BodyMassDto bodyMassCreate)
@@ -43,11 +43,11 @@ namespace Hart_Check_Official.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var users = _bodyMassRepository.GetBodies();
-                //.Where(e => e.firstName.Trim().ToUpper() == userCreate.lastName.TrimEnd().ToUpper())
-                //.FirstOrDefault();
+            var bodyMass = _bodyMassRepository.GetBodies()
+                .Where(e => e.weight == bodyMassCreate.height)
+                .FirstOrDefault();
 
-            if (users != null)
+            if (bodyMass != null)
             {
                 ModelState.AddModelError("", "Already Exist");
                 return StatusCode(422, ModelState);

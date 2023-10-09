@@ -33,6 +33,7 @@ namespace Hart_Check_Official.Data
         public DbSet<Messages> Messages { get; set; }
         public DbSet<Patients> Patients { get; set; }
         public DbSet<PatientsDoctor> PatientsDoctor { get; set; }
+        public DbSet<PreviousMedication> PreviousMedication { get; set; }
         public DbSet<Users> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

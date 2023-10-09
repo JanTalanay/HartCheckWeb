@@ -36,57 +36,6 @@ namespace Hart_Check_Official.Controllers
             return Ok(user);
         }
 
-        [HttpGet("{userID}")]// Getting user info by their ID
-        [ProducesResponseType(200, Type = typeof(Users))]
-        [ProducesResponseType(400)]
-        public IActionResult getUser(int userID)
-        {
-            if (!_userRepository.UserExists(userID))
-            {
-                return NotFound();
-            }
-            var user = _mapper.Map<UserDto>(_userRepository.GetUsers(userID));
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            return Ok(user);
-        }
-
-        //[HttpPost]//register also adding what role
-        //[ProducesResponseType(204)]
-        //[ProducesResponseType(400)]
-        //public async Task<IActionResult> CreateUserAsync([FromBody] UserDto userCreate)
-        //{
-        //    if (userCreate == null)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    var users = _userRepository.GetUser()
-        //        .Where(e => e.firstName.Trim().ToUpper() == userCreate.lastName.TrimEnd().ToUpper())
-        //        .FirstOrDefault();
-
-        //    if (users != null)
-        //    {
-        //        ModelState.AddModelError("", "Already Exist");
-        //        return StatusCode(422, ModelState);
-        //    }
-
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    var userMap = _mapper.Map<Users>(userCreate);
-
-        //    if (!await _userRepository.CreateUsersAsync(userMap))
-        //    {
-        //        ModelState.AddModelError("", "Something Went Wrong while saving");
-        //        return StatusCode(500, ModelState);
-        //    }
-        //    return Ok("Successfully created");
-        //}
-
         [HttpPost]//register
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -97,7 +46,7 @@ namespace Hart_Check_Official.Controllers
                 return BadRequest(ModelState);
             }
             var users = _userRepository.GetUser()
-                .Where(e => e.firstName.Trim().ToUpper() == userCreate.lastName.TrimEnd().ToUpper())
+                .Where(e => e.email.Trim().ToUpper() == userCreate.password.TrimEnd().ToUpper())
                 .FirstOrDefault();
 
             if (users != null)
@@ -132,7 +81,7 @@ namespace Hart_Check_Official.Controllers
             }
             var usersToDelete = _userRepository.GetUsers(userID);
 
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
@@ -143,21 +92,22 @@ namespace Hart_Check_Official.Controllers
             }
             return NoContent();
         }
-        [HttpPut("{userID}")]
+        [HttpPut("{usersID}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public IActionResult UpdateUser(int userID, [FromBody] UserDto updateUser)
+        public IActionResult UpdateUser(int usersID, [FromBody] UserDto userUpdate)
         {
-            if(updateUser == null)
+            if(userUpdate == null)
             {
                 return BadRequest(ModelState);
             }
-            if (userID != updateUser.usersID)
+            if (usersID != userUpdate.usersID)
             {
+                ModelState.AddModelError("usersID", "The 'usersID' in the URL does not match the 'usersID' in the request body.");
                 return BadRequest(ModelState);
             }
-            if (!_userRepository.UserExists(userID))
+            if (!_userRepository.UserExists(usersID))
             {
                 return NotFound();
             }
@@ -165,15 +115,15 @@ namespace Hart_Check_Official.Controllers
             {
                 return BadRequest();
             }
-            var userMap = _mapper.Map<Users>(updateUser);
 
-            if (!_userRepository.UpdateUsers(userMap))
+            var usersMap = _mapper.Map<Users>(userUpdate);
+
+            if (!_userRepository.UpdateUsers(usersMap))
             {
-                ModelState.AddModelError("", "Something Went Wrong");
+                ModelState.AddModelError("", "Something Went Wrong when Updating");
                 return StatusCode(500, ModelState);
             }
             return NoContent();
-
         }
     }
 }

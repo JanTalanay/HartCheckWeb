@@ -8,13 +8,11 @@ namespace Hart_Check_Official.Interface
 
         Users GetUsers(int userID);
 
-        int GetUsersRole (int patientID);
-
         bool UserExists(int userID); 
 
+        Task<bool> CreateUsersAsync(Users users);
         bool CreateUsers(Users users);
         bool LoginUsers(Users users);
-        Task<bool> CreateUsersAsync(Users users);
         bool UpdateUsers(Users users);
 
         bool DeleteUser(Users users);
