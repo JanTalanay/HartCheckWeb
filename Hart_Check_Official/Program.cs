@@ -16,6 +16,8 @@ builder.Services.AddScoped<IMedicalConditionRepository, MedicalConditionReposito
 builder.Services.AddScoped<IPreviousMedRepository, PreviousMedRepository>();
 builder.Services.AddScoped<IMedicalHistoryRepository, MedicalHistoryRepository>();
 
+builder.Services.AddScoped<IViewPatientListsRepository, ViewPatientListsRepository>();
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
