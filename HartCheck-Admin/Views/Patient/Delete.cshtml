@@ -1,0 +1,25 @@
+﻿@using HartCheck_Admin.Models
+@model EducationalResource
+
+<h1>Are you sure you want to delete this Educational Resource?</h1>
+
+<form method="post" asp-action="Delete" >
+    <input type="hidden" value="resourceID" id="resourceID" asp-for="resourceID" />
+    <div class="form-group">
+        <label asp-for="text">Title</label>
+        <input asp-for="text" class="form-control" placeholder="text" readonly>
+        <span asp-validation-for="text" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="link">Link</label>
+        <input asp-for="link" class="form-control" placeholder="link" readonly>
+        <span asp-validation-for="link" class="text-danger"></span>
+    
+ </form> 
+    
+    <div class="form-group">
+        <form action="Delete" method="post">
+            <input type="hidden" asp-for="resourceID" />
+            <input type="submit" value="Confirm" class="btn btn-danger float-right mt-3" />
+        </form>
+     </div>
