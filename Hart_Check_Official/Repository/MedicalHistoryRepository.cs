@@ -13,10 +13,11 @@ namespace Hart_Check_Official.Repository
             _context = context;
         }
 
-        public bool CreatemedHistory(MedicalHistory medicalHistory)
+        public MedicalHistory CreatemedHistory(MedicalHistory medicalHistory)
         {
             _context.Add(medicalHistory);
-            return Save();
+            _context.SaveChanges();
+            return (medicalHistory);
         }
 
         public bool DeletemedHistory(MedicalHistory medicalHistory)

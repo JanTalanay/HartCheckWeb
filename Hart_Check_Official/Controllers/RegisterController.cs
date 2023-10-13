@@ -25,7 +25,7 @@ namespace Hart_Check_Official.Controllers
 
         [HttpGet]//getting list all the data of the Users table
         [ProducesResponseType(200, Type = typeof(IEnumerable<Users>))]
-        public IActionResult getUsers()
+        public IActionResult GetUsers()
         {
             var user = _mapper.Map<List<UserDto>>(_userRepository.GetUser());
 
@@ -36,10 +36,60 @@ namespace Hart_Check_Official.Controllers
             return Ok(user);
         }
 
-        [HttpPost]//register
+        [HttpGet("{userID}")]//getting the users by ID
+        [ProducesResponseType(200, Type = typeof(Users))]
+        [ProducesResponseType(400)]
+        public IActionResult GetUsersByID(int userID)
+        {
+            if(!_userRepository.UserExists(userID))
+            {
+                return NotFound();
+            }
+            var user = _mapper.Map<UserDto>(_userRepository.GetUsers(userID));
+
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(user); ;
+        }
+
+        //[HttpPost]//register
+        //[ProducesResponseType(204)]
+        //[ProducesResponseType(400)]
+        //public IActionResult CreateUser([FromBody] UserDto userCreate)
+        //{
+        //    if (userCreate == null)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+        //    var users = _userRepository.GetUser()
+        //        .Where(e => e.email.Trim().ToUpper() == userCreate.password.TrimEnd().ToUpper())
+        //        .FirstOrDefault();
+
+        //    if (users != null)
+        //    {
+        //        ModelState.AddModelError("", "Already Exist");
+        //        return StatusCode(422, ModelState);
+        //    }
+
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+        //    var userMap = _mapper.Map<Users>(userCreate);
+
+        //    if (!_userRepository.CreateUsers(userMap))
+        //    {
+        //        ModelState.AddModelError("", "Something Went Wrong while saving");
+        //        return StatusCode(500, ModelState);
+        //    }
+        //    return Ok("Successfully created");
+        //}
+        [HttpPost]//register also adding what role
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateUser([FromBody] UserDto userCreate)
+        public async Task<IActionResult> CreateUserAsync([FromBody] UserDto userCreate)
         {
             if (userCreate == null)
             {
@@ -61,14 +111,23 @@ namespace Hart_Check_Official.Controllers
             }
             var userMap = _mapper.Map<Users>(userCreate);
 
-            if (!_userRepository.CreateUsers(userMap))
+            //if (!await _userRepository.CreateUsersAsync(userMap))
+            //{
+            //    ModelState.AddModelError("", "Something Went Wrong while saving");
+            //    return StatusCode(500, ModelState);
+            //}
+            //return Ok("Successfully created");
+            try
             {
-                ModelState.AddModelError("", "Something Went Wrong while saving");
+                await _userRepository.CreateUsersAsync(userMap);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Something Went Wrong while saving: " + ex.Message);
                 return StatusCode(500, ModelState);
             }
-            return Ok("Successfully created");
+            return Ok(userMap);
         }
-
         [HttpDelete("{userID}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]

@@ -11,7 +11,7 @@ namespace Hart_Check_Official.Interface
         BugReport GetBugReport(string description);
         bool BugExists(int bugID);
 
-        bool CreateBugReport(BugReport bugReport);
+        BugReport CreateBugReport(BugReport bugReport);
         bool DeleteBugReport(BugReport bugReport);
         bool UpdateBugReport(BugReport bugReport);
 

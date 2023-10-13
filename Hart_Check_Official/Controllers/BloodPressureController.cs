@@ -2,7 +2,6 @@
 using Hart_Check_Official.DTO;
 using Hart_Check_Official.Interface;
 using Hart_Check_Official.Models;
-using Hart_Check_Official.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,23 +9,23 @@ namespace Hart_Check_Official.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BodyMassController : ControllerBase
+    public class BloodPressureController : ControllerBase
     {
-        private readonly IBodyMassRepository _bodyMassRepository;
+        private readonly IBloodPressureRepository _bloodPressureRepository;
 
         private readonly IMapper _mapper;
 
-        public BodyMassController(IBodyMassRepository bodyMassRepository, IMapper mapper)
+        public BloodPressureController(IBloodPressureRepository bloodPressureRepository, IMapper mapper)
         {
-            _bodyMassRepository = bodyMassRepository;
+            _bloodPressureRepository = bloodPressureRepository;
             _mapper = mapper;
         }
 
         [HttpGet]//getting list all the data of the BodyMass table
-        [ProducesResponseType(200, Type = typeof(IEnumerable<BodyMass>))]
-        public IActionResult getBodyMass()
+        [ProducesResponseType(200, Type = typeof(IEnumerable<BloodPressure>))]
+        public IActionResult GetGetBloodPressure()
         {
-            var user = _mapper.Map<List<BodyMassDto>>(_bodyMassRepository.GetBodies());
+            var user = _mapper.Map<List<BloodPressureDto>>(_bloodPressureRepository.GetBloodPressures());
 
             if (!ModelState.IsValid)
             {
@@ -34,16 +33,16 @@ namespace Hart_Check_Official.Controllers
             }
             return Ok(user);
         }
-        [HttpGet("{bodyMassID}")]//getting the users by ID
-        [ProducesResponseType(200, Type = typeof(BodyMass))]
+        [HttpGet("{bloodPressureID}")]//getting the users by ID
+        [ProducesResponseType(200, Type = typeof(BloodPressure))]
         [ProducesResponseType(400)]
-        public IActionResult GetbodyMass(int bodyMassID)
+        public IActionResult GetBloodPressureID(int bloodPressureID)
         {
-            if (!_bodyMassRepository.BodyMassExist(bodyMassID))
+            if (!_bloodPressureRepository.BloodPressureExist(bloodPressureID))
             {
                 return NotFound();
             }
-            var user = _mapper.Map<BodyMassDto>(_bodyMassRepository.GetBodyMass(bodyMassID));
+            var user = _mapper.Map<BloodPressureDto>(_bloodPressureRepository.GetBloodPress(bloodPressureID));
 
             if (!ModelState.IsValid)
             {
@@ -54,15 +53,15 @@ namespace Hart_Check_Official.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateBodyMass([FromBody] BodyMassDto bodyMassCreate)
+        public IActionResult CreateGetBloodPressure([FromBody] BloodPressureDto bloodPressureCreate)
         {
-            if (bodyMassCreate == null)
+            if (bloodPressureCreate == null)
             {
                 return BadRequest(ModelState);
             }
-            var bodyMass = _bodyMassRepository.GetBodies()
-                .Where(e => e.weight == bodyMassCreate.height)
-                .FirstOrDefault();
+            var bodyMass = _bloodPressureRepository.GetBloodPressures();
+                //.Where(e => e.weight == bloodPressureCreate.height)
+                //.FirstOrDefault();
 
             if (bodyMass != null)
             {
@@ -74,64 +73,54 @@ namespace Hart_Check_Official.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var bodyMassMap = _mapper.Map<BodyMass>(bodyMassCreate);
+            var bloodpressureMap = _mapper.Map<BloodPressure>(bloodPressureCreate);
 
-            //if (!_bodyMassRepository.CreateBodyMass(bodyMassMap))
-            //{
-            //    ModelState.AddModelError("", "Something Went Wrong while saving");
-            //    return StatusCode(500, ModelState);
-            //}
-            //return Ok("Successfully created");
-            try
+            if (!_bloodPressureRepository.CreateBloodPressure(bloodpressureMap))
             {
-                _bodyMassRepository.CreateBodyMass(bodyMassMap);
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("", "Something Went Wrong while saving: " + ex.Message);
+                ModelState.AddModelError("", "Something Went Wrong while saving");
                 return StatusCode(500, ModelState);
             }
-            return Ok(bodyMassMap);
+            return Ok("Successfully created");
         }
 
-        [HttpDelete("{bodyMassID}")]
+        [HttpDelete("{bloodPressureID}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public IActionResult DeleteBodyMass(int bodyMassID)
+        public IActionResult DeleteGetBloodPressure(int bloodPressureID)
         {
-            if (!_bodyMassRepository.BodyMassExist(bodyMassID))
+            if (!_bloodPressureRepository.BloodPressureExist(bloodPressureID))
             {
                 return NotFound();
             }
-            var bodyMassToDelete = _bodyMassRepository.GetBodyMass(bodyMassID);
+            var bodyMassToDelete = _bloodPressureRepository.GetBloodPress(bloodPressureID);
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (!_bodyMassRepository.DeleteBodyMass(bodyMassToDelete))
+            if (!_bloodPressureRepository.DeleteBloodPressure(bodyMassToDelete))
             {
                 ModelState.AddModelError("", "Something Went wrong deleting");
             }
             return NoContent();
         }
-        [HttpPut("{bodyMassID}")]//to be fix
+        [HttpPut("{bloodPressureID}")]//to be fix
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public IActionResult Updatebodymass(int bodyMassID, [FromBody] BodyMassDto updateBodyMass)
+        public IActionResult UpdateGetBloodPressure(int bloodPressureID, [FromBody] BloodPressureDto updateBloodPressure)
         {
-            if (updateBodyMass == null)
+            if (updateBloodPressure == null)
             {
                 return BadRequest(ModelState);
             }
-            if (bodyMassID != updateBodyMass.bodyMassID)
+            if (bloodPressureID != updateBloodPressure.bloodPressureID)
             {
                 return BadRequest(ModelState);
             }
-            if (!_bodyMassRepository.BodyMassExist(bodyMassID))
+            if (!_bloodPressureRepository.BloodPressureExist(bloodPressureID))
             {
                 return NotFound();
             }
@@ -139,9 +128,9 @@ namespace Hart_Check_Official.Controllers
             {
                 return BadRequest();
             }
-            var bodyMassMap = _mapper.Map<BodyMass>(updateBodyMass);
+            var bloodpressureMap = _mapper.Map<BloodPressure>(updateBloodPressure);
 
-            if (!_bodyMassRepository.UpdateBodyMass(bodyMassMap))
+            if (!_bloodPressureRepository.UpdateBloodPressure(bloodpressureMap))
             {
                 ModelState.AddModelError("", "Something Went Wrong");
                 return StatusCode(500, ModelState);

@@ -33,6 +33,23 @@ namespace Hart_Check_Official.Controllers
             }
             return Ok(user);
         }
+        [HttpGet("{prevMedID}")]//getting the users by ID
+        [ProducesResponseType(200, Type = typeof(PreviousMedication))]
+        [ProducesResponseType(400)]
+        public IActionResult GetMedCondID(int prevMedID)
+        {
+            if (!_previousMedRepository.PrevMedExists(prevMedID))
+            {
+                return NotFound();
+            }
+            var user = _mapper.Map<PreviousMedDto>(_previousMedRepository.GetPrevMed(prevMedID));
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(user); ;
+        }
         [HttpPost]//Insert
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]

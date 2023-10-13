@@ -33,7 +33,24 @@ namespace Hart_Check_Official.Controllers
             }
             return Ok(user);
         }
-        [HttpDelete("{medCondID}")]//TO BE FIX
+        [HttpGet("{medCondID}")]//getting the users by ID
+        [ProducesResponseType(200, Type = typeof(MedicalCondition))]
+        [ProducesResponseType(400)]
+        public IActionResult GetMedCondID(int medCondID)
+        {
+            if (!_medicalConditionRepository.MedicalConditionExists(medCondID))
+            {
+                return NotFound();
+            }
+            var user = _mapper.Map<MedicalConditionDto>(_medicalConditionRepository.GetMedicalCondition(medCondID));
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(user); ;
+        }
+        [HttpDelete("{medCondID}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]

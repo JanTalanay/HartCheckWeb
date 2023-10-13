@@ -14,62 +14,76 @@ namespace Hart_Check_Official.Repository
             _context = context;
         }
 
-        public bool CreateUsers(Users users)
+        public Users CreateUsers(Users users)
         {
             _context.Add(users);
-            //int userID = users.usersID;
-
-            //if (users.role == 1)
-            //{
-            //    var patient = new Patients
-            //    {
-            //        usersID = userID,
-            //    };
-            //    _context.Add(users);
-            //    _context.Add(patient);
-            //}
-            //else if (users.role == 2)
-            //{
-            //    var doctor = new HealthCareProfessional
-            //    {
-            //        usersID = userID,
-            //    };
-            //    _context.Add(users);
-            //    _context.Add(doctor);
-            //}
-            return Save();
-        }
-
-        public async Task<bool> CreateUsersAsync(Users users)//it works, causing 500 error
-        {
-            _context.Add(users);
-            await _context.SaveChangesAsync();
-
-            int userID = users.usersID;
+            _context.SaveChanges();
 
             if (users.role == 1)
             {
                 var patient = new Patients
                 {
-                    usersID = userID,
+                    usersID = users.usersID,
                 };
-                _context.Add(patient);
-                await _context.SaveChangesAsync();
+                _context.Add(patient.usersID);
+                _context.SaveChanges();
             }
             else if (users.role == 2)
             {
                 var doctor = new HealthCareProfessional
                 {
-                    usersID = userID,
+                    usersID = users.usersID,
                     licenseID = null,
                     clinic = null,
                     verification = null,
                 };
                 _context.Add(doctor);
+                _context.SaveChanges();
+            }
+            return users;
+
+        }
+
+        public async Task<Users> CreateUsersAsync(Users users)//it works, causing 500 error
+        {
+            try
+            {
+                _context.Add(users);
                 await _context.SaveChangesAsync();
 
+                int userID = users.usersID;
+
+                if (users.role == 1)
+                {
+                    var patient = new Patients
+                    {
+                        usersID = userID,
+                    };
+                    _context.Add(patient);
+                    await _context.SaveChangesAsync();
+                }
+                else if (users.role == 2)
+                {
+                    var doctor = new HealthCareProfessional
+                    {
+                        usersID = userID,
+                        licenseID = null,
+                        clinic = null,
+                        verification = null,
+                    };
+                    _context.Add(doctor);
+                    await _context.SaveChangesAsync();
+                }
+
+                await _context.SaveChangesAsync();
+
+                return (users);
             }
-            return Save();
+            catch (Exception ex)
+            {
+                // Log the exception details
+                return null;
+            }
         }
 
         public bool DeleteUser(Users users)
@@ -88,14 +102,22 @@ namespace Hart_Check_Official.Repository
             return _context.Users.Where(e => e.usersID == userID).FirstOrDefault();
         }
 
-        public bool LoginUsers(Users users)
+        public Users LoginUsers(Login login)
         {
-            var user = new Users();
-            if (_context.Users.Any(users => users.email.Equals(users.email)))
+            var user = _context.Users.SingleOrDefault(x => x.email == login.email);
+            if (user == null)
             {
-                user = _context.Users.Where(user => user.email.Equals(users.email)).First();
+                throw new Exception("Invalid email or password.");
             }
-            return Save();
+
+            //Users pass = _context.Users.Where(Users => pass.email == login.email.Equals(login.password)).First();
+
+            //if(login.password != password.password)
+            //{
+            //    throw new Exception("Invalid email or password.");
+            //}
+
+            return user;
         }
 
         public bool Save()

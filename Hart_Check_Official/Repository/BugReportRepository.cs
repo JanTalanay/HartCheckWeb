@@ -13,11 +13,12 @@ namespace Hart_Check_Official.Repository
             _context = context;
         }
 
-        public bool CreateBugReport(BugReport bugReport)
+        public BugReport CreateBugReport(BugReport bugReport)
         {
             
             _context.Add(bugReport);
-            return Save();
+            _context.SaveChanges();
+            return (bugReport);
         }
 
         public bool DeleteBugReport(BugReport bugReport)

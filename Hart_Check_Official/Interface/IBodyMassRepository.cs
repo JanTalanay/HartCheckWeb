@@ -8,10 +8,8 @@ namespace Hart_Check_Official.Interface
 
         BodyMass GetBodyMass(int bodyMassID);
 
-        int GetBodyMassByID(int bodyMassID);
-
         bool BodyMassExist(int bodyMassID);
-        bool CreateBodyMass(BodyMass bodyMass);
+        BodyMass CreateBodyMass(BodyMass bodyMass);
 
         Task<bool> CreateBodyMassAsync(BodyMass bodyMass);
 
