@@ -17,6 +17,12 @@ builder.Services.AddScoped<IPreviousMedRepository, PreviousMedRepository>();
 builder.Services.AddScoped<IMedicalHistoryRepository, MedicalHistoryRepository>();
 
 builder.Services.AddScoped<IViewPatientListsRepository, ViewPatientListsRepository>();
+builder.Services.AddScoped<IDoctorEditProfileRepository, DoctorEditProfileRepository>();
+
+
+
+
+
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -27,6 +33,11 @@ builder.Services.AddDbContext<datacontext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+/*builder.Services.AddDbContext<datacontext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});*/
 
 var app = builder.Build();
 

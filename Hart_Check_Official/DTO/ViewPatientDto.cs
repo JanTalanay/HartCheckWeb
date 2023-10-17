@@ -1,10 +1,22 @@
-﻿namespace Hart_Check_Official.DTO
+﻿/*using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
+
+namespace Hart_Check_Official.DTO
 {
     public class ViewPatientDto
     {
-        public string firstName { get; set; }
-        public string lastName { get; set; }
-        public string email { get; set; }
-        public long phoneNumber { get; set; }
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Display(Name = "Email Address")]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Display(Name = "Phone Number")]
+        public long PhoneNumber { get; set; }
     }
 }
+*/
