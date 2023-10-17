@@ -183,7 +183,6 @@ namespace Hart_Check_Official.Data
                 .WithMany(e => e.auditlog)
                 .HasForeignKey(e => e.patientID);
 
-
             modelBuilder.Entity<AuditLog>()
                 .HasOne(e => e.admin)
                 .WithMany(e => e.auditlog)

@@ -17,10 +17,11 @@ namespace Hart_Check_Official.Repository
             return _context.BodyMass.Any(e => e.bodyMassID == bodyMassID);
         }
 
-        public bool CreateBodyMass(BodyMass bodyMass)
+        public BodyMass CreateBodyMass(BodyMass bodyMass)
         {
             _context.Add(bodyMass);
-            return Save();
+            _context.SaveChanges();
+            return (bodyMass);
         }
 
         public Task<bool> CreateBodyMassAsync(BodyMass bodyMass)
@@ -42,17 +43,6 @@ namespace Hart_Check_Official.Repository
         public BodyMass GetBodyMass(int bodyMassID)
         {
             return _context.BodyMass.Where(e => e.bodyMassID == bodyMassID).FirstOrDefault();
-        }
-
-        public int GetBodyMassByID(int bodyMassID)//Ignore this
-        {
-            var bodyMass = _context.BodyMass.Where(e => e.bodyMassID == bodyMassID);
-
-            if (bodyMass.Count() <= 0)
-            {
-                return 0;
-            }
-            return bodyMass.Count();
         }
 
         public bool Save()

@@ -34,6 +34,23 @@ namespace Hart_Check_Official.Controllers
             }
             return Ok(bug);
         }
+        [HttpGet("{medicalHistoryID}")]//getting the users by ID
+        [ProducesResponseType(200, Type = typeof(MedicalHistory))]
+        [ProducesResponseType(400)]
+        public IActionResult GetMedCondID(int medicalHistoryID)
+        {
+            if (!_medicalHistoryRepository.medHistoryExsist(medicalHistoryID))
+            {
+                return NotFound();
+            }
+            var user = _mapper.Map<MedicalHistoryDto>(_medicalHistoryRepository.GetMedicalHistory(medicalHistoryID));
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(user); ;
+        }
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -59,12 +76,22 @@ namespace Hart_Check_Official.Controllers
             }
             var medicalHistoryMap = _mapper.Map<MedicalHistory>(medicalHistoryCreate);
 
-            if (!_medicalHistoryRepository.CreatemedHistory(medicalHistoryMap))
+            //if (!_medicalHistoryRepository.CreatemedHistory(medicalHistoryMap))
+            //{
+            //    ModelState.AddModelError("", "Something Went Wrong while saving");
+            //    return StatusCode(500, ModelState);
+            //}
+            //return Ok("Successfully created");
+            try
             {
-                ModelState.AddModelError("", "Something Went Wrong while saving");
+                _medicalHistoryRepository.CreatemedHistory(medicalHistoryMap);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Something Went Wrong while saving: " + ex.Message);
                 return StatusCode(500, ModelState);
             }
-            return Ok("Successfully created");
+            return Ok(medicalHistoryMap);
         }
 
         [HttpDelete("{medicalHistoryID}")]

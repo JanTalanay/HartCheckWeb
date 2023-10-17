@@ -6,7 +6,7 @@ namespace Hart_Check_Official.Models
     {
         [Key]
         public int BMITypeID { get; set; }
-        public string BMITypeName { get;}
+        public string BMI { get; set; }
 
         public BodyMass BodyMass { get; set; }
     }

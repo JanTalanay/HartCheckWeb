@@ -23,32 +23,43 @@ namespace Hart_Check_Official.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult LoginUsers([FromBody] UserDto usersLogin)
+        public IActionResult LoginUsers([FromBody] Login usersLogin)
         {
             if (usersLogin == null)
             {
                 return BadRequest(ModelState);
             }
-            var users = _userRepository.GetUser();
+            //var users = _userRepository.GetUser();
 
-            //if (users != null)
-            //{
-            //    ModelState.AddModelError("", "Already Exist");
-            //    return StatusCode(422, ModelState);
-            //}
+            ////if (users != null)
+            ////{
+            ////    ModelState.AddModelError("", "Already Exist");
+            ////    return StatusCode(422, ModelState);
+            ////}
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var userMap = _mapper.Map<Users>(usersLogin);
+            //var userMap = _mapper.Map<Users>(usersLogin);
 
-            if (_userRepository.LoginUsers(userMap))
+            //if (_userRepository.LoginUsers(userMap))
+            //{
+            //    ModelState.AddModelError("", "Something Went Wrong while logging in");
+            //    return StatusCode(500, ModelState);
+            //}
+            UserDto user;
+            try
             {
-                ModelState.AddModelError("", "Something Went Wrong while logging in");
-                return StatusCode(500, ModelState);
+                user = _mapper.Map<UserDto>(_userRepository.LoginUsers(usersLogin));
             }
-            return Ok("Successfully Logged In");
+            catch (Exception)
+            {
+                return BadRequest("Invalid email or password.");
+            }
+
+            //return Ok(new { Message = "Successfully Logged In", User = user });
+            return Ok(user);
         }
     }
 }

@@ -17,6 +17,12 @@ namespace Hart_Check_Official.Helper
             CreateMap<LoginDto, Users>();
             CreateMap<Users, LoginDto>();
 
+            CreateMap<Patients, PatientDto>();
+            CreateMap<PatientDto, Patients>();
+
+            CreateMap<BloodPressure, BloodPressureDto>();
+            CreateMap<BloodPressureDto, BloodPressure>();
+
             CreateMap<BodyMass, BodyMassDto>();
             CreateMap<BodyMassDto, BodyMass>();
 
@@ -26,8 +32,15 @@ namespace Hart_Check_Official.Helper
             CreateMap<PreviousMedication, PreviousMedDto>();
             CreateMap<PreviousMedDto, PreviousMedication>();
 
-            CreateMap<MedicalHistory, MedicalConditionDto>();
-            CreateMap<MedicalConditionDto, MedicalHistory>();
+            CreateMap<MedicalHistory, MedicalHistoryDto>();
+            CreateMap<MedicalHistoryDto, MedicalHistory>();
+
+            CreateMap<BMIType, BMITypeDto>();
+            CreateMap<BMITypeDto, BMIType>();
+
+
+            CreateMap<Consultation, ConsultationDto>();
+            CreateMap<ConsultationDto, Consultation>();
 
             /*CreateMap<Users, ViewPatientDto>();
             CreateMap<ViewPatientDto, Users>();*/

@@ -1,0 +1,20 @@
+﻿@using HartCheck_Admin.ViewModels
+@model EditEducationalResourceViewModel
+
+<form method="post" asp-action="Edit" >
+    <input type="hidden" value="resourceID" id="resourceID" />
+    <div class="form-group">
+        <label asp-for="text">Title</label>
+        <input asp-for="text" class="form-control" placeholder="text">
+        <span asp-validation-for="text" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="link">Link</label>
+        <input asp-for="link" class="form-control" placeholder="link">
+        <span asp-validation-for="link" class="text-danger"></span>
+    
+    
+       <button type="submit" class="btn btn-danger float-right mt-3" >Submit</button>
+
+     </div>
+ </form> 

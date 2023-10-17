@@ -34,6 +34,23 @@ namespace Hart_Check_Official.Controllers
             }
             return Ok(user);
         }
+        [HttpGet("{bodyMassID}")]//getting the users by ID
+        [ProducesResponseType(200, Type = typeof(BodyMass))]
+        [ProducesResponseType(400)]
+        public IActionResult GetbodyMass(int bodyMassID)
+        {
+            if (!_bodyMassRepository.BodyMassExist(bodyMassID))
+            {
+                return NotFound();
+            }
+            var user = _mapper.Map<BodyMassDto>(_bodyMassRepository.GetBodyMass(bodyMassID));
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(user); ;
+        }
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -59,12 +76,22 @@ namespace Hart_Check_Official.Controllers
             }
             var bodyMassMap = _mapper.Map<BodyMass>(bodyMassCreate);
 
-            if (!_bodyMassRepository.CreateBodyMass(bodyMassMap))
+            //if (!_bodyMassRepository.CreateBodyMass(bodyMassMap))
+            //{
+            //    ModelState.AddModelError("", "Something Went Wrong while saving");
+            //    return StatusCode(500, ModelState);
+            //}
+            //return Ok("Successfully created");
+            try
             {
-                ModelState.AddModelError("", "Something Went Wrong while saving");
+                _bodyMassRepository.CreateBodyMass(bodyMassMap);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Something Went Wrong while saving: " + ex.Message);
                 return StatusCode(500, ModelState);
             }
-            return Ok("Successfully created");
+            return Ok(bodyMassMap);
         }
 
         [HttpDelete("{bodyMassID}")]

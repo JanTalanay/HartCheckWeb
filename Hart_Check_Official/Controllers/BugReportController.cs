@@ -24,7 +24,7 @@ namespace Hart_Check_Official.Controllers
 
         [HttpGet]//getting list all the data of the Users table
         [ProducesResponseType(200, Type = typeof(IEnumerable<Users>))]
-        public IActionResult getUsers()
+        public IActionResult GetBugReport()
         {
             var bug = _mapper.Map<List<BugReportDto>>(_bugRepository.GetBugReports());
 
@@ -34,12 +34,29 @@ namespace Hart_Check_Official.Controllers
             }
             return Ok(bug);
         }
+        [HttpGet("{bugID}")]//getting the users by ID
+        [ProducesResponseType(200, Type = typeof(BugReport))]
+        [ProducesResponseType(400)]
+        public IActionResult GetBugReportID(int bugID)
+        {
+            if (!_bugRepository.BugExists(bugID))
+            {
+                return NotFound();
+            }
+            var user = _mapper.Map<BugReportDto>(_bugRepository.GetBugReport(bugID));
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(user); ;
+        }
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         public IActionResult CreateBugReport([FromBody] BugReportDto bugreportCreate)
         {
-            if(bugreportCreate == null)
+            if (bugreportCreate == null)
             {
                 return BadRequest(ModelState);
             }
@@ -47,24 +64,28 @@ namespace Hart_Check_Official.Controllers
                 .Where(e => e.description.Trim().ToUpper() == bugreportCreate.description.TrimEnd().ToUpper())
                 .FirstOrDefault();
 
-            if(bugReport != null)
+            if (bugReport != null)
             {
                 ModelState.AddModelError("", "Already Exist");
                 return StatusCode(422, ModelState);
             }
 
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
             var bugReportMap = _mapper.Map<BugReport>(bugreportCreate);
 
-            if (!_bugRepository.CreateBugReport(bugReportMap))
+            try
             {
-                ModelState.AddModelError("", "Something Went Wrong while saving");
+                _bugRepository.CreateBugReport(bugReportMap);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Something Went Wrong while saving: " + ex.Message);
                 return StatusCode(500, ModelState);
             }
-            return Ok("Successfully created");
+            return Ok(bugReportMap);
         }
 
         [HttpDelete("{bugID}")]
