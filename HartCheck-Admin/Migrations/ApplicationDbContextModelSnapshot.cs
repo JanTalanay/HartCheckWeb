@@ -74,9 +74,6 @@ namespace HartCheck_Admin.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<int>("adminID")
-                        .HasColumnType("int");
-
                     b.Property<int>("auditLogID")
                         .HasColumnType("int");
 
@@ -99,6 +96,112 @@ namespace HartCheck_Admin.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("HartCheck_Admin.Models.BugReport", b =>
+                {
+                    b.Property<int>("bugID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("bugID"), 1L, 1);
+
+                    b.Property<string>("description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("featureID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("userID")
+                        .HasColumnType("int");
+
+                    b.HasKey("bugID");
+
+                    b.ToTable("BugReport");
+                });
+
+            modelBuilder.Entity("HartCheck_Admin.Models.Doctor", b =>
+                {
+                    b.Property<int>("usersID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("usersID"), 1L, 1);
+
+                    b.Property<DateTime>("birthdate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("firstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("lastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("phoneNumber")
+                        .HasColumnType("int");
+
+                    b.HasKey("usersID");
+
+                    b.ToTable("Doctors");
+                });
+
+            modelBuilder.Entity("HartCheck_Admin.Models.EducationalResource", b =>
+                {
+                    b.Property<int>("resourceID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("resourceID"), 1L, 1);
+
+                    b.Property<string>("link")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("resourceID");
+
+                    b.ToTable("EducationalResource");
+                });
+
+            modelBuilder.Entity("HartCheck_Admin.Models.Patient", b =>
+                {
+                    b.Property<int>("usersID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("usersID"), 1L, 1);
+
+                    b.Property<DateTime>("birthdate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("firstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("lastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("phoneNumber")
+                        .HasColumnType("int");
+
+                    b.HasKey("usersID");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

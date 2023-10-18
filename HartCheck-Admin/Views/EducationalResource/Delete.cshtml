@@ -14,12 +14,9 @@
         <label asp-for="link">Link</label>
         <input asp-for="link" class="form-control" placeholder="link" readonly>
         <span asp-validation-for="link" class="text-danger"></span>
-    
- </form> 
-    
+
     <div class="form-group">
-        <form action="Delete" method="post">
             <input type="hidden" asp-for="resourceID" />
             <input type="submit" value="Confirm" class="btn btn-danger float-right mt-3" />
-        </form>
      </div>
+</form>

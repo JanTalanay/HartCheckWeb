@@ -1,8 +1,13 @@
+using Google.Analytics.Data.V1Beta;
+using Google.Apis.AnalyticsReporting.v4;
+using Google.Apis.Auth.AspNetCore3;
+using Google.Apis.Auth.OAuth2;
 using HartCheck_Admin.Data;
 using HartCheck_Admin.Interfaces;
 using HartCheck_Admin.Models;
 using HartCheck_Admin.Repository;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +17,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IEducationalResourceRepository, EducationalResourceRepository>();
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
+builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
+builder.Services.AddScoped<IBugReportRepository, BugReportRepository>();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -24,6 +32,17 @@ builder.Services.AddSession();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
         .AddCookie();
 
+
+
+/*builder.Services.AddHttpClient();
+builder.Services.AddSingleton(provider =>
+{
+    var credential = GoogleCredential
+        .FromFile("C:\\tmp\\ServiceAccountCred.json")
+        .CreateScoped(BetaAnalyticsDataService.Scope.Analytics);
+
+    return BetaAnalyticsDataClient.Create(credentials: credential);
+});*/
 
 var app = builder.Build();
 

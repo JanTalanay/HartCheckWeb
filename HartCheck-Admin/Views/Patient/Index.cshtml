@@ -14,23 +14,20 @@
             {
                 @foreach(var item in Model)
                 {
-                <div class="col">
-                <div class="card shadow-sm">
+                    <div class="card shadow-sm w-100">
             
-                <div class="card-body">
-                 <p class="card-text">@item.firstName</p>
-                 <p class="card-text">@item.lastName</p>
-                 <p class="card-text">@item.email</p>
-                 <p class="card-text">@item.birthdate</p>
-                 <p class="card-text">@item.phoneNumber</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                        <a asp-controller="EducationalResource" asp-action="Delete" asp-route-id="@item.usersID" class="btn btn-sm btn-outline-secondary">Delete</a>
-                    </div>
-                    
-                    </div>
-                    </div>
-                </div>
-                </div>       
+                        <div class="card-body">
+                            <p class="card-text">@item.firstName</p>
+                            <p class="card-text">@item.lastName</p>
+                            <p class="card-text">@item.email</p>
+                            <p class="card-text">@item.birthdate</p>
+                            <p class="card-text">@item.phoneNumber</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a asp-controller="BugReport" asp-action="Delete" asp-route-id="@item.usersID" class="btn btn-sm btn-outline-secondary">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>      
                 }
             }  
