@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Visual Studio\\HartCheck-Admin\\HartCheck-Admin\\HartCheck-Admin.csproj": {}
+    "E:\\GitHub\\HartCheckWeb\\HartCheck-Admin\\HartCheck-Admin.csproj": {}
   },
   "projects": {
-    "E:\\Visual Studio\\HartCheck-Admin\\HartCheck-Admin\\HartCheck-Admin.csproj": {
+    "E:\\GitHub\\HartCheckWeb\\HartCheck-Admin\\HartCheck-Admin.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Visual Studio\\HartCheck-Admin\\HartCheck-Admin\\HartCheck-Admin.csproj",
+        "projectUniqueName": "E:\\GitHub\\HartCheckWeb\\HartCheck-Admin\\HartCheck-Admin.csproj",
         "projectName": "HartCheck-Admin",
-        "projectPath": "E:\\Visual Studio\\HartCheck-Admin\\HartCheck-Admin\\HartCheck-Admin.csproj",
+        "projectPath": "E:\\GitHub\\HartCheckWeb\\HartCheck-Admin\\HartCheck-Admin.csproj",
         "packagesPath": "C:\\Users\\Justin\\.nuget\\packages\\",
-        "outputPath": "E:\\Visual Studio\\HartCheck-Admin\\HartCheck-Admin\\obj\\",
+        "outputPath": "E:\\GitHub\\HartCheckWeb\\HartCheck-Admin\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Justin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,6 +40,26 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Google.Analytics.Data.V1Beta": {
+              "target": "Package",
+              "version": "[2.0.0-beta03, )"
+            },
+            "Google.Apis.Analytics.v3": {
+              "target": "Package",
+              "version": "[1.62.0.1679, )"
+            },
+            "Google.Apis.AnalyticsReporting.v4": {
+              "target": "Package",
+              "version": "[1.62.0.2484, )"
+            },
+            "Google.Apis.Auth.AspNetCore3": {
+              "target": "Package",
+              "version": "[1.62.1, )"
+            },
+            "GoogleAnalyticsSDK": {
+              "target": "Package",
+              "version": "[1.3.1, )"
+            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.22, )"

@@ -14,6 +14,7 @@ namespace Hart_Check_Official.Controllers
         private readonly IMapper _mapper;
 
 
+
         public ViewPatientController(IViewPatientListsRepository viewPatientListsRepository, IMapper mapper)
         {
             _viewPatientListsRepository = viewPatientListsRepository;
@@ -25,7 +26,7 @@ namespace Hart_Check_Official.Controllers
 
         public IActionResult getUsers()
         {
-            var user = _mapper.Map<List<ViewPatientDto>>(_viewPatientListsRepository.GetUser());
+            var user = _mapper.Map<List<Users>>(_viewPatientListsRepository.GetUser());
 
             if (!ModelState.IsValid)
             {
@@ -43,7 +44,7 @@ namespace Hart_Check_Official.Controllers
             {
                 return NotFound();
             }
-            var user = _mapper.Map<UserDto>(_viewPatientListsRepository.GetUsers(userID));
+            var user = _mapper.Map<Users>(_viewPatientListsRepository.GetUsers(userID));
 
             if (!ModelState.IsValid)
             {

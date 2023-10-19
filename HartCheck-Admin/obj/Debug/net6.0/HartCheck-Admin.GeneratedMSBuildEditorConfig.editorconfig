@@ -8,61 +8,77 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = HartCheck_Admin
 build_property.RootNamespace = HartCheck_Admin
-build_property.ProjectDir = E:\Visual Studio\HartCheck-Admin\HartCheck-Admin\
+build_property.ProjectDir = E:\GitHub\HartCheckWeb\HartCheck-Admin\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = E:\Visual Studio\HartCheck-Admin\HartCheck-Admin
+build_property.MSBuildProjectDirectory = E:\GitHub\HartCheckWeb\HartCheck-Admin
 build_property._RazorSourceGeneratorDebug = 
 
-[E:/Visual Studio/HartCheck-Admin/HartCheck-Admin/Views/EducationalResource/Create.cshtml]
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/Analytics/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW5hbHl0aWNzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/BugReport/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnVnUmVwb3J0XERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/BugReport/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnVnUmVwb3J0XEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/EducationalResource/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWR1Y2F0aW9uYWxSZXNvdXJjZVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Visual Studio/HartCheck-Admin/HartCheck-Admin/Views/EducationalResource/Delete.cshtml]
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/EducationalResource/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWR1Y2F0aW9uYWxSZXNvdXJjZVxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Visual Studio/HartCheck-Admin/HartCheck-Admin/Views/EducationalResource/Edit.cshtml]
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/EducationalResource/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWR1Y2F0aW9uYWxSZXNvdXJjZVxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Visual Studio/HartCheck-Admin/HartCheck-Admin/Views/EducationalResource/Index.cshtml]
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/EducationalResource/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWR1Y2F0aW9uYWxSZXNvdXJjZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Visual Studio/HartCheck-Admin/HartCheck-Admin/Views/Home/Index.cshtml]
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Visual Studio/HartCheck-Admin/HartCheck-Admin/Views/Home/Privacy.cshtml]
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Visual Studio/HartCheck-Admin/HartCheck-Admin/Views/Patient/Delete.cshtml]
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/Patient/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Visual Studio/HartCheck-Admin/HartCheck-Admin/Views/Patient/Index.cshtml]
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/Patient/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Visual Studio/HartCheck-Admin/HartCheck-Admin/Views/Shared/Error.cshtml]
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Visual Studio/HartCheck-Admin/HartCheck-Admin/Views/Shared/_ValidationScriptsPartial.cshtml]
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Visual Studio/HartCheck-Admin/HartCheck-Admin/Views/_ViewImports.cshtml]
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Visual Studio/HartCheck-Admin/HartCheck-Admin/Views/_ViewStart.cshtml]
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Visual Studio/HartCheck-Admin/HartCheck-Admin/Views/Shared/_Layout.cshtml]
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-ugcri45ixj

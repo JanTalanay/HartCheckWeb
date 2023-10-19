@@ -42,8 +42,11 @@ namespace Hart_Check_Official.Helper
             CreateMap<Consultation, ConsultationDto>();
             CreateMap<ConsultationDto, Consultation>();
 
-            CreateMap<Users, ViewPatientDto>();
-            CreateMap<ViewPatientDto, Users>();
+            /*CreateMap<Users, ViewPatientDto>();
+            CreateMap<ViewPatientDto, Users>();*/
+
+            CreateMap<Users, DoctorEditProfileDto>();
+            CreateMap<DoctorEditProfileDto, Users>();
         }
     }
    

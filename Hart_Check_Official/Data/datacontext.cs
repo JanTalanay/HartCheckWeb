@@ -1,4 +1,5 @@
-﻿using Hart_Check_Official.Models;
+﻿using Hart_Check_Official.DTO;
+using Hart_Check_Official.Models;
 using Microsoft.EntityFrameworkCore; 
 
 namespace Hart_Check_Official.Data
@@ -35,6 +36,8 @@ namespace Hart_Check_Official.Data
         public DbSet<PatientsDoctor> PatientsDoctor { get; set; }
         public DbSet<PreviousMedication> PreviousMedication { get; set; }
         public DbSet<Users> Users { get; set; }
+
+        /*public DbSet<ViewPatientDto> ViewPatientDto { get; set; }*/
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

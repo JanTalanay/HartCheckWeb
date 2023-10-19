@@ -22,6 +22,12 @@ builder.Services.AddScoped<IBMITypeRepository, BMITypeRepository>();
 builder.Services.AddScoped<IConsultationRepository, ConsultationRepository>();
 
 builder.Services.AddScoped<IViewPatientListsRepository, ViewPatientListsRepository>();
+builder.Services.AddScoped<IDoctorEditProfileRepository, DoctorEditProfileRepository>();
+
+
+
+
+
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
@@ -35,6 +41,11 @@ builder.Services.AddDbContext<datacontext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+/*builder.Services.AddDbContext<datacontext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});*/
 
 var app = builder.Build();
 

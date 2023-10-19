@@ -41,7 +41,13 @@ namespace HartCheck_Admin.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var educationalresourceDetails = await _educationalresourceRepository.GetByIdAsync(id);
-            if (educationalresourceDetails == null) return View("Error");
+            if (educationalresourceDetails == null)
+            {
+                ErrorViewModel m = new ErrorViewModel();
+                m.RequestId = Guid.NewGuid().ToString();
+                return View("Error", m);
+            }
+
             return View(educationalresourceDetails);
         }
 
