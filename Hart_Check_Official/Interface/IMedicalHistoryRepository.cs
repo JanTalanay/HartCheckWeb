@@ -8,8 +8,9 @@ namespace Hart_Check_Official.Interface
 
         MedicalHistory GetMedicalHistory(int medicalHistoryID);
 
-        MedicalHistory GetMedHistory(string pastSurgicalHistory);
+        MedicalHistory GetMedicalHistoryPatientID(int patientID);
         bool medHistoryExsist(int medicalHistoryID);
+        bool medHistoryExsistPatientID(int patientID);
         MedicalHistory CreatemedHistory(MedicalHistory medicalHistory);
         bool DeletemedHistory(MedicalHistory medicalHistory);
         bool UpdatemedHistory(MedicalHistory medicalHistory);

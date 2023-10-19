@@ -33,16 +33,16 @@ namespace Hart_Check_Official.Controllers
             }
             return Ok(user);
         }
-        [HttpGet("{prevMedID}")]//getting the users by ID
+        [HttpGet("{patientID}")]//getting the users by ID
         [ProducesResponseType(200, Type = typeof(PreviousMedication))]
         [ProducesResponseType(400)]
-        public IActionResult GetMedCondID(int prevMedID)
+        public IActionResult GetMedCondID(int patientID)
         {
-            if (!_previousMedRepository.PrevMedExists(prevMedID))
+            if (!_previousMedRepository.PrevMedExistsPatientID(patientID))
             {
                 return NotFound();
             }
-            var user = _mapper.Map<PreviousMedDto>(_previousMedRepository.GetPrevMed(prevMedID));
+            var user = _mapper.Map<PreviousMedDto>(_previousMedRepository.GetPrevMedPatientID(patientID));
 
             if (!ModelState.IsValid)
             {

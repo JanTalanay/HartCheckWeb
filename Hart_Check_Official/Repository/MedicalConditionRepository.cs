@@ -13,31 +13,23 @@ namespace Hart_Check_Official.Repository
             _context = context;
         }
 
-        public bool CreateMedicalCondition(MedicalCondition medicalCondition)
-        {
-            _context.Add(medicalCondition);
-            return Save();
-        }
+
 
         public Task<bool> CreateUsersAsync(MedicalCondition medicalCondition)
         {
             throw new NotImplementedException();
         }
 
-        public bool DeleteMedicalCondition(MedicalCondition medicalCondition)
-        {
-            _context.Remove(medicalCondition);
-            return Save();
-        }
+
 
         public MedicalCondition GetMedicalCondition(int medCondID)
         {
             return _context.MedicalCondition.Where(e => e.medCondID == medCondID).FirstOrDefault();
         }
 
-        public int GetMedicalConditionID(int medCondID)
+        public MedicalCondition GetMedicalConditionPatientID(int patientID)
         {
-            throw new NotImplementedException();
+            return _context.MedicalCondition.Where(e => e.patientID == patientID).FirstOrDefault();
         }
 
         public ICollection<MedicalCondition> GetMedicalConditions()
@@ -50,6 +42,11 @@ namespace Hart_Check_Official.Repository
             return _context.MedicalCondition.Any(e => e.medCondID == medCondID);
         }
 
+        public bool MedicalConditionExistspatientID(int patientID)
+        {
+            return _context.MedicalCondition.Any(e => e.patientID == patientID);
+        }
+
         public bool Save()
         {
             var saved = _context.SaveChanges();
@@ -59,6 +56,16 @@ namespace Hart_Check_Official.Repository
         public bool UpdateMedicalCondition(MedicalCondition medicalCondition)
         {
             _context.Update(medicalCondition);
+            return Save();
+        }
+        public bool DeleteMedicalCondition(MedicalCondition medicalCondition)
+        {
+            _context.Remove(medicalCondition);
+            return Save();
+        }
+        public bool CreateMedicalCondition(MedicalCondition medicalCondition)
+        {
+            _context.Add(medicalCondition);
             return Save();
         }
     }

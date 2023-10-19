@@ -25,30 +25,30 @@ namespace Hart_Check_Official.Controllers
         [ProducesResponseType(200, Type = typeof(IEnumerable<BloodPressure>))]
         public IActionResult GetGetBloodPressure()
         {
-            var user = _mapper.Map<List<BloodPressureDto>>(_bloodPressureRepository.GetBloodPressures());
+            var bloodPressure = _mapper.Map<List<BloodPressureDto>>(_bloodPressureRepository.GetBloodPressures());
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            return Ok(user);
+            return Ok(bloodPressure);
         }
-        [HttpGet("{bloodPressureID}")]//getting the users by ID
+        [HttpGet("{patientID}")]//getting the users by ID
         [ProducesResponseType(200, Type = typeof(BloodPressure))]
         [ProducesResponseType(400)]
-        public IActionResult GetBloodPressureID(int bloodPressureID)
+        public IActionResult GetBloodPressureID(int patientID)
         {
-            if (!_bloodPressureRepository.BloodPressureExist(bloodPressureID))
+            if (!_bloodPressureRepository.BloodPressureExistPatientID(patientID))
             {
                 return NotFound();
             }
-            var user = _mapper.Map<BloodPressureDto>(_bloodPressureRepository.GetBloodPress(bloodPressureID));
+            var bloodPressure = _mapper.Map<List<BloodPressureDto>>(_bloodPressureRepository.GetBloodPressPatientID(patientID));
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            return Ok(user); ;
+            return Ok(bloodPressure);
         }
         [HttpPost]
         [ProducesResponseType(204)]
@@ -59,11 +59,11 @@ namespace Hart_Check_Official.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var bodyMass = _bloodPressureRepository.GetBloodPressures();
-                //.Where(e => e.weight == bloodPressureCreate.height)
-                //.FirstOrDefault();
+            var bloodPressure = _bloodPressureRepository.GetBloodPressures()
+                .Where(e => e.dateTaken == bloodPressureCreate.dateTaken)
+                .FirstOrDefault();
 
-            if (bodyMass != null)
+            if (bloodPressure != null)
             {
                 ModelState.AddModelError("", "Already Exist");
                 return StatusCode(422, ModelState);
@@ -106,7 +106,7 @@ namespace Hart_Check_Official.Controllers
             }
             return NoContent();
         }
-        [HttpPut("{bloodPressureID}")]//to be fix
+        [HttpPut("{bloodPressureID}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]

@@ -11,11 +11,38 @@ namespace Hart_Check_Official.Repository
         {
             _context = context;
         }
-        public bool BloodPressureExist(int bloodPressureID)
+        public bool BloodPressureExistPatientID(int patientID)//checks the table based on the id of patientID
+        {
+            return _context.BloodPressure.Any(e => e.patientID == patientID);
+        }
+        public bool BloodPressureExist(int bloodPressureID)//checks the table based on the id of blood pressure
         {
             return _context.BloodPressure.Any(e => e.bloodPressureID == bloodPressureID);
         }
 
+
+        public ICollection<BloodPressure> GetBloodPressPatientID(int patientID)
+        {
+            return _context.BloodPressure.Where(e => e.patientID == patientID).ToList();
+        }
+        public ICollection<BloodPressure> GetBloodPressures()
+        {
+            return _context.BloodPressure.OrderBy(p => p.bloodPressureID).ToList();
+        }
+        public BloodPressure GetBloodPress(int bloodPressureID)
+        {
+            return _context.BloodPressure.Where(e => e.bloodPressureID == bloodPressureID).FirstOrDefault();
+        }
+        //public BloodPressure GetBloodPressPatientID(int patientID)
+        //{
+        //    return _context.BloodPressure.Where(e => e.patientID == patientID).FirstOrDefault();
+        //}
+
+        public bool UpdateBloodPressure(BloodPressure bloodpressure)
+        {
+            _context.Update(bloodpressure);
+            return Save();
+        }
         public bool CreateBloodPressure(BloodPressure bloodpressure)
         {
             _context.Add(bloodpressure);
@@ -28,26 +55,11 @@ namespace Hart_Check_Official.Repository
             return Save();
         }
 
-        public BloodPressure GetBloodPress(int bloodPressureID)
-        {
-            return _context.BloodPressure.Where(e => e.bloodPressureID == bloodPressureID).FirstOrDefault();
-        }
-
-        public ICollection<BloodPressure> GetBloodPressures()
-        {
-            return _context.BloodPressure.OrderBy(p => p.bloodPressureID).ToList();
-        }
-
         public bool Save()
         {
             var saved = _context.SaveChanges();
             return saved > 0 ? true : false;
         }
 
-        public bool UpdateBloodPressure(BloodPressure bloodpressure)
-        {
-            _context.Update(bloodpressure);
-            return Save();
-        }
     }
 }

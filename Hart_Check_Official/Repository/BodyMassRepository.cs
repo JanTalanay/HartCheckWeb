@@ -16,24 +16,11 @@ namespace Hart_Check_Official.Repository
         {
             return _context.BodyMass.Any(e => e.bodyMassID == bodyMassID);
         }
-
-        public BodyMass CreateBodyMass(BodyMass bodyMass)
+        public bool BodyMassExistPatientID(int patientID)
         {
-            _context.Add(bodyMass);
-            _context.SaveChanges();
-            return (bodyMass);
+            return _context.BodyMass.Any(e => e.patientID == patientID);
         }
 
-        public Task<bool> CreateBodyMassAsync(BodyMass bodyMass)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool DeleteBodyMass(BodyMass bodyMass)
-        {
-            _context.Remove(bodyMass);
-            return Save();
-        }
 
         public ICollection<BodyMass> GetBodies()
         {
@@ -43,6 +30,10 @@ namespace Hart_Check_Official.Repository
         public BodyMass GetBodyMass(int bodyMassID)
         {
             return _context.BodyMass.Where(e => e.bodyMassID == bodyMassID).FirstOrDefault();
+        }
+        public BodyMass GetBodyMassPatientID(int patientID)
+        {
+            return _context.BodyMass.Where(e => e.patientID == patientID).FirstOrDefault();
         }
 
         public bool Save()
@@ -54,6 +45,17 @@ namespace Hart_Check_Official.Repository
         public bool UpdateBodyMass(BodyMass bodyMass)
         {
             _context.Update(bodyMass);
+            return Save();
+        }
+        public BodyMass CreateBodyMass(BodyMass bodyMass)
+        {
+            _context.Add(bodyMass);
+            _context.SaveChanges();
+            return (bodyMass);
+        }
+        public bool DeleteBodyMass(BodyMass bodyMass)
+        {
+            _context.Remove(bodyMass);
             return Save();
         }
     }

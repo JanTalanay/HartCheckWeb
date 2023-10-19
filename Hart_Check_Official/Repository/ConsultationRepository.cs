@@ -1,43 +1,63 @@
-﻿using Hart_Check_Official.Interface;
+﻿using Hart_Check_Official.Data;
+using Hart_Check_Official.Interface;
 using Hart_Check_Official.Models;
 
 namespace Hart_Check_Official.Repository
 {
     public class ConsultationRepository : IConsultationRepository
     {
+        private readonly datacontext _context;
+        public ConsultationRepository(datacontext context)
+        {
+            _context = context;
+        }
+        public ICollection<Consultation> GetConsultations()
+        {
+            return _context.Consultation.OrderBy(p => p.consultationID).ToList();
+        }
         public bool consultationExists(int consultationID)
         {
-            throw new NotImplementedException();
+            return _context.Consultation.Any(e => e.consultationID == consultationID);
+        }
+        public bool consultationExistsPatientsID(int patientID)
+        {
+            return _context.Consultation.Any(e => e.patientID == patientID);
+        }
+        public Consultation GetConsultation(int consultationID)
+        {
+            return _context.Consultation.Where(e => e.consultationID == consultationID).FirstOrDefault();
+        }
+        public Consultation GetConsultationPatientsID(int patientID)
+        {
+            return _context.Consultation.Where(e => e.patientID == patientID).FirstOrDefault();
         }
 
+
+
+
+
+        public bool UpdateConsultation(Consultation consultation)
+        {
+            _context.Update(consultation);
+            return Save();
+        }
         public bool CreateConsultation(Consultation consultation)
         {
-            throw new NotImplementedException();
+            _context.Add(consultation);
+            return Save();
         }
 
         public bool DeleteConsultation(Consultation consultation)
         {
-            throw new NotImplementedException();
+            _context.Remove(consultation);
+            return Save();
         }
-
-        public Consultation GetConsultation(int consultationID)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ICollection<Consultation> GetConsultations()
-        {
-            throw new NotImplementedException();
-        }
-
         public bool Save()
         {
-            throw new NotImplementedException();
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
         }
 
-        public bool UpdateConsultation(Consultation consultation)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

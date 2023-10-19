@@ -12,7 +12,39 @@ namespace Hart_Check_Official.Repository
         {
             _context = context;
         }
+        public ICollection<MedicalHistory> GetMedicalHistories()
+        {
+            return _context.MedicalHistory.OrderBy(e => e.medicalHistoryID).ToList();
+        }
 
+        public MedicalHistory GetMedicalHistory(int medicalHistoryID)
+        {
+            return _context.MedicalHistory.Where(e => e.medicalHistoryID == medicalHistoryID).FirstOrDefault();
+        }
+
+        public MedicalHistory GetMedicalHistoryPatientID(int patientID)
+        {
+            return _context.MedicalHistory.Where(e => e.patientID == patientID).FirstOrDefault();
+        }
+
+        public bool medHistoryExsistPatientID(int patientID)
+        {
+            return _context.MedicalHistory.Any(e => e.patientID == patientID);
+        }
+
+
+        public bool medHistoryExsist(int medicalHistoryID)
+        {
+            return _context.MedicalHistory.Any(e => e.medicalHistoryID == medicalHistoryID);
+        }
+
+
+
+        public bool UpdatemedHistory(MedicalHistory medicalHistory)
+        {
+            _context.Update(medicalHistory);
+            return Save();
+        }
         public MedicalHistory CreatemedHistory(MedicalHistory medicalHistory)
         {
             _context.Add(medicalHistory);
@@ -25,37 +57,12 @@ namespace Hart_Check_Official.Repository
             _context.Remove(medicalHistory);
             return Save();
         }
-
-        public MedicalHistory GetMedHistory(string pastSurgicalHistory)
-        {
-            return _context.MedicalHistory.Where(e => e.pastSurgicalHistory == pastSurgicalHistory).FirstOrDefault();
-        }
-
-        public ICollection<MedicalHistory> GetMedicalHistories()
-        {
-            return _context.MedicalHistory.OrderBy(e => e.medicalHistoryID).ToList();
-        }
-
-        public MedicalHistory GetMedicalHistory(int medicalHistoryID)
-        {
-            return _context.MedicalHistory.Where(e => e.medicalHistoryID == medicalHistoryID).FirstOrDefault();
-        }
-
-        public bool medHistoryExsist(int medicalHistoryID)
-        {
-            return _context.MedicalHistory.Any(e => e.medicalHistoryID == medicalHistoryID);
-        }
-
         public bool Save()
         {
             var saved = _context.SaveChanges();
             return saved > 0 ? true : false;
         }
 
-        public bool UpdatemedHistory(MedicalHistory medicalHistory)
-        {
-            _context.Update(medicalHistory);
-            return Save();
-        }
+
     }
 }

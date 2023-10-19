@@ -151,22 +151,22 @@ namespace Hart_Check_Official.Controllers
             }
             return NoContent();
         }
-        [HttpPut("{usersID}")]
+        [HttpPut("{userID}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public IActionResult UpdateUser(int usersID, [FromBody] UserDto userUpdate)
+        public IActionResult UpdateUser(int userID, [FromBody] UserDto userUpdate)
         {
             if(userUpdate == null)
             {
                 return BadRequest(ModelState);
             }
-            if (usersID != userUpdate.usersID)
+            if (userID != userUpdate.usersID)
             {
                 ModelState.AddModelError("usersID", "The 'usersID' in the URL does not match the 'usersID' in the request body.");
                 return BadRequest(ModelState);
             }
-            if (!_userRepository.UserExists(usersID))
+            if (!_userRepository.UserExists(userID))
             {
                 return NotFound();
             }
