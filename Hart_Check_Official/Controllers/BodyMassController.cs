@@ -34,16 +34,16 @@ namespace Hart_Check_Official.Controllers
             }
             return Ok(user);
         }
-        [HttpGet("{bodyMassID}")]//getting the users by ID
+        [HttpGet("{patientID}")]//getting the users by ID
         [ProducesResponseType(200, Type = typeof(BodyMass))]
         [ProducesResponseType(400)]
-        public IActionResult GetbodyMass(int bodyMassID)
+        public IActionResult GetbodyMass(int patientID)
         {
-            if (!_bodyMassRepository.BodyMassExist(bodyMassID))
+            if (!_bodyMassRepository.BodyMassExistPatientID(patientID))
             {
                 return NotFound();
             }
-            var user = _mapper.Map<BodyMassDto>(_bodyMassRepository.GetBodyMass(bodyMassID));
+            var user = _mapper.Map<BodyMassDto>(_bodyMassRepository.GetBodyMassPatientID(patientID));
 
             if (!ModelState.IsValid)
             {
