@@ -3,7 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HartCheck_Admin.Models
 {
-    public class Doctor 
+    [Table("Users")]
+    public class User
     {
         [Key]
         public int usersID { get; set; }
@@ -12,5 +13,6 @@ namespace HartCheck_Admin.Models
         public string email { get; set; }
         public int phoneNumber { get; set; }
         public DateTime birthdate { get; set; }
+        public int role { get; set; }
     }
 }

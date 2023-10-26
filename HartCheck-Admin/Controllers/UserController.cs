@@ -4,25 +4,25 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HartCheck_Admin.Controllers
 {
-    public class PatientController : Controller
+    public class UserController : Controller
     {
-        private readonly IPatientRepository _patientRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IHttpContextAccessor _httpcontextAccessor;
-        public PatientController(IPatientRepository patientRepository, IHttpContextAccessor httpContextAccessor)
+        public UserController(IUserRepository userRepository, IHttpContextAccessor httpContextAccessor)
         {
-            _patientRepository = patientRepository;
+            _userRepository = userRepository;
             _httpcontextAccessor = httpContextAccessor;
 
         }
         public async Task<IActionResult> Index()
         {
-            IEnumerable<Patient> patients = await _patientRepository.GetAll();
+            IEnumerable<User> patients = await _userRepository.GetAll();
             return View(patients);
         }
 
         public async Task<IActionResult> Delete(int id)
         {
-            var patientdetails = await _patientRepository.GetByIdAsync(id);
+            var patientdetails = await _userRepository.GetByIdAsync(id);
             if (patientdetails == null)
             {
                 ErrorViewModel m = new ErrorViewModel();
@@ -35,16 +35,16 @@ namespace HartCheck_Admin.Controllers
 
         [HttpPost, ActionName("Delete")]
 
-        public async Task<IActionResult> DeletePatient(int id)
+        public async Task<IActionResult> DeleteUser(int id)
         {
-            var patientdetails = await _patientRepository.GetByIdAsync(id);
-            if (patientdetails == null)
+            var userdetails = await _userRepository.GetByIdAsync(id);
+            if (userdetails == null)
             {
                 return View("Error");
             }
             else
             {
-                _patientRepository.Delete(patientdetails);
+                _userRepository.Delete(userdetails);
                 return RedirectToAction("Index");
             }
 
