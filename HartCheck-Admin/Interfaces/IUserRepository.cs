@@ -12,5 +12,6 @@ namespace HartCheck_Admin.Interfaces
         bool Update(User user);  
         bool Delete(User user);
         bool Save();
+        Task<IEnumerable<User>> GetUsersWithIds(IEnumerable<int> userIds);
     }
 }

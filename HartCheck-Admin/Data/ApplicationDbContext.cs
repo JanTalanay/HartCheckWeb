@@ -14,5 +14,6 @@ namespace HartCheck_Admin.Data
         public DbSet<EducationalResource> EducationalResources { get; set; }
         public DbSet<User> Patients { get; set; }
         public DbSet<BugReport> BugReports { get; set; }
+        public DbSet<HCProfessional> HCProfessionals { get; set; }
     }
 }

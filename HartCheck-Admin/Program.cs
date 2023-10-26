@@ -18,11 +18,13 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IEducationalResourceRepository, EducationalResourceRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IBugReportRepository, BugReportRepository>();
+builder.Services.AddScoped<IHCProfessionalRepository, HCProfessionalRepository>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
 
 builder.Services.AddIdentity<Admin, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -44,6 +46,12 @@ builder.Services.AddSingleton(provider =>
 });*/
 
 var app = builder.Build();
+
+if (args.Length == 1 && args[0].ToLower() == "seeddata")
+{
+    await Seed.SeedUsersAndRolesAsync(app);
+}
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

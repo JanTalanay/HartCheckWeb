@@ -17,7 +17,7 @@ namespace HartCheck_Admin.Controllers
             _signInManager = signInManager;
             _context = context;
         }
-
+        [HttpGet]
         public IActionResult Login()
         {
             var response = new LoginViewModel();
@@ -41,7 +41,7 @@ namespace HartCheck_Admin.Controllers
                     //Password is correct
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Index", "Analytics");
+                        return RedirectToAction("Index", "EducationalResource");
                     }
                     
                 }
@@ -53,6 +53,7 @@ namespace HartCheck_Admin.Controllers
             TempData["Error"] = "Invalid Credentials. Please try again";
             return View(loginViewModel);
         }
+        [HttpGet]
         public IActionResult Register()
         {
             var response = new RegisterViewModel();
@@ -81,14 +82,14 @@ namespace HartCheck_Admin.Controllers
             {
                 await _userManager.AddToRoleAsync(newAdmin, UserRoles.Admin);
             }
-            return RedirectToAction("Index", "Analytics");
+            return RedirectToAction("Index", "EducationalResource");
         }
 
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Analytics");
+            return RedirectToAction("Index", "EducationalResource");
         }
     }
 }
