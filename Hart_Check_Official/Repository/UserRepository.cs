@@ -14,40 +14,42 @@ namespace Hart_Check_Official.Repository
             _context = context;
         }
 
-        public Users CreateUsers(Users users)
+        public bool CreateUsers(Users users)
         {
+            users.password = BCrypt.Net.BCrypt.HashPassword(users.password);
             _context.Add(users);
-            _context.SaveChanges();
+            //_context.SaveChanges();
 
-            if (users.role == 1)
-            {
-                var patient = new Patients
-                {
-                    usersID = users.usersID,
-                };
-                _context.Add(patient.usersID);
-                _context.SaveChanges();
-            }
-            else if (users.role == 2)
-            {
-                var doctor = new HealthCareProfessional
-                {
-                    usersID = users.usersID,
-                    licenseID = null,
-                    clinic = null,
-                    verification = null,
-                };
-                _context.Add(doctor);
-                _context.SaveChanges();
-            }
-            return users;
-
+            //if (users.role == 1)
+            //{
+            //    var patient = new Patients
+            //    {
+            //        usersID = users.usersID,
+            //    };
+            //    _context.Add(patient.usersID);
+            //    _context.SaveChanges();
+            //}
+            //else if (users.role == 2)
+            //{
+            //    var doctor = new HealthCareProfessional
+            //    {
+            //        usersID = users.usersID,
+            //        licenseID = null,
+            //        clinic = null,
+            //        verification = null,
+            //    };
+            //    _context.Add(doctor);
+            //    _context.SaveChanges();
+            //}
+            //return users;
+            return Save();
         }
 
         public async Task<Users> CreateUsersAsync(Users users)//it works, causing 500 error
         {
             try
             {
+                users.password = BCrypt.Net.BCrypt.HashPassword(users.password);
                 _context.Add(users);
                 await _context.SaveChangesAsync();
 
@@ -81,7 +83,7 @@ namespace Hart_Check_Official.Repository
             }
             catch (Exception ex)
             {
-                // Log the exception details
+                //Log the exception details
                 return null;
             }
         }
@@ -102,20 +104,18 @@ namespace Hart_Check_Official.Repository
             return _context.Users.Where(e => e.usersID == userID).FirstOrDefault();
         }
 
+        public Users GetUsersEmail(string email)
+        {
+            return _context.Users.Where(e => e.email == email).FirstOrDefault();
+        }
+
         public Users LoginUsers(Login login)
         {
             var user = _context.Users.SingleOrDefault(x => x.email == login.email);
-            if (user == null)
+            if (user == null || !BCrypt.Net.BCrypt.Verify(login.password, user.password))
             {
                 throw new Exception("Invalid email or password.");
             }
-
-            //Users pass = _context.Users.Where(Users => pass.email == login.email.Equals(login.password)).First();
-
-            //if(login.password != password.password)
-            //{
-            //    throw new Exception("Invalid email or password.");
-            //}
 
             return user;
         }
@@ -136,6 +136,11 @@ namespace Hart_Check_Official.Repository
         public bool UserExists(int userID)
         {
             return _context.Users.Any(e => e.usersID == userID);
+        }
+
+        public bool UserExistsEmail(string email)
+        {
+            return _context.Users.Any(e => e.email == email);
         }
     }
 }

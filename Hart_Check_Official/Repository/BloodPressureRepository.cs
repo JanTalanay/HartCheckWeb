@@ -43,10 +43,11 @@ namespace Hart_Check_Official.Repository
             _context.Update(bloodpressure);
             return Save();
         }
-        public bool CreateBloodPressure(BloodPressure bloodpressure)
+        public BloodPressure CreateBloodPressure(BloodPressure bloodpressure)
         {
             _context.Add(bloodpressure);
-            return Save();
+            _context.SaveChanges();
+            return (bloodpressure);
         }
 
         public bool DeleteBloodPressure(BloodPressure bloodpressure)

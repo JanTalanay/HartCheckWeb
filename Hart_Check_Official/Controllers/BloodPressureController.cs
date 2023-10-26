@@ -2,6 +2,7 @@
 using Hart_Check_Official.DTO;
 using Hart_Check_Official.Interface;
 using Hart_Check_Official.Models;
+using Hart_Check_Official.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -53,7 +54,7 @@ namespace Hart_Check_Official.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public IActionResult CreateGetBloodPressure([FromBody] BloodPressureDto bloodPressureCreate)
+        public IActionResult CreateBloodPressure([FromBody] BloodPressureDto bloodPressureCreate)
         {
             if (bloodPressureCreate == null)
             {
@@ -75,12 +76,22 @@ namespace Hart_Check_Official.Controllers
             }
             var bloodpressureMap = _mapper.Map<BloodPressure>(bloodPressureCreate);
 
-            if (!_bloodPressureRepository.CreateBloodPressure(bloodpressureMap))
+            //if (!_bloodPressureRepository.CreateBloodPressure(bloodpressureMap))
+            //{
+            //    ModelState.AddModelError("", "Something Went Wrong while saving");
+            //    return StatusCode(500, ModelState);
+            //}
+            //return Ok("Successfully created");
+            try
             {
-                ModelState.AddModelError("", "Something Went Wrong while saving");
+                _bloodPressureRepository.CreateBloodPressure(bloodpressureMap);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Something Went Wrong while saving: " + ex.Message);
                 return StatusCode(500, ModelState);
             }
-            return Ok("Successfully created");
+            return Ok(bloodpressureMap);
         }
 
         [HttpDelete("{bloodPressureID}")]

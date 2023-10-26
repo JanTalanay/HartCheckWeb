@@ -42,7 +42,7 @@ namespace Hart_Check_Official.Controllers
             {
                 return NotFound();
             }
-            var consultation = _mapper.Map<PatientDto>(_consultationRepository.GetConsultationPatientsID(patientID));
+            var consultation = _mapper.Map<ConsultationDto>(_consultationRepository.GetConsultationPatientsID(patientID));
 
             if (!ModelState.IsValid)
             {

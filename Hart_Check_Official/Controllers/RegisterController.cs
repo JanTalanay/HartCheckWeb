@@ -5,7 +5,11 @@ using Hart_Check_Official.Interface;
 using Hart_Check_Official.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SendGrid.Helpers.Mail;
+using SendGrid;
 using System.Numerics;
+using System.Net.Mail;
+using System.Net;
 
 namespace Hart_Check_Official.Controllers
 {
@@ -53,43 +57,28 @@ namespace Hart_Check_Official.Controllers
             }
             return Ok(user); ;
         }
+        [HttpGet("GetUsersByEmail/{email}")]//getting the users by ID
+        [ProducesResponseType(200, Type = typeof(Users))]
+        [ProducesResponseType(400)]
+        public IActionResult GetUsersByEmail(String email)
+        {
+            if (!_userRepository.UserExistsEmail(email))
+            {
+                return NotFound();
+            }
+            var user = _mapper.Map<UserDto>(_userRepository.GetUsersEmail(email));
 
-        //[HttpPost]//register
-        //[ProducesResponseType(204)]
-        //[ProducesResponseType(400)]
-        //public IActionResult CreateUser([FromBody] UserDto userCreate)
-        //{
-        //    if (userCreate == null)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    var users = _userRepository.GetUser()
-        //        .Where(e => e.email.Trim().ToUpper() == userCreate.password.TrimEnd().ToUpper())
-        //        .FirstOrDefault();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(user); ;
+        }
 
-        //    if (users != null)
-        //    {
-        //        ModelState.AddModelError("", "Already Exist");
-        //        return StatusCode(422, ModelState);
-        //    }
-
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    var userMap = _mapper.Map<Users>(userCreate);
-
-        //    if (!_userRepository.CreateUsers(userMap))
-        //    {
-        //        ModelState.AddModelError("", "Something Went Wrong while saving");
-        //        return StatusCode(500, ModelState);
-        //    }
-        //    return Ok("Successfully created");
-        //}
-        [HttpPost]//register also adding what role
+        [HttpPost]//register
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> CreateUserAsync([FromBody] UserDto userCreate)
+        public IActionResult CreateUser([FromBody] UserDto userCreate)
         {
             if (userCreate == null)
             {
@@ -111,23 +100,55 @@ namespace Hart_Check_Official.Controllers
             }
             var userMap = _mapper.Map<Users>(userCreate);
 
-            //if (!await _userRepository.CreateUsersAsync(userMap))
-            //{
-            //    ModelState.AddModelError("", "Something Went Wrong while saving");
-            //    return StatusCode(500, ModelState);
-            //}
-            //return Ok("Successfully created");
-            try
+            if (!_userRepository.CreateUsers(userMap))
             {
-                await _userRepository.CreateUsersAsync(userMap);
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("", "Something Went Wrong while saving: " + ex.Message);
+                ModelState.AddModelError("", "Something Went Wrong while saving");
                 return StatusCode(500, ModelState);
             }
-            return Ok(userMap);
+            return Ok("Successfully created");
         }
+        //[HttpPost]//register also adding what role
+        //[ProducesResponseType(204)]
+        //[ProducesResponseType(400)]
+        //public async Task<IActionResult> CreateUserAsync([FromBody] UserDto userCreate)
+        //{
+        //    if (userCreate == null)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+        //    var users = _userRepository.GetUser()
+        //        .Where(e => e.email.Trim().ToUpper() == userCreate.password.TrimEnd().ToUpper())
+        //        .FirstOrDefault();
+
+        //    if (users != null)
+        //    {
+        //        ModelState.AddModelError("", "Already Exist");
+        //        return StatusCode(422, ModelState);
+        //    }
+
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+        //    var userMap = _mapper.Map<Users>(userCreate);
+
+        //    //if (!await _userRepository.CreateUsersAsync(userMap))
+        //    //{
+        //    //    ModelState.AddModelError("", "Something Went Wrong while saving");
+        //    //    return StatusCode(500, ModelState);
+        //    //}
+        //    //return Ok("Successfully created");
+        //    try
+        //    {
+        //        await _userRepository.CreateUsersAsync(userMap);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ModelState.AddModelError("", "Something Went Wrong while saving: " + ex.Message);
+        //        return StatusCode(500, ModelState);
+        //    }
+        //    return Ok(userMap);
+        //}
         [HttpDelete("{userID}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
@@ -183,6 +204,80 @@ namespace Hart_Check_Official.Controllers
                 return StatusCode(500, ModelState);
             }
             return NoContent();
+        }
+        [HttpPost("ForgotPassword")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public IActionResult ForgotPassword([FromBody] ForgotPasswordDto forgotPassword)
+        {
+            if (!_userRepository.UserExistsEmail(forgotPassword.Email))
+            {
+                return NotFound();
+            }
+
+            var user = _userRepository.GetUsersEmail(forgotPassword.Email);
+            var otp = new Random().Next(1000, 9999).ToString(); // Generate a 4 digit OTP
+            var otpHash = ComputeHash(otp + forgotPassword.Email);  // Compute the hash of the OTP and email
+
+            var smtpClient = new SmtpClient("smtp.gmail.com") // Replace with your SMTP server
+            {
+                Port = 587, // Replace with your SMTP server's port
+                Credentials = new NetworkCredential("testing072301@gmail.com", "dsmnmkocsoyqfvhz"), // Replace with your SMTP server's username and password
+                EnableSsl = true
+            };
+
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress(user.email), // Replace with the sender's email
+                Subject = "Your OTP",
+                Body = $"Your OTP is {otp} and {otpHash}"
+            };
+
+            mailMessage.To.Add(forgotPassword.Email);
+            smtpClient.Send(mailMessage);
+
+            //return Ok(new { Message = $"An OTP has been sent to {forgotPassword}", OtpHash = otpHash });
+            return Ok(otpHash);
+        }
+        [HttpPost("VerifyOtp")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public IActionResult VerifyOtp([FromBody] OTPverificationDto otpVerification)
+        {
+            var computedHash = ComputeHash(otpVerification.Otp + otpVerification.Email);
+            if (computedHash == otpVerification.OtpHash)
+            {
+                return Ok("OTP is verified");
+            }
+
+            return BadRequest("Invalid OTP");
+        }
+        [HttpPost("ChangePassword")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public IActionResult ChangePassword([FromBody] ChangePasswordDto changePassword)
+        {
+            var computedHash = ComputeHash(changePassword.Otp + changePassword.Email);
+            if (computedHash != changePassword.OtpHash)
+            {
+                return BadRequest("Invalid OTP");
+            }
+
+            var user = _userRepository.GetUsersEmail(changePassword.Email);
+            user.password = BCrypt.Net.BCrypt.HashPassword(changePassword.NewPassword); // Hash the new password
+            _userRepository.UpdateUsers(user);
+
+            return Ok("Password has been changed");
+        }
+
+        private string ComputeHash(string input)
+        {
+            using (var sha256 = System.Security.Cryptography.SHA256.Create())
+            {
+                var bytes = System.Text.Encoding.UTF8.GetBytes(input);
+                var hash = sha256.ComputeHash(bytes);
+                return Convert.ToBase64String(hash);
+            }
         }
     }
 }
