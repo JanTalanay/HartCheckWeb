@@ -2,6 +2,7 @@
 using HartCheck_Admin.Interfaces;
 using HartCheck_Admin.Models;
 using HartCheck_Admin.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HartCheck_Admin.Controllers
@@ -16,18 +17,20 @@ namespace HartCheck_Admin.Controllers
             _httpcontextAccessor = httpContextAccessor;
 
         }
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             IEnumerable<EducationalResource> resources = await _educationalresourceRepository.GetAll();
             return View(resources);
         }
-
+        [Authorize]
         public IActionResult Create()
         { 
             return View();
         }
         
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(EducationalResource educationalResource)
         {
             if (!ModelState.IsValid)
@@ -37,7 +40,7 @@ namespace HartCheck_Admin.Controllers
             _educationalresourceRepository.Add(educationalResource); 
             return RedirectToAction("Index");
         }
-        
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             var educationalresourceDetails = await _educationalresourceRepository.GetByIdAsync(id);
@@ -52,7 +55,7 @@ namespace HartCheck_Admin.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-
+        [Authorize]
         public async Task<IActionResult> DeleteEducationalResource(int id)
         {
             var educationalresourceDetails = await _educationalresourceRepository.GetByIdAsync(id);

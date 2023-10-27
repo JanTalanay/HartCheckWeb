@@ -1,6 +1,7 @@
 ﻿using HartCheck_Admin.Data;
 using HartCheck_Admin.Interfaces;
 using HartCheck_Admin.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HartCheck_Admin.Controllers
@@ -18,12 +19,13 @@ namespace HartCheck_Admin.Controllers
             _httpcontextAccessor = httpContextAccessor;
 
         }
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             IEnumerable<User> users = await _userRepository.GetAll();
             return View(users);
         }
-
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             var userdetails = await _userRepository.GetByIdAsync(id);
@@ -38,7 +40,7 @@ namespace HartCheck_Admin.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-
+        [Authorize]
         public async Task<IActionResult> DeleteUser(int id)
         {
             var userdetails = await _userRepository.GetByIdAsync(id);
@@ -65,7 +67,9 @@ namespace HartCheck_Admin.Controllers
         {
             IEnumerable<User> users = await _userRepository.GetAll();
             IEnumerable<User> pending = users.Where(u => u.role == 1);
-            return View(pending);
+            var approved = await DisplayApprovedHCProfessional();
+            return View(approved);
+            
         }
 
         public async Task<IActionResult> ViewDeclined()
@@ -75,20 +79,36 @@ namespace HartCheck_Admin.Controllers
             return View (declined);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> ApproveDoctor(int userId)
+        public async Task<IActionResult> Approve(int id)
         {
-            var user = await _userRepository.GetByIdAsync(userId);
-            var doctorStatus = await _hcprofessionalRepository.GetByIdAsync(userId);
+            var userdetails = await _userRepository.GetByIdAsync(id);
+            if (userdetails == null)
+            {
+                ErrorViewModel m = new ErrorViewModel();
+                m.RequestId = Guid.NewGuid().ToString();
+                return View("Error", m);
+            }
 
-            if (user != null && doctorStatus != null)
+            return View(userdetails);
+        }
+
+        [HttpPost, ActionName("Approve")]
+        public async Task<IActionResult> ApproveDoctor(int id)
+        {
+            var userdetails = await _userRepository.GetByIdAsync(id);
+            var doctorStatus = await _hcprofessionalRepository.GetByIdAsync(id);
+
+            if (userdetails != null && doctorStatus != null)
             {
                 // Update the user's status in the UserStatus table
                 doctorStatus.verification = 1;
                  _hcprofessionalRepository.Update(doctorStatus);
             }
-            var approved = await DisplayApprovedHCProfessional();
-            return View(approved);
+            else
+            {
+                return View("Error");
+            }
+            return RedirectToAction("ViewPending");
         }
 
         public async Task<IActionResult> DisplayApprovedHCProfessional()

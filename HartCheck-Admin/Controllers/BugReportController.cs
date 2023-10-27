@@ -1,5 +1,6 @@
 ﻿using HartCheck_Admin.Interfaces;
 using HartCheck_Admin.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HartCheck_Admin.Controllers
@@ -13,12 +14,13 @@ namespace HartCheck_Admin.Controllers
             _bugreportRepository = bugreportRepository;
             _httpcontextAccessor = httpContextAccessor;
         }
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             IEnumerable<BugReport> resources = await _bugreportRepository.GetAll();
             return View(resources);
         }
-
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             var bugreportDetails = await _bugreportRepository.GetByIdAsync(id);
@@ -33,7 +35,7 @@ namespace HartCheck_Admin.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-
+        [Authorize]
         public async Task<IActionResult> DeleteBugReport(int id)
         {
             var bugreportDetails = await _bugreportRepository.GetByIdAsync(id);
