@@ -74,17 +74,6 @@ namespace HartCheck_Admin.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<int>("auditLogID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -140,6 +129,34 @@ namespace HartCheck_Admin.Migrations
                     b.HasKey("resourceID");
 
                     b.ToTable("EducationalResource");
+                });
+
+            modelBuilder.Entity("HartCheck_Admin.Models.HCProfessional", b =>
+                {
+                    b.Property<int>("doctorID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("doctorID"), 1L, 1);
+
+                    b.Property<string>("clinic")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("licenseID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("userID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("verification")
+                        .HasColumnType("int");
+
+                    b.HasKey("doctorID");
+
+                    b.ToTable("HealthcareProfessional");
                 });
 
             modelBuilder.Entity("HartCheck_Admin.Models.User", b =>

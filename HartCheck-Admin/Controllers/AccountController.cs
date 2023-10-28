@@ -7,88 +7,82 @@ namespace HartCheck_Admin.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<Admin> _userManager;
-        private readonly SignInManager<Admin> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ApplicationDbContext _context;
 
-        public AccountController(UserManager<Admin> userManager, SignInManager<Admin> signInManager, ApplicationDbContext context)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
         }
-
-        public IActionResult Login()
+        [HttpGet]
+        public IActionResult Login(string? returnUrl)
         {
-            var response = new LoginViewModel();
-            return View(response);
+            LoginViewModel vm = new LoginViewModel();
+            if (!string.IsNullOrEmpty(returnUrl))
+                vm.ReturnUrl = returnUrl;
+            return View(vm);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel loginViewModel)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel loginViewModel, string? returnUrl)
         {
-            if(!ModelState.IsValid) return View(loginViewModel);
-
-            var user = await _userManager.FindByEmailAsync(loginViewModel.EmailAddress); 
-
-            if(user != null)
+            IdentityUser user = await _userManager.FindByNameAsync(loginViewModel.EmailAddress);
+            if (user != null)
             {
-                //User is found, check password
-                var passwordCheck = await _userManager.CheckPasswordAsync(user, loginViewModel.Password);
-                if (passwordCheck)
+                var result = await _signInManager.PasswordSignInAsync(user, loginViewModel.Password, false, false);
+
+                if (result.Succeeded)
                 {
-                    var result = await _signInManager.PasswordSignInAsync(user, loginViewModel.Password, false, false);
-                    //Password is correct
-                    if (result.Succeeded)
-                    {
-                        return RedirectToAction("Index", "Analytics");
-                    }
-                    
+                    if (!string.IsNullOrEmpty(returnUrl))
+                        return LocalRedirect(returnUrl);
+                    else
+                        return LocalRedirect("/Home/Index");          
                 }
-                //Password is incorrect
-                TempData["Error"] = "Invalid Credentials. Please try again";
+                else
+                {
+                    ModelState.AddModelError("Login Error", "Invalid Credentials");
+                    return View(loginViewModel);
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("Login Error", "Invalid Credentials");
                 return View(loginViewModel);
             }
-            //User not found
-            TempData["Error"] = "Invalid Credentials. Please try again";
-            return View(loginViewModel);
         }
         public IActionResult Register()
         {
-            var response = new RegisterViewModel();
-            return View(response);
+            return View(new RegisterViewModel());
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
         {
-            if (!ModelState.IsValid) return View(registerViewModel);
-
-            var user = await _userManager.FindByEmailAsync(registerViewModel.EmailAddress);
-            if (user != null)
+            if (ModelState.IsValid == true)
             {
-                TempData["Error"] = "This email address is already in use.";
+                IdentityUser user = new IdentityUser();
+                user.UserName = registerViewModel.EmailAddress;
+                user.Email = registerViewModel.EmailAddress;
+                await _userManager.CreateAsync(user, registerViewModel.Password);
+
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
                 return View(registerViewModel);
             }
-
-            var newAdmin = new Admin()
-            {
-                Email = registerViewModel.EmailAddress,
-                UserName = registerViewModel.EmailAddress
-            };
-            var newAdminResponse = await _userManager.CreateAsync(newAdmin, registerViewModel.Password);
-
-            if (newAdminResponse.Succeeded)
-            {
-                await _userManager.AddToRoleAsync(newAdmin, UserRoles.Admin);
-            }
-            return RedirectToAction("Index", "Analytics");
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Analytics");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

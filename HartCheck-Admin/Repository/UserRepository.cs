@@ -48,5 +48,16 @@ namespace HartCheck_Admin.Repository
             _context.Update(user);
             return Save();
         }
+
+        public async Task<IEnumerable<User>> GetUsersWithIds(IEnumerable<int> userIds)
+        {
+            // Assuming you have a DbContext set up, and User represents your User entity.
+
+            var users = await _context.Patients
+                .Where(u => userIds.Contains(u.usersID))
+                .ToListAsync();
+
+            return users;
+        }
     }
 }

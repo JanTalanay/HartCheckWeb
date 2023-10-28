@@ -1,0 +1,37 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+    <div class="dropdown">
+        <span class="dropdown-toggle" type="button" id="dropdownMenuUser"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            @User.Identity.Name
+        </span>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuUser">
+            <li>
+                <form asp-controller="Account" asp-action="Logout" method="post">
+                    <input type="submit" class="dropdown-item" value="Logout"/> 
+                </form>
+            </li>
+        </ul>
+    </div>
+}
+else
+{
+    <div class="dropdown">
+        <span class="dropdown-toggle" type="button" id="dropdownMenuUser"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Account
+        </span>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuUser">
+            <li>
+                <a class="dropdown-item" asp-controller="Account" asp-action="Login">
+                    Login
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" asp-controller="Account" asp-action="Register">
+                    Register
+                </a>
+            </li>
+        </ul>
+    </div>
+}
