@@ -18,6 +18,6 @@ namespace Hart_Check_Official.Models
         public BloodPressureThreshold BloodPressureThreshold { get; set; }
         public DoctorLicense Doctorlicense { get; set; }
         public ICollection<DoctorSchedule> DoctorSchedule { get; set; }
-        public ICollection<AuditLog> auditlog { get; set; }
+        //public ICollection<AuditLog> auditlog { get; set; }
     }
 }

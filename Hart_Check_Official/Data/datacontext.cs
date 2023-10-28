@@ -83,10 +83,10 @@ namespace Hart_Check_Official.Data
                 .WithMany(e => e.DoctorSchedule)
                 .HasForeignKey(e => e.doctorID);
 
-            modelBuilder.Entity<AuditLog>()//goods
-                .HasOne(e => e.doctor)
-                .WithMany(e => e.auditlog)
-                .HasForeignKey(e => e.doctorID);
+            //modelBuilder.Entity<AuditLog>()//goods
+            //    .HasOne(e => e.doctor)
+            //    .WithMany(e => e.auditlog)
+            //    .HasForeignKey(e => e.doctorID);
 
             /////
             modelBuilder.Entity<Clinic>()
@@ -179,14 +179,14 @@ namespace Hart_Check_Official.Data
 
             //audits
             modelBuilder.Entity<AuditLog>()
-                .HasOne(e => e.patients)
+                .HasOne(e => e.users)
                 .WithMany(e => e.auditlog)
-                .HasForeignKey(e => e.patientID);
+                .HasForeignKey(e => e.userID);
 
-            modelBuilder.Entity<AuditLog>()
-                .HasOne(e => e.admin)
-                .WithMany(e => e.auditlog)
-                .HasForeignKey(e => e.adminID);
+            //modelBuilder.Entity<AuditLog>()
+            //    .HasOne(e => e.admin)
+            //    .WithMany(e => e.auditlog)
+            //    .HasForeignKey(e => e.adminID);
 
             modelBuilder.Entity<AuditLogValue>()
                 .HasOne(e => e.auditlog)

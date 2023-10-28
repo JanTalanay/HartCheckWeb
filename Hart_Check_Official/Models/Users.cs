@@ -31,6 +31,7 @@ namespace Hart_Check_Official.Models
         public ICollection<BugReport> bugreport { get; set; }
         public ICollection<Patients> patients { get; set; }
         public ICollection<HealthCareProfessional> doctor { get; set; }
+        public ICollection<AuditLog> auditlog { get; set; }
 
     }
 }

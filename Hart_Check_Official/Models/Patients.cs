@@ -19,6 +19,6 @@ namespace Hart_Check_Official.Models
         public ICollection<BloodPressure> BloodPressure { get; set; }
         public ICollection<Consultation> Consultation { get; set; }
         public ICollection<ArchievedRecord> archievedrecord { get; set; }
-        public ICollection<AuditLog> auditlog { get; set; }
+        //public ICollection<AuditLog> auditlog { get; set; }
     }
 }

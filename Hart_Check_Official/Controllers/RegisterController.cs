@@ -75,42 +75,10 @@ namespace Hart_Check_Official.Controllers
             return Ok(user); ;
         }
 
-        [HttpPost]//register
-        [ProducesResponseType(204)]
-        [ProducesResponseType(400)]
-        public IActionResult CreateUser([FromBody] UserDto userCreate)
-        {
-            if (userCreate == null)
-            {
-                return BadRequest(ModelState);
-            }
-            var users = _userRepository.GetUser()
-                .Where(e => e.email.Trim().ToUpper() == userCreate.password.TrimEnd().ToUpper())
-                .FirstOrDefault();
-
-            if (users != null)
-            {
-                ModelState.AddModelError("", "Already Exist");
-                return StatusCode(422, ModelState);
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            var userMap = _mapper.Map<Users>(userCreate);
-
-            if (!_userRepository.CreateUsers(userMap))
-            {
-                ModelState.AddModelError("", "Something Went Wrong while saving");
-                return StatusCode(500, ModelState);
-            }
-            return Ok("Successfully created");
-        }
-        //[HttpPost]//register also adding what role
+        //[HttpPost]//register
         //[ProducesResponseType(204)]
         //[ProducesResponseType(400)]
-        //public async Task<IActionResult> CreateUserAsync([FromBody] UserDto userCreate)
+        //public IActionResult CreateUser([FromBody] UserDto userCreate)
         //{
         //    if (userCreate == null)
         //    {
@@ -132,23 +100,55 @@ namespace Hart_Check_Official.Controllers
         //    }
         //    var userMap = _mapper.Map<Users>(userCreate);
 
-        //    //if (!await _userRepository.CreateUsersAsync(userMap))
-        //    //{
-        //    //    ModelState.AddModelError("", "Something Went Wrong while saving");
-        //    //    return StatusCode(500, ModelState);
-        //    //}
-        //    //return Ok("Successfully created");
-        //    try
+        //    if (!_userRepository.CreateUsers(userMap))
         //    {
-        //        await _userRepository.CreateUsersAsync(userMap);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ModelState.AddModelError("", "Something Went Wrong while saving: " + ex.Message);
+        //        ModelState.AddModelError("", "Something Went Wrong while saving");
         //        return StatusCode(500, ModelState);
         //    }
-        //    return Ok(userMap);
+        //    return Ok("Successfully created");
         //}
+        [HttpPost]//register also adding what role
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> CreateUserAsync([FromBody] UserDto userCreate)
+        {
+            if (userCreate == null)
+            {
+                return BadRequest(ModelState);
+            }
+            var users = _userRepository.GetUser()
+                .Where(e => e.email.Trim().ToUpper() == userCreate.password.TrimEnd().ToUpper())
+                .FirstOrDefault();
+
+            if (users != null)
+            {
+                ModelState.AddModelError("", "Already Exist");
+                return StatusCode(422, ModelState);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var userMap = _mapper.Map<Users>(userCreate);
+
+            //if (!await _userRepository.CreateUsersAsync(userMap))
+            //{
+            //    ModelState.AddModelError("", "Something Went Wrong while saving");
+            //    return StatusCode(500, ModelState);
+            //}
+            //return Ok("Successfully created");
+            try
+            {
+                await _userRepository.CreateUsersAsync(userMap);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Something Went Wrong while saving: " + ex.Message);
+                return StatusCode(500, ModelState);
+            }
+            return Ok(userMap);
+        }
         [HttpDelete("{userID}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
@@ -230,7 +230,7 @@ namespace Hart_Check_Official.Controllers
             {
                 From = new MailAddress(user.email), // Replace with the sender's email
                 Subject = "Your OTP",
-                Body = $"Your OTP is {otp} and {otpHash}"
+                Body = $"Your OTP is {otp}"
             };
 
             mailMessage.To.Add(forgotPassword.Email);

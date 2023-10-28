@@ -14,6 +14,45 @@ namespace Hart_Check_Official.Repository
             _context = context;
         }
 
+        public ICollection<Users> GetUser()
+        {
+            return _context.Users.OrderBy(p => p.usersID).ToList();
+        }
+
+        public Users GetUsers(int userID)
+        {
+            return _context.Users.Where(e => e.usersID == userID).FirstOrDefault();
+        }
+
+        public Users GetUsersEmail(string email)
+        {
+            return _context.Users.Where(e => e.email == email).FirstOrDefault();
+        }
+
+        public Users LoginUsers(Login login)
+        {
+            var user = _context.Users.SingleOrDefault(x => x.email == login.email);
+            if (user == null || !BCrypt.Net.BCrypt.Verify(login.password, user.password))
+            {
+                throw new Exception("Invalid email or password.");
+            }
+
+            return user;
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
+        }
+
+        public bool UpdateUsers(Users users)
+        {
+
+            _context.Update(users);
+            return Save();
+        }
+
         public bool CreateUsers(Users users)
         {
             users.password = BCrypt.Net.BCrypt.HashPassword(users.password);
@@ -90,46 +129,68 @@ namespace Hart_Check_Official.Repository
 
         public bool DeleteUser(Users users)
         {
-            _context.Remove(users);
-            return Save();
-        }
-
-        public ICollection<Users> GetUser()
-        {
-            return _context.Users.OrderBy(p => p.usersID).ToList();
-        }
-
-        public Users GetUsers(int userID)
-        {
-            return _context.Users.Where(e => e.usersID == userID).FirstOrDefault();
-        }
-
-        public Users GetUsersEmail(string email)
-        {
-            return _context.Users.Where(e => e.email == email).FirstOrDefault();
-        }
-
-        public Users LoginUsers(Login login)
-        {
-            var user = _context.Users.SingleOrDefault(x => x.email == login.email);
-            if (user == null || !BCrypt.Net.BCrypt.Verify(login.password, user.password))
+            //_context.Remove(users);
+            //return Save();
+            // Check if the user is a patient and remove the patient record if it exists
+            var patient = _context.Patients.Include(p => p.BodyMass)
+                                               .Include(p => p.BloodPressureThreshold)
+                                               .Include(p => p.MedicalConditions)
+                                               .Include(p => p.PreviousMedication)
+                                               .Include(p => p.MedicalHistory)
+                                               .Include(p => p.BloodPressure)
+                                               .Include(p => p.Consultation)
+                                               .Include(p => p.archievedrecord)
+                                               .FirstOrDefault(p => p.usersID == users.usersID);
+            if (patient != null)
             {
-                throw new Exception("Invalid email or password.");
+                // Remove associated records
+                if (patient.BodyMass != null)
+                {
+                    _context.BodyMass.RemoveRange(patient.BodyMass);
+                }
+                if (patient.BloodPressureThreshold != null)
+                {
+                    _context.BloodPressureThreshold.Remove(patient.BloodPressureThreshold);
+                }
+                if (patient.MedicalConditions != null)
+                {
+                    _context.MedicalCondition.RemoveRange(patient.MedicalConditions);
+                }
+                if (patient.PreviousMedication != null)
+                {
+                    _context.PreviousMedication.RemoveRange(patient.PreviousMedication);
+                }
+                if (patient.MedicalHistory != null)
+                {
+                    _context.MedicalHistory.RemoveRange(patient.MedicalHistory);
+                }
+                if (patient.BloodPressure != null)
+                {
+                    _context.BloodPressure.RemoveRange(patient.BloodPressure);
+                }
+                if (patient.Consultation != null)
+                {
+                    _context.Consultation.RemoveRange(patient.Consultation);
+                }
+                if (patient.archievedrecord != null)
+                {
+                    _context.ArchievedRecord.RemoveRange(patient.archievedrecord);
+                }
+
+                // Remove the patient record
+                _context.Patients.Remove(patient);
             }
 
-            return user;
-        }
+            // Check if the user is a doctor and remove the doctor record if it exists
+            var doctor = _context.HealthCareProfessional.FirstOrDefault(d => d.usersID == users.usersID);
+            if (doctor != null)
+            {
+                _context.HealthCareProfessional.Remove(doctor);
+            }
 
-        public bool Save()
-        {
-            var saved = _context.SaveChanges();
-            return saved > 0 ? true : false;
-        }
+            // Finally, remove the user
+            _context.Users.Remove(users);
 
-        public bool UpdateUsers(Users users)
-        {
-
-            _context.Update(users);
             return Save();
         }
 
