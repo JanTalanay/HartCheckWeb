@@ -21,19 +21,19 @@ namespace Hart_Check_Official.Controllers
             _mapper = mapper;
         }
 
-        //[HttpGet]//getting list all the data of the Users table
-        //[ProducesResponseType(200, Type = typeof(IEnumerable<Users>))]
+        [HttpGet]//getting list all the data of the Users table
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Users>))]
 
-        //public IActionResult getUsers()
-        //{
-        //    var user = _mapper.Map<List<Users>>(_viewPatientListsRepository.GetUser());
+        public IActionResult getUsers()
+        {
+            var user = _mapper.Map<List<Users>>(_viewPatientListsRepository.GetUser());
 
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    return Ok(user);
-        //}
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(user);
+        }
 
         [HttpGet("{userID}")]// Getting user info by their ID
         [ProducesResponseType(200, Type = typeof(Users))]

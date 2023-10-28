@@ -9,41 +9,41 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = WebApp_Doctor
 build_property.RootNamespace = WebApp_Doctor
-build_property.ProjectDir = C:\Users\janta\source\repos\Hart_Check_Official\WebApp_Doctor\
+build_property.ProjectDir = C:\Users\gksch\OneDrive - De La Salle-College of Saint Benilde\First Term (Sept - 2023-2024)\ISPROJ2\Capstone\WebApp_Doctor\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = true
-build_property.MSBuildProjectDirectory = C:\Users\janta\source\repos\Hart_Check_Official\WebApp_Doctor
+build_property.MSBuildProjectDirectory = C:\Users\gksch\OneDrive - De La Salle-College of Saint Benilde\First Term (Sept - 2023-2024)\ISPROJ2\Capstone\WebApp_Doctor
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/janta/source/repos/Hart_Check_Official/WebApp_Doctor/Views/Home/Index.cshtml]
+[C:/Users/gksch/OneDrive - De La Salle-College of Saint Benilde/First Term (Sept - 2023-2024)/ISPROJ2/Capstone/WebApp_Doctor/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/janta/source/repos/Hart_Check_Official/WebApp_Doctor/Views/Home/Privacy.cshtml]
+[C:/Users/gksch/OneDrive - De La Salle-College of Saint Benilde/First Term (Sept - 2023-2024)/ISPROJ2/Capstone/WebApp_Doctor/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/janta/source/repos/Hart_Check_Official/WebApp_Doctor/Views/Shared/Error.cshtml]
+[C:/Users/gksch/OneDrive - De La Salle-College of Saint Benilde/First Term (Sept - 2023-2024)/ISPROJ2/Capstone/WebApp_Doctor/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/janta/source/repos/Hart_Check_Official/WebApp_Doctor/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/gksch/OneDrive - De La Salle-College of Saint Benilde/First Term (Sept - 2023-2024)/ISPROJ2/Capstone/WebApp_Doctor/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/janta/source/repos/Hart_Check_Official/WebApp_Doctor/Views/WebApp_ViewPatient/ViewPatientLists.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2ViQXBwX1ZpZXdQYXRpZW50XFZpZXdQYXRpZW50TGlzdHMuY3NodG1s
+[C:/Users/gksch/OneDrive - De La Salle-College of Saint Benilde/First Term (Sept - 2023-2024)/ISPROJ2/Capstone/WebApp_Doctor/Views/ViewPatient/ViewPatientLists.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmlld1BhdGllbnRcVmlld1BhdGllbnRMaXN0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/janta/source/repos/Hart_Check_Official/WebApp_Doctor/Views/_ViewImports.cshtml]
+[C:/Users/gksch/OneDrive - De La Salle-College of Saint Benilde/First Term (Sept - 2023-2024)/ISPROJ2/Capstone/WebApp_Doctor/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/janta/source/repos/Hart_Check_Official/WebApp_Doctor/Views/_ViewStart.cshtml]
+[C:/Users/gksch/OneDrive - De La Salle-College of Saint Benilde/First Term (Sept - 2023-2024)/ISPROJ2/Capstone/WebApp_Doctor/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/janta/source/repos/Hart_Check_Official/WebApp_Doctor/Views/Shared/_Layout.cshtml]
+[C:/Users/gksch/OneDrive - De La Salle-College of Saint Benilde/First Term (Sept - 2023-2024)/ISPROJ2/Capstone/WebApp_Doctor/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-u1fxe5topy

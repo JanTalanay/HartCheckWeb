@@ -5,7 +5,7 @@ namespace Hart_Check_Official.Interface
 {
     public interface IViewPatientListsRepository
     {
-        //ICollection<Users> GetUser();
+        ICollection<Users> GetUser();
 
         Users GetUsers(int userID);
 
