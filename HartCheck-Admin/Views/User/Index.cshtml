@@ -1,102 +1,122 @@
 ﻿@using HartCheck_Admin.Models
 @model IEnumerable<User>
 
-<h1 >@ViewData["Title"]</h1>
+<h1>@ViewData["Title"]</h1>
 
 
-                                    
-<div class="album py-5 bg-body-tertiary">
+<br /><br />
+@if (Model.Count() < 1)
+{
+	<div class="alert alert-info">
+		No User records found.
+	</div>
+}
+else
+{
+	<table id="User" class="table table-striped table-hover">
+		<thead>
+			<tr>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Email Address</th>
+				<th>Phone Number</th>
+				<th>Birthdate</th>
+				<th>Role</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody  id="role0" >
+			@foreach (var item in Model)
+			{
+				@if (item.role == 0)
+				{
+					<tr>
+						<td>@item.firstName</td>
+						<td>@item.lastName</td>
+						<td>@item.email</td>
+						<td>@item.phoneNumber</td>
+						<td>@item.birthdate</td>
+						<td>@item.role</td>
+						<td>
+							<button class="btn btn-danger btn-sm deleteBtn" data-id="@item.usersID">
+								<i class="fas fa-trash"></i>
+								Delete
+							</button>
+						</td>
+					</tr>
+				}
+			}
+		</tbody>
+		<tbody  id="role1">
+			@foreach (var item in Model)
+			{
+				@if (item.role == 1)
+				{
+					<tr>
+						<td>@item.firstName</td>
+						<td>@item.lastName</td>
+						<td>@item.email</td>
+						<td>@item.phoneNumber</td>
+						<td>@item.birthdate</td>
+						<td>@item.role</td>
+						<td>
+							<button class="btn btn-danger btn-sm deleteBtn" data-id="@item.usersID">
+								<i class="fas fa-trash"></i>
+								Delete
+							</button>
+						</td>
+					</tr>
+				}
+			}
+		</tbody>
+	</table>
+}
 
-        <div id="partialViewContainer">
-
-        </div>
-
-        <div id="role0" class="row row-cols-1 row-cols-sm-5 row-cols-md-3 g-3" style="display: none;">
-            @if (Model != null)
-            {
-                @foreach(var item in Model)
-                {
-                    <div class="card shadow-sm w-100">
-
-                        @if (item.role == 0)
-                        {
-                            <div class="card-body">
-                                <p class="card-text">@item.firstName</p>
-                                <p class="card-text">@item.lastName</p>
-                                <p class="card-text">@item.email</p>
-                                <p class="card-text">@item.birthdate</p>
-                                <p class="card-text">@item.phoneNumber</p>
-                                <p class="card-text">@item.role</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                    <a asp-controller="User" asp-action="Delete" asp-route-id="@item.usersID" class="btn btn-sm btn-outline-secondary">Delete</a>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                      
-                    </div>      
-                }
-            } 
-        </div>
-
-        <div id="role1" class="row row-cols-1 row-cols-sm-5 row-cols-md-3 g-3" style="display: none;">
-            @if (Model != null)
-            {
-                @foreach(var item in Model)
-                {
-                    <div class="card shadow-sm w-100">
-
-                        @if (item.role == 1)
-                        {
-                            <div class="card-body">
-                                <p class="card-text">@item.firstName</p>
-                                <p class="card-text">@item.lastName</p>
-                                <p class="card-text">@item.email</p>
-                                <p class="card-text">@item.birthdate</p>
-                                <p class="card-text">@item.phoneNumber</p>
-                                <p class="card-text">@item.role</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                    <a asp-controller="User" asp-action="Delete" asp-route-id="@item.usersID" class="btn btn-sm btn-outline-secondary">Delete</a>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                        }
-                      
-                    </div>      
-                }
-
-                <div class="button-box col-lg-12 btn-group">
-                    <a asp-controller="User" asp-action="ViewApproved" class="btn btn-outline-info button-link"  id="approve-button"  > View Approved </a>
-                    <a asp-controller="User" asp-action="ViewPending" class="btn btn-outline-info button-link"  id="loadViewPendingButton"  > View Pending </a>
-                    <a asp-controller="User" asp-action="ViewDenied" class="btn btn-outline-danger button-link"  id="loadViewDeniedButton"  >View Declined</a>
-                </div>
-            }
-        </div>
-</div>
+<form id="DeleteForm" asp-controller="User" asp-action="Delete" method="post">
+	<input type="hidden" id="HiddenUserID" name="Id" value="" /> 
+</form>
 
 @{
     var viewPendingUrl = Url.Action("ViewPending", "User");
 }
+@section Scripts {
+	<script>
 
-<script>
-    document.getElementById("role0Button").addEventListener("click", function (event) {
+
+		 document.getElementById("role0Button").addEventListener("click", function (event) {
         event.preventDefault();
         document.getElementById("role0").style.display = "block";
         document.getElementById("role1").style.display = "none";
        
          document.querySelector("h1").innerText = "Patient List Management";
-    });
+		 });
 
-    document.getElementById("role1Button").addEventListener("click", function (event) {
-        event.preventDefault();
-        document.getElementById("role0").style.display = "none";
-        document.getElementById("role1").style.display = "block";
+		 document.getElementById("role1Button").addEventListener("click", function (event) {
+			event.preventDefault();
+			document.getElementById("role0").style.display = "none";
+			document.getElementById("role1").style.display = "block";
 
-        document.querySelector("h1").innerText = "Doctor List Management";
-    });
+			document.querySelector("h1").innerText = "Doctor List Management";
+		});
 
-   
-</script>
+		$(document).ready( function () {
+			 $('#User').DataTable();
+				} );
+		$('.deleteBtn').click(function(e) {
+            swal({
+                title: "Are you sure?",
+                text: "Are you sure you want to delete this record?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true
+            }).then((confirm) => {
+                if (confirm) {
+                    var btn = $(this);
+                    var id = btn.data("id");
+                    $("#HiddenUserID").val(id);
+                    $('#DeleteForm').submit();
+				}
+			});
+		});
+	</script>
+}

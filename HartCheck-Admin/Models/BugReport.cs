@@ -8,6 +8,7 @@ namespace HartCheck_Admin.Models
     {
         [Key]
         public int bugID { get; set; }
+        [ForeignKey("User")]
         public int userID { get; set; }
         public int featureID { get; set; }
         public string description { get; set; }
