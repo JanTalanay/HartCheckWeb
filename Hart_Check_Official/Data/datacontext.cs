@@ -36,7 +36,13 @@ namespace Hart_Check_Official.Data
         public DbSet<Patients> Patients { get; set; }
         public DbSet<PatientsDoctor> PatientsDoctor { get; set; }
         public DbSet<PreviousMedication> PreviousMedication { get; set; }
+
+
+
         public DbSet<Users> Users { get; set; }
+        public DbSet<WorkOrder> WorkOrders { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<Resource> Resources { get; set; }
 
         /*public DbSet<ViewPatientDto> ViewPatientDto { get; set; }*/
 
@@ -193,6 +199,21 @@ namespace Hart_Check_Official.Data
                 .HasOne(e => e.auditlog)
                 .WithMany(e => e.auditlogsvalue)
                 .HasForeignKey(e => e.auditLogID);
+
+            //calendar 
+            // Configure Group-Resource relationship
+            modelBuilder.Entity<Resource>()
+                .HasOne(r => r.Group)
+                .WithMany(g => g.Resources)
+                .HasForeignKey(r => r.GroupId)
+                .HasConstraintName("FK_Resources_Groups");
+
+            // Configure Resource-WorkOrder relationship
+            modelBuilder.Entity<WorkOrder>()
+                .HasOne(w => w.Resource)
+                .WithMany()
+                .HasForeignKey(w => w.ResourceId)
+                .HasConstraintName("FK_WorkOrders_Resources");
         }
     }
 }

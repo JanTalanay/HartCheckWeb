@@ -23,32 +23,19 @@ namespace HartCheck_Admin.Controllers
         [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
-            var bugreportDetails = await _bugreportRepository.GetByIdAsync(id);
-            if (bugreportDetails == null)
-            {
-                ErrorViewModel m = new ErrorViewModel();
-                m.RequestId = Guid.NewGuid().ToString();
-                return View("Error", m);
-            }
-
-            return View(bugreportDetails);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [Authorize]
-        public async Task<IActionResult> DeleteBugReport(int id)
-        {
-            var bugreportDetails = await _bugreportRepository.GetByIdAsync(id);
-            if (bugreportDetails == null)
+            var bugreportdetails = await _bugreportRepository.GetByIdAsync(id);
+            if (bugreportdetails == null)
             {
                 return View("Error");
             }
             else
             {
-                _bugreportRepository.Delete(bugreportDetails);
+                _bugreportRepository.Delete(bugreportdetails);
                 return RedirectToAction("Index");
             }
 
         }
+
+
     }
 }

@@ -3,26 +3,12 @@ using WebApp_Doctor.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-/*builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
-
-builder.Services.AddHttpClient();
-builder.Services.AddHttpClient("RestfulApi", client =>
-{
-    client.BaseAddress = new Uri("http://localhost:5179"); // Replace with the actual base URL of your Restful API
-});*/
-
-
 // Add services to the container.
 builder.Services.AddHttpClient();
 builder.Services.AddDbContext<ApplicationDbContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddControllersWithViews();
 
-// Add services to the container.(for .5 different from .6)
-/*builder.Services.AddDbContext<ApplicationDbContext>(option =>
-    option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddControllersWithViews();
-*/
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -40,10 +26,22 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+
 app.MapControllerRoute(
-    name: "webapp_viewpatient",
-    pattern: "WebApp_ViewPatient/ViewPatientLists",
-    defaults: new { controller = "WebApp_ViewPatient", action = "ViewPatientLists" }
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}"
+);
+
+app.MapControllerRoute(
+    name: "viewpatient",
+    pattern: "ViewPatient/ViewPatientLists",
+    defaults: new { controller = "ViewPatient", action = "ViewPatientLists" }
+);
+
+app.MapControllerRoute(
+    name: "calendarScheduling",
+    pattern: "CalendarScheduling/{action=Schedule}",
+    defaults: new { controller = "CalendarScheduling", action = "Schedule" }
 );
 
 app.Run();
