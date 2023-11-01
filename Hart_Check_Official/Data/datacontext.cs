@@ -25,6 +25,7 @@ namespace Hart_Check_Official.Data
         public DbSet<Consultation> Consultation { get; set; }
         public DbSet<Diagnosis> Diagnosis { get; set; }
         public DbSet<DoctorLicense> DoctorLicense { get; set; }
+        public DbSet<DoctorSchedule> DoctorSchedule { get; set; }
         public DbSet<EducationalResource> EducationalResource { get; set; }
         public DbSet<HealthCareClinic> HealthCareClinic { get; set; }
         public DbSet<HealthCareProfessional> HealthCareProfessional { get; set; }

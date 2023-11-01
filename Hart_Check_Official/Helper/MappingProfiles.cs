@@ -38,6 +38,15 @@ namespace Hart_Check_Official.Helper
             CreateMap<BMIType, BMITypeDto>();
             CreateMap<BMITypeDto, BMIType>();
 
+            CreateMap<HealthCareProfessional, HealthCareProfessionalDto>();
+            CreateMap<HealthCareProfessionalDto, HealthCareProfessional>();
+
+            CreateMap<DoctorSchedule, DoctorScheduleDto>();
+            CreateMap<DoctorScheduleDto, DoctorSchedule>();
+
+            CreateMap<PatientsDoctor, PatientsDoctorDto>();
+            CreateMap<PatientsDoctorDto, PatientsDoctor>();
+
 
             CreateMap<Consultation, ConsultationDto>();
             CreateMap<ConsultationDto, Consultation>();

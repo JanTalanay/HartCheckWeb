@@ -26,6 +26,9 @@ builder.Services.AddScoped<IPatientRepository, PatientRepository>();
 builder.Services.AddScoped<IBloodPressureRepository, BloodPressureRepository>();
 builder.Services.AddScoped<IBMITypeRepository, BMITypeRepository>();
 builder.Services.AddScoped<IConsultationRepository, ConsultationRepository>();
+builder.Services.AddScoped<IHealthCareProfessionalRepository, HealthCareProfessionalRepository>();
+builder.Services.AddScoped<IPatientsDoctorRepository, PatientsDoctorReposiotry>();
+builder.Services.AddScoped<IDoctorScheduleRepository, DoctorScheduleRepository>();
 
 //builder.Services.AddControllers(options =>
 //{
