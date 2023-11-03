@@ -52,85 +52,27 @@ namespace Hart_Check_Official.Repository
             return Save();
         }
 
-        public async Task<(HealthCareProfessional, HealthCareProfessionalName)> GetDoctorDetails(int patientID)
-        {
-            var doctorDetails = await _context.PatientsDoctor
-                  .Where(pd => pd.patientID == patientID)
-                  .Include(pd => pd.doctor)
-                      .ThenInclude(d => d.User)
-                  .FirstOrDefaultAsync();
-
-            var doctorName = new HealthCareProfessionalName
-            {
-                FirstName = doctorDetails.doctor.User.firstName,
-                LastName = doctorDetails.doctor.User.lastName
-            };
-
-            return (doctorDetails.doctor, doctorName);
-        }
-
-        public async Task<List<DateTime>> GetDoctorSched(int doctorID)
-        {
-            var doctorSchedule = await _context.DoctorSchedule
-                .Where(ds => ds.doctorID == doctorID)
-                .Select(ds => ds.schedDateTime)
-                .ToListAsync();
-
-            return doctorSchedule;
-        }
-
-        public async Task<List<(HealthCareProfessional, HealthCareProfessionalName, List<DateTime>)>> GetDoctorsDetailsAndSchedules(int patientID)
-        {
-            var doctorDetailsAndSchedules = new List<(HealthCareProfessional, HealthCareProfessionalName, List<DateTime>)>();
-
-            var patientDoctors = await _context.PatientsDoctor
-                .Where(pd => pd.patientID == patientID)
-                .Include(pd => pd.doctor)
-                    .ThenInclude(d => d.User)
-                .ToListAsync();
-
-            foreach (var patientDoctor in patientDoctors)
-            {
-                var doctorName = new HealthCareProfessionalName
-                {
-                    FirstName = patientDoctor.doctor.User.firstName,
-                    LastName = patientDoctor.doctor.User.lastName
-                };
-
-                var doctorSchedule = await _context.DoctorSchedule
-                    .Where(ds => ds.doctorID == patientDoctor.doctorID)
-                    .Select(ds => ds.schedDateTime)
-                    .ToListAsync();
-
-                doctorDetailsAndSchedules.Add((patientDoctor.doctor, doctorName, doctorSchedule));
-            }
-
-            return doctorDetailsAndSchedules;
-        }
         public bool PatientDoctorExist(int patientID)
         {
             return _context.PatientsDoctor.Any(pd => pd.patientID == patientID);
         }
 
-        public async Task<Dictionary<int, List<DateTime>>> GetDoctorSchedulesForPatient(int patientID)
+        public List<DoctorSchedule> GetDoctorSchedulesForPatient(int patientID)
         {
-            var patientDoctors = await _context.PatientsDoctor
-                                  .Include(pd => pd.doctor)
-                                  .ThenInclude(d => d.DoctorSchedule)
-                                  .Where(pd => pd.patientID == patientID)
-                                  .ToListAsync();
+            var patientDoctors = _context.PatientsDoctor
+                                       .Include(pd => pd.doctor)
+                                       .ThenInclude(d => d.DoctorSchedule)
+                                       .Where(pd => pd.patientID == patientID)
+                                       .ToList();
 
-            var datesByDoctor = new Dictionary<int, List<DateTime>>();
+            var doctorSchedules = new List<DoctorSchedule>();
 
             foreach (var patientDoctor in patientDoctors)
             {
-                var doctorSchedules = patientDoctor.doctor.DoctorSchedule;
-                var dates = doctorSchedules.Select(ds => ds.schedDateTime).ToList();
-
-                datesByDoctor.Add(patientDoctor.doctorID, dates);
+                doctorSchedules.AddRange(patientDoctor.doctor.DoctorSchedule);
             }
 
-            return datesByDoctor;
+            return doctorSchedules;
         }
     }
 }

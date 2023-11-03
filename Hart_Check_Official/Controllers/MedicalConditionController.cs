@@ -131,12 +131,21 @@ namespace Hart_Check_Official.Controllers
             }
             var medCondMap = _mapper.Map<MedicalCondition>(medCondCreate);
 
-            if (!_medicalConditionRepository.CreateMedicalCondition(medCondMap))
+            //if (!_medicalConditionRepository.CreateMedicalCondition(medCondMap))
+            //{
+            //    ModelState.AddModelError("", "Something Went Wrong while saving");
+            //    return StatusCode(500, ModelState);
+            //}
+            try
             {
-                ModelState.AddModelError("", "Something Went Wrong while saving");
+                _medicalConditionRepository.CreateMedicalCondition(medCondMap);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Something Went Wrong while saving: " + ex.Message);
                 return StatusCode(500, ModelState);
             }
-            return Ok("Successfully created");
+            return Ok(medCondMap);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Hart_Check_Official.Models;
+﻿using Hart_Check_Official.DTO;
+using Hart_Check_Official.Models;
 
 namespace Hart_Check_Official.Interface
 {
@@ -12,11 +13,17 @@ namespace Hart_Check_Official.Interface
         //Consultation GetBugReport(string description);
         bool consultationExists(int consultationID);
         bool consultationExistsPatientsID(int patientID);
+        DoctorSchedule GetDoctorScheduleByID(int doctorSchedID);
+        HealthCareProfessional GetHealthCareProfessionalByID(int doctorID);
+        Consultation CreateConsultation(Consultation consultation);
+        Users GetDoctorUserByDoctorId(int doctorID);
 
-        bool CreateConsultation(Consultation consultation);
         bool DeleteConsultation(Consultation consultation);
         bool UpdateConsultation(Consultation consultation);
 
         bool Save();
+        ICollection<DoctorScheduleDto> GetDoctorSchedulesForPatient(int patientID);
+
     }
+
 }

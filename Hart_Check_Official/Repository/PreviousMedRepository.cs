@@ -44,10 +44,11 @@ namespace Hart_Check_Official.Repository
             _context.Update(prevMed);
             return Save();
         }
-        public bool CreatePrevMed(PreviousMedication prevMed)
+        public PreviousMedication CreatePrevMed(PreviousMedication prevMed)
         {
             _context.Add(prevMed);
-            return Save();
+            _context.SaveChanges();
+            return (prevMed);
         }
 
         public bool DeletePrevMed(PreviousMedication prevMed)

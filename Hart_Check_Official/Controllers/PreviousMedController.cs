@@ -75,12 +75,21 @@ namespace Hart_Check_Official.Controllers
             }
             var prevMedMap = _mapper.Map<PreviousMedication>(userPrevMed);
 
-            if (!_previousMedRepository.CreatePrevMed(prevMedMap))
+            //if (!_previousMedRepository.CreatePrevMed(prevMedMap))
+            //{
+            //    ModelState.AddModelError("", "Something Went Wrong while saving");
+            //    return StatusCode(500, ModelState);
+            //}
+            try
             {
-                ModelState.AddModelError("", "Something Went Wrong while saving");
+                _previousMedRepository.CreatePrevMed(prevMedMap);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Something Went Wrong while saving: " + ex.Message);
                 return StatusCode(500, ModelState);
             }
-            return Ok("Successfully created");
+            return Ok(prevMedMap);
         }
         [HttpDelete("{prevMedID}")]
         [ProducesResponseType(400)]

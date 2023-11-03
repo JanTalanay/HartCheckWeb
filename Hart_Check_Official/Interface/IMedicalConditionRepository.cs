@@ -14,7 +14,7 @@ namespace Hart_Check_Official.Interface
         bool MedicalConditionExists(int medCondID);
         bool MedicalConditionExistspatientID(int patientID);
 
-        bool CreateMedicalCondition(MedicalCondition medicalCondition);
+        MedicalCondition CreateMedicalCondition(MedicalCondition medicalCondition);
         bool UpdateMedicalCondition(MedicalCondition medicalCondition);
         bool DeleteMedicalCondition(MedicalCondition medicalCondition);
         bool Save();

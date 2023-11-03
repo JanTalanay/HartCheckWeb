@@ -60,9 +60,9 @@ namespace Hart_Check_Official.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var consultation = _consultationRepository.GetConsultations();
-                //.Where(e => e.usersID == patientCreate.usersID)
-                //.FirstOrDefault();
+            var consultation = _consultationRepository.GetConsultations()
+            .Where(e => e.doctorSchedID == consultationCreate.doctorSchedID)
+            .FirstOrDefault();
 
             if (consultation != null)
             {
@@ -76,12 +76,22 @@ namespace Hart_Check_Official.Controllers
             }
             var consultMap = _mapper.Map<Consultation>(consultationCreate);
 
-            if (!_consultationRepository.CreateConsultation(consultMap))
+            //if (!_consultationRepository.CreateConsultation(consultMap))
+            //{
+            //    ModelState.AddModelError("", "Something Went Wrong while saving");
+            //    return StatusCode(500, ModelState);
+            //}
+            //return Ok("Successfully created");
+            try
             {
-                ModelState.AddModelError("", "Something Went Wrong while saving");
+                _consultationRepository.CreateConsultation(consultMap);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Something Went Wrong while saving: " + ex.Message);
                 return StatusCode(500, ModelState);
             }
-            return Ok("Successfully created");
+            return Ok(consultMap);
         }
         [HttpDelete("{consultationID}")]
         [ProducesResponseType(400)]
@@ -105,6 +115,35 @@ namespace Hart_Check_Official.Controllers
                 ModelState.AddModelError("", "Something Went wrong deleting");
             }
             return NoContent();
+        }
+
+        [HttpGet("doctor/{doctorID}/name")]
+        public IActionResult GetDoctorName(int doctorID)
+        {
+            var doctorUser = _consultationRepository.GetDoctorUserByDoctorId(doctorID);
+            if (doctorUser == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(new { firstName = doctorUser.firstName, lastName = doctorUser.lastName });
+        }
+        [HttpGet("{patientID}/dates")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<DoctorScheduleDto>))]
+        public IActionResult GetDatesForPatient(int patientID)
+        {
+            if (!_consultationRepository.consultationExistsPatientsID(patientID))
+            {
+                return NotFound();
+            }
+            var doctorSchedules = _consultationRepository.GetDoctorSchedulesForPatient(patientID);
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Ok(doctorSchedules);
         }
     }
 }

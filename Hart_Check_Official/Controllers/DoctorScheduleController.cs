@@ -85,46 +85,23 @@ namespace Hart_Check_Official.Controllers
             }
             return Ok(doctorSchedMap);
         }
-        [HttpGet("patient/{patientID}")]
-        [ProducesResponseType(200, Type = typeof(List<DoctorDetailsAndScheduleDto>))]
-        [ProducesResponseType(400)]
-        public async Task<IActionResult> GetDoctorsDetailsAndSchedules(int patientID)
-        {
-            if (!_doctorScheduleRepository.PatientDoctorExist(patientID))
-            {
-                return NotFound();
-            }
-
-            var doctorsDetailsAndSchedules = await _doctorScheduleRepository.GetDoctorsDetailsAndSchedules(patientID);
-
-            var doctorsDetailsAndSchedulesDto = doctorsDetailsAndSchedules.Select(dds => new DoctorDetailsAndScheduleDto
-            {
-                Doctor = _mapper.Map<HealthCareProfessionalDto>(dds.Item1),
-                DoctorName = _mapper.Map<HealthCareProfessionalName>(dds.Item2),
-                DoctorSchedule = _mapper.Map<List<DateTime>>(dds.Item3)
-            }).ToList();
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            return Ok(doctorsDetailsAndSchedulesDto);
-        }
         [HttpGet("patient/{patientID}/schedules")]
-        [ProducesResponseType(200, Type = typeof(Dictionary<int, List<DateTime>>))]
+        [ProducesResponseType(200, Type = typeof(List<DoctorScheduleDto>))]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> GetDoctorSchedulesForPatient(int patientID)
+        public IActionResult GetDoctorSchedulesForPatient(int patientID)
         {
-            var datesByDoctor = await _doctorScheduleRepository.GetDoctorSchedulesForPatient(patientID);
+            var doctorSchedules = _doctorScheduleRepository.GetDoctorSchedulesForPatient(patientID);
+
+            var doctorSchedulesDto = _mapper.Map<List<DoctorScheduleDto>>(doctorSchedules);
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            return Ok(datesByDoctor);
+            return Ok(doctorSchedulesDto);
         }
+
 
     }
 }

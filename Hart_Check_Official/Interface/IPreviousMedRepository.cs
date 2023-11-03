@@ -11,7 +11,7 @@ namespace Hart_Check_Official.Interface
 
         bool PrevMedExists(int prevMedID);
         bool PrevMedExistsPatientID(int patientID);
-        bool CreatePrevMed(PreviousMedication prevMed);
+        PreviousMedication CreatePrevMed(PreviousMedication prevMed);
         bool UpdatePrevMed(PreviousMedication prevMed);
 
         bool DeletePrevMed(PreviousMedication prevMed);

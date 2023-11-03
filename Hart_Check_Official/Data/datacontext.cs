@@ -142,14 +142,14 @@ namespace Hart_Check_Official.Data
                 .WithMany(e => e.BloodPressure)
                 .HasForeignKey(e => e.patientID);
 
-            modelBuilder.Entity<Consultation>()
-                .HasOne(e => e.patients)
-                .WithMany(e => e.Consultation)
-                .HasForeignKey(e => e.patientID);
-
             modelBuilder.Entity<ArchievedRecord>()
                 .HasOne(e => e.patients)
                 .WithMany(e => e.archievedrecord)
+                .HasForeignKey(e => e.patientID);
+
+            modelBuilder.Entity<Consultation>()
+                .HasOne(e => e.patients)
+                .WithMany(e => e.Consultation)
                 .HasForeignKey(e => e.patientID);
 
             modelBuilder.Entity<Consultation>()
@@ -157,26 +157,26 @@ namespace Hart_Check_Official.Data
                 .WithOne(e => e.consultation)
                 .HasForeignKey(e => e.doctorSchedID);
 
-            //consultation child
-            modelBuilder.Entity<Consultation>()
-                .HasOne(e => e.diagnosis)
-                .WithMany(e => e.consultations)
+            ////consultation child
+            modelBuilder.Entity<Diagnosis>()
+                .HasOne(e => e.consultation)
+                .WithMany(e => e.diagnoses)
                 .HasForeignKey(e => e.consultationID);
 
-            modelBuilder.Entity<Consultation>()
-                .HasOne(e => e.condition)
-                .WithMany(e => e.consultations)
+            modelBuilder.Entity<Condition>()
+                .HasOne(e => e.consultation)
+                .WithMany(e => e.conditions)
                 .HasForeignKey(e => e.consultationID);
 
-            modelBuilder.Entity<Consultation>()
-                .HasOne(e => e.medicine)
-                .WithMany(e => e.consultations)
+            modelBuilder.Entity<Medicine>()
+                .HasOne(e => e.consultation)
+                .WithMany(e => e.medicines)
                 .HasForeignKey(e => e.consultationID);
 
-            modelBuilder.Entity<Consultation>()
-                .HasOne(e => e.chat)
-                .WithOne(e => e.consultations)
-                .HasForeignKey<Consultation>(e => e.consultationID);
+            modelBuilder.Entity<Chat>()
+                .HasOne(e => e.consultations)
+                .WithOne(e => e.chat)
+                .HasForeignKey<Chat>(e => e.consultationID);
 
             //chat and message
             modelBuilder.Entity<Chat>()

@@ -9,6 +9,6 @@ namespace Hart_Check_Official.Models
         public int consultationID { get; set; }
         public string condition {  get; set; }
 
-        public ICollection<Consultation> consultations { get; set; }
+        public Consultation consultation { get; set; }
     }
 }

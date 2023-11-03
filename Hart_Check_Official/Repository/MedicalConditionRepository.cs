@@ -63,10 +63,11 @@ namespace Hart_Check_Official.Repository
             _context.Remove(medicalCondition);
             return Save();
         }
-        public bool CreateMedicalCondition(MedicalCondition medicalCondition)
+        public MedicalCondition CreateMedicalCondition(MedicalCondition medicalCondition)
         {
             _context.Add(medicalCondition);
-            return Save();
+            _context.SaveChanges();
+            return (medicalCondition);
         }
     }
 }

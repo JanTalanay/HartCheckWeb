@@ -12,10 +12,7 @@ namespace Hart_Check_Official.Interface
         bool DoctorScheduleExist(int doctorID);
         bool PatientDoctorExist(int patientID);
 
-        Task<(HealthCareProfessional, HealthCareProfessionalName)> GetDoctorDetails(int patientID);
-        Task<List<DateTime>> GetDoctorSched(int doctorID);
-        Task<List<(HealthCareProfessional, HealthCareProfessionalName, List<DateTime>)>> GetDoctorsDetailsAndSchedules(int patientID);
-        Task<Dictionary<int, List<DateTime>>> GetDoctorSchedulesForPatient(int patientID);
+        List<DoctorSchedule> GetDoctorSchedulesForPatient(int patientID);
 
         DoctorSchedule CreateDoctorSchedule(DoctorSchedule doctorSchedID);
         bool DeletepDoctorSchedule(DoctorSchedule doctorSchedID);

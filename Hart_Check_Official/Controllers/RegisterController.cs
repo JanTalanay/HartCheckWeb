@@ -105,8 +105,33 @@ namespace Hart_Check_Official.Controllers
         //        ModelState.AddModelError("", "Something Went Wrong while saving");
         //        return StatusCode(500, ModelState);
         //    }
-        //    return Ok("Successfully created");
+
+        //    // Generate a 4 digit OTP
+        //    var otp = new Random().Next(1000, 9999).ToString();
+        //    var otpHash = ComputeHash(otp + userCreate.email);
+
+        //    // SMTP client setup
+        //    var smtpClient = new SmtpClient("smtp.gmail.com")
+        //    {
+        //        Port = 587,
+        //        Credentials = new NetworkCredential("testing072301@gmail.com", "dsmnmkocsoyqfvhz"),
+        //        EnableSsl = true
+        //    };
+
+        //    // Create the email message
+        //    var mailMessage = new MailMessage
+        //    {
+        //        From = new MailAddress(userMap.email), // Sender's email
+        //        Subject = "Your OTP",
+        //        Body = $"Your OTP is {otp}"
+        //    };
+
+        //    mailMessage.To.Add(userCreate.email); // Receiver's email
+        //    smtpClient.Send(mailMessage);
+
+        //    return Ok(otpHash);
         //}
+
         [HttpPost]//register also adding what role
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -132,12 +157,6 @@ namespace Hart_Check_Official.Controllers
             }
             var userMap = _mapper.Map<Users>(userCreate);
 
-            //if (!await _userRepository.CreateUsersAsync(userMap))
-            //{
-            //    ModelState.AddModelError("", "Something Went Wrong while saving");
-            //    return StatusCode(500, ModelState);
-            //}
-            //return Ok("Successfully created");
             try
             {
                 await _userRepository.CreateUsersAsync(userMap);
@@ -147,7 +166,41 @@ namespace Hart_Check_Official.Controllers
                 ModelState.AddModelError("", "Something Went Wrong while saving: " + ex.Message);
                 return StatusCode(500, ModelState);
             }
-            return Ok(userMap);
+
+            // Generate a 4 digit OTP
+            var otp = new Random().Next(1000, 9999).ToString();
+
+            // Compute the hash of the OTP and email
+            var otpHash = ComputeHash(otp + userCreate.email);
+
+            // SMTP client setup
+            var smtpClient = new SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                Credentials = new NetworkCredential("testing072301@gmail.com", "dsmnmkocsoyqfvhz"),
+                EnableSsl = true
+            };
+
+            // Create the email message
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress(userMap.email),
+                Subject = "Your OTP",
+                Body = $"Your OTP is {otp}"
+            };
+
+            mailMessage.To.Add(userCreate.email);
+            smtpClient.Send(mailMessage);
+
+            var response = new CreateUserResponse
+            {
+                UsersID = userMap.usersID,
+                Email = userMap.email,
+                Password = userMap.password,
+                OTPHash = otpHash
+            };
+
+            return Ok(response);
         }
         [HttpDelete("{userID}")]
         [ProducesResponseType(400)]
