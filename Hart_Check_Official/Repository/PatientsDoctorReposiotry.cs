@@ -13,9 +13,9 @@ namespace Hart_Check_Official.Repository
         {
             _context = context;
         }
-        public PatientsDoctor GetPatientsDoctor(int patientID)
+        public ICollection<PatientsDoctor> GetPatientsDoctor(int patientID)
         {
-            return _context.PatientsDoctor.Where(e => e.patientID == patientID).FirstOrDefault();
+            return _context.PatientsDoctor.OrderBy(e => e.patientID == patientID).ToList();
         }
 
         public ICollection<PatientsDoctor> GetPatientsDoctors()
@@ -60,10 +60,24 @@ namespace Hart_Check_Official.Repository
                 .Where(pd => pd.patientID == patientID && pd.doctor.User.role == 2)
                 .Select(pd => new HealthCareProfessionalName 
                 { 
+                    Email = pd.doctor.User.email,
                     FirstName = pd.doctor.User.firstName, 
                     LastName = pd.doctor.User.lastName 
                 })
                 .ToList();
+        }
+
+        public List<DoctorInfoDto> GetDoctorsByPatientId(int patientID)
+        {
+            return _context.PatientsDoctor
+           .Where(pd => pd.patientID == patientID)
+           .Select(pd => new DoctorInfoDto
+           {
+               doctorID = pd.doctor.doctorID,
+               firstName = pd.doctor.User.firstName,
+               lastName = pd.doctor.User.lastName
+           })
+           .ToList();
         }
     }
 }

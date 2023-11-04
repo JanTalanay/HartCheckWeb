@@ -7,12 +7,12 @@ namespace Hart_Check_Official.Interface
     {
         ICollection<PatientsDoctor> GetPatientsDoctors();
 
-        PatientsDoctor GetPatientsDoctor(int patientID);
+        ICollection<PatientsDoctor> GetPatientsDoctor(int patientID);
 
         bool PatientsDoctorExist(int patientDoctorID);
 
         List<HealthCareProfessionalName> GetHealthCareProfessionals(int patientID);
-
+        List<DoctorInfoDto> GetDoctorsByPatientId(int patientID);
         PatientsDoctor CreatePatientsDoctor(PatientsDoctor PatientsDoctor);
         bool DeletepPatientsDoctor(PatientsDoctor PatientsDoctor);
         bool UpdatePatientsDoctort(PatientsDoctor PatientsDoctor);

@@ -41,7 +41,7 @@ namespace Hart_Check_Official.Controllers
             {
                 return NotFound();
             }
-            var patientsDoctor = _mapper.Map<PatientsDoctorDto>(_patientsDoctorRepository.GetPatientsDoctor(patientID));
+            var patientsDoctor = _mapper.Map<List<PatientsDoctorDto>>(_patientsDoctorRepository.GetPatientsDoctor(patientID));
 
             if (!ModelState.IsValid)
             {
@@ -96,6 +96,12 @@ namespace Hart_Check_Official.Controllers
                 return BadRequest(ModelState);
             }
             return Ok(healthCareProfessionals);
+        }
+        [HttpGet("{patientID}/doctors")]
+        public IActionResult GetDoctorsByPatientId(int patientID)
+        {
+            var doctors = _patientsDoctorRepository.GetDoctorsByPatientId(patientID);
+            return Ok(doctors);
         }
 
     }
