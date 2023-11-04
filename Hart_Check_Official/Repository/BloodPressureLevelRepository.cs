@@ -1,5 +1,6 @@
 ﻿using Hart_Check_Official.Data;
 using Hart_Check_Official.DTO;
+using Hart_Check_Official.Interface;
 
 namespace Hart_Check_Official.Repository
 {

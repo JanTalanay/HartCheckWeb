@@ -2,6 +2,7 @@
 using Hart_Check_Official.DTO;
 using Hart_Check_Official.Interface;
 using Hart_Check_Official.Models;
+using Hart_Check_Official.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hart_Check_Official.Controllers

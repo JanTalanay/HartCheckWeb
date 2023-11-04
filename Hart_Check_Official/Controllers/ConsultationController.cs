@@ -33,10 +33,28 @@ namespace Hart_Check_Official.Controllers
             }
             return Ok(consultation);
         }
+        [HttpGet("{doctorSchedID}/schedule")]//getting the users by ID
+        [ProducesResponseType(200, Type = typeof(Consultation))]
+        [ProducesResponseType(400)]
+        public IActionResult GetConsultationID(int doctorSchedID)
+        {
+            if (!_consultationRepository.consultationExistsdoctorSchedID(doctorSchedID))
+            {
+                return NotFound();
+            }
+            var consultation = _mapper.Map<ConsultationDto>(_consultationRepository.GetConsultationdoctorSchedID(doctorSchedID));
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            
+            return Ok(consultation);
+        }
         [HttpGet("{patientID}")]//getting the users by ID
         [ProducesResponseType(200, Type = typeof(Consultation))]
         [ProducesResponseType(400)]
-        public IActionResult GetConsultationID(int patientID)
+        public IActionResult GetConsultationPatientID(int patientID)
         {
             if (!_consultationRepository.consultationExistsPatientsID(patientID))
             {
@@ -48,7 +66,7 @@ namespace Hart_Check_Official.Controllers
             {
                 return BadRequest(ModelState);
             }
-            
+
             return Ok(consultation);
         }
         [HttpPost]//register
@@ -93,17 +111,17 @@ namespace Hart_Check_Official.Controllers
             }
             return Ok(consultMap);
         }
-        [HttpDelete("{consultationID}")]
+        [HttpDelete("{doctorSchedID}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public IActionResult DeleteConsultation(int consultationID)
+        public IActionResult DeleteConsultation(int doctorSchedID)
         {
-            if (!_consultationRepository.consultationExists(consultationID))
+            if (!_consultationRepository.consultationExistsdoctorSchedID(doctorSchedID))
             {
                 return NotFound();
             }
-            var consultationToDelete = _consultationRepository.GetConsultation(consultationID);
+            var consultationToDelete = _consultationRepository.GetConsultationdoctorSchedID(doctorSchedID);
 
             if (!ModelState.IsValid)
             {

@@ -98,6 +98,14 @@ namespace Hart_Check_Official.Repository
             return doctorSchedules;
         }
 
+        public Consultation GetConsultationdoctorSchedID(int doctorSchedID)
+        {
+            return _context.Consultation.Where(e => e.doctorSchedID == doctorSchedID).FirstOrDefault();
+        }
 
+        public bool consultationExistsdoctorSchedID(int doctorSchedID)
+        {
+            return _context.Consultation.Any(e => e.doctorSchedID == doctorSchedID);
+        }
     }
 }

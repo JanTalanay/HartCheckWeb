@@ -8,10 +8,12 @@ namespace Hart_Check_Official.Interface
         ICollection<Consultation> GetConsultations();
 
         Consultation GetConsultation(int consultationID);
+        Consultation GetConsultationdoctorSchedID(int doctorSchedID);
         Consultation GetConsultationPatientsID(int patientID);
 
         //Consultation GetBugReport(string description);
         bool consultationExists(int consultationID);
+        bool consultationExistsdoctorSchedID(int doctorSchedID);
         bool consultationExistsPatientsID(int patientID);
         DoctorSchedule GetDoctorScheduleByID(int doctorSchedID);
         HealthCareProfessional GetHealthCareProfessionalByID(int doctorID);

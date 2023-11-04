@@ -56,6 +56,12 @@ namespace Hart_Check_Official.Helper
 
             CreateMap<Users, DoctorEditProfileDto>();
             CreateMap<DoctorEditProfileDto, Users>();
+
+            CreateMap<EducationalResource, EducationalResourceDto>();
+            CreateMap<EducationalResourceDto, EducationalResource>();
+
+            CreateMap<BloodPressureThreshold, BloodPressureThresholdDto>();
+            CreateMap<BloodPressureThresholdDto, BloodPressureThreshold>();
         }
     }
    

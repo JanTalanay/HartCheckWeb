@@ -29,6 +29,7 @@ builder.Services.AddScoped<IConsultationRepository, ConsultationRepository>();
 builder.Services.AddScoped<IHealthCareProfessionalRepository, HealthCareProfessionalRepository>();
 builder.Services.AddScoped<IPatientsDoctorRepository, PatientsDoctorReposiotry>();
 builder.Services.AddScoped<IDoctorScheduleRepository, DoctorScheduleRepository>();
+builder.Services.AddScoped<IEducationalResourceRepository, EducationalResourceRepository>();
 
 //builder.Services.AddControllers(options =>
 //{
@@ -38,6 +39,8 @@ builder.Services.AddScoped<IDoctorScheduleRepository, DoctorScheduleRepository>(
 
 builder.Services.AddScoped<IViewPatientListsRepository, ViewPatientListsRepository>();
 builder.Services.AddScoped<IDoctorEditProfileRepository, DoctorEditProfileRepository>();
+
+builder.Services.AddScoped<IBloodPressureThresholdRepository, BloodPressureThresholdRepository>();
 
 
 
