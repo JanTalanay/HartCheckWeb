@@ -6,11 +6,9 @@ namespace Hart_Check_Official.Interface
     public interface IPatientsDoctorRepository
     {
         ICollection<PatientsDoctor> GetPatientsDoctors();
-
         ICollection<PatientsDoctor> GetPatientsDoctor(int patientID);
-
         bool PatientsDoctorExist(int patientDoctorID);
-
+        PatientsDoctor GetPatientsDoctorByEmailAndName(string email, string firstName, string lastName);
         List<HealthCareProfessionalName> GetHealthCareProfessionals(int patientID);
         List<DoctorInfoDto> GetDoctorsByPatientId(int patientID);
         PatientsDoctor CreatePatientsDoctor(PatientsDoctor PatientsDoctor);
