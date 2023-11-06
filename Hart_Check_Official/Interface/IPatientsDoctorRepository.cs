@@ -8,7 +8,7 @@ namespace Hart_Check_Official.Interface
         ICollection<PatientsDoctor> GetPatientsDoctors();
         ICollection<PatientsDoctor> GetPatientsDoctor(int patientID);
         bool PatientsDoctorExist(int patientDoctorID);
-        PatientsDoctor GetPatientsDoctorByEmailAndName(string email, string firstName, string lastName);
+        PatientsDoctor GetPatientsDoctorByEmailAndDoctorName(string email, string doctorName);
         List<HealthCareProfessionalName> GetHealthCareProfessionals(int patientID);
         List<DoctorInfoDto> GetDoctorsByPatientId(int patientID);
         PatientsDoctor CreatePatientsDoctor(PatientsDoctor PatientsDoctor);

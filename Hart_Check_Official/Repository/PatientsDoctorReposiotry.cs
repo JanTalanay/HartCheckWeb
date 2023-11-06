@@ -80,14 +80,18 @@ namespace Hart_Check_Official.Repository
            .ToList();
         }
 
-        public PatientsDoctor GetPatientsDoctorByEmailAndName(string email, string firstName, string lastName)
+        public PatientsDoctor GetPatientsDoctorByEmailAndDoctorName(string email, string doctorName)
         {
+            var names = doctorName.Split(' ');
+            var firstName = names[0];
+            var lastName = names[1];
+
             return _context.PatientsDoctor
-                        .Include(pd => pd.patient)
-                        .ThenInclude(p => p.User)
-                        .Include(pd => pd.doctor)
-                        .ThenInclude(d => d.User)
-                        .FirstOrDefault(pd => pd.patient.User.email == email && pd.doctor.User.firstName == firstName && pd.doctor.User.lastName == lastName);
+                .Include(pd => pd.patient)
+                .ThenInclude(p => p.User)
+                .Include(pd => pd.doctor)
+                .ThenInclude(d => d.User)
+                .FirstOrDefault(pd => pd.patient.User.email == email && pd.doctor.User.firstName == firstName && pd.doctor.User.lastName == lastName);
         }
     }
 }

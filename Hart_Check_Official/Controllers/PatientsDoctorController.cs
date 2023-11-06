@@ -113,7 +113,7 @@ namespace Hart_Check_Official.Controllers
         [ProducesResponseType(400)]
         public IActionResult RescheduleAppointment([FromBody] ConsultationRescheduleDto rescheduleAppointment)
         {
-            var patientDoctor = _patientsDoctorRepository.GetPatientsDoctorByEmailAndName(rescheduleAppointment.email, rescheduleAppointment.firstName, rescheduleAppointment.lastName);
+            var patientDoctor = _patientsDoctorRepository.GetPatientsDoctorByEmailAndDoctorName(rescheduleAppointment.email, rescheduleAppointment.doctorName);
 
             if (patientDoctor == null)
             {
@@ -145,7 +145,7 @@ namespace Hart_Check_Official.Controllers
             mailMessage.To.Add(doctorEmail);
             smtpClient.Send(mailMessage);
 
-            return Ok(new { Message = $"A reschedule request has been sent to the doctor's email" });
+            return Ok();
         }
     }
 }
