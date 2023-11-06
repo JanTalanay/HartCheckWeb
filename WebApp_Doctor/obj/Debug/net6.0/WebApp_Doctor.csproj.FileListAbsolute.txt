@@ -1110,3 +1110,6 @@ C:\Users\gksch\OneDrive - De La Salle-College of Saint Benilde\First Term (Sept 
 C:\Users\gksch\OneDrive - De La Salle-College of Saint Benilde\First Term (Sept - 2023-2024)\ISPROJ2\Capstone\WebApp_Doctor\obj\Debug\net6.0\WebApp_Doctor.csproj.CopyComplete
 C:\Users\gksch\OneDrive - De La Salle-College of Saint Benilde\First Term (Sept - 2023-2024)\ISPROJ2\Capstone\WebApp_Doctor\obj\Debug\net6.0\WebApp_Doctor.genruntimeconfig.cache
 C:\Users\gksch\OneDrive - De La Salle-College of Saint Benilde\First Term (Sept - 2023-2024)\ISPROJ2\Capstone\WebApp_Doctor\obj\Debug\net6.0\ref\WebApp_Doctor.dll
+E:\GitHub\HartCheckWeb\WebApp_Doctor\bin\Debug\net6.0\BCrypt.Net-Next.dll
+E:\GitHub\HartCheckWeb\WebApp_Doctor\bin\Debug\net6.0\SendGrid.dll
+E:\GitHub\HartCheckWeb\WebApp_Doctor\bin\Debug\net6.0\StarkbankEcdsa.dll

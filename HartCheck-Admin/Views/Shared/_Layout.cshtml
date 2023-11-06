@@ -30,12 +30,8 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>                                       
-                </button>
-
-
-                
-            </div>
-            
+                </button>    
+            </div>      
         </nav>
         <partial name="_LoginPartial" />
     </header>
@@ -50,7 +46,17 @@
                     <a class="nav_link" asp-area="" asp-controller="EducationalResource" asp-action="Index"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Educational Resource</span> </a> 
                     <a class="nav_link" asp-area="" asp-controller="BugReport" asp-action="Index"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Bug Report</span> </a> 
                 </div>
-            </div> <a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
+            </div> 
+            <div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a class="nav_link" asp-area="" asp-controller="Account" asp-action="Logout"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Logout</span> </a>
+            }else
+            {
+                <a class="nav_link" asp-area="" asp-controller="Account" asp-action="Login"> <i class='bx bx-log-in nav_icon'></i> <span class="nav_name">Login</span> </a>
+                <a class="nav_link" asp-area="" asp-controller="Account" asp-action="Register"> <i class='bx bx-log-in nav_icon'></i> <span class="nav_name">Register</span> </a>
+            }
+           </div>
         </nav>
     </div>
 
