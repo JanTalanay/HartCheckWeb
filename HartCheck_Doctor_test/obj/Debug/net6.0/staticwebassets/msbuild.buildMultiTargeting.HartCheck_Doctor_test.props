@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\HartCheck_Doctor_test.props" />
+</Project>

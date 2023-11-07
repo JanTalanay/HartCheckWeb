@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\HartCheck_Doctor_test.props" />
+</Project>
