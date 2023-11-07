@@ -40,51 +40,14 @@ namespace Hart_Check_Official.Repository
             return user;
         }
 
-        public bool Save()
-        {
-            var saved = _context.SaveChanges();
-            return saved > 0 ? true : false;
-        }
-
-        public bool UpdateUsers(Users users)
-        {
-
-            _context.Update(users);
-            return Save();
-        }
-
         public bool CreateUsers(Users users)
         {
             users.password = BCrypt.Net.BCrypt.HashPassword(users.password);
             _context.Add(users);
-            //_context.SaveChanges();
-
-            //if (users.role == 1)
-            //{
-            //    var patient = new Patients
-            //    {
-            //        usersID = users.usersID,
-            //    };
-            //    _context.Add(patient.usersID);
-            //    _context.SaveChanges();
-            //}
-            //else if (users.role == 2)
-            //{
-            //    var doctor = new HealthCareProfessional
-            //    {
-            //        usersID = users.usersID,
-            //        licenseID = null,
-            //        clinic = null,
-            //        verification = null,
-            //    };
-            //    _context.Add(doctor);
-            //    _context.SaveChanges();
-            //}
-            //return users;
             return Save();
         }
 
-        public async Task<Users> CreateUsersAsync(Users users)//it works, causing 500 error
+        public async Task<Users> CreateUsersAsync(Users users)
         {
             try
             {
@@ -127,70 +90,10 @@ namespace Hart_Check_Official.Repository
             }
         }
 
-        public bool DeleteUser(Users users)
+        public bool UpdateUsers(Users users)
         {
-            //_context.Remove(users);
-            //return Save();
-            // Check if the user is a patient and remove the patient record if it exists
-            var patient = _context.Patients.Include(p => p.BodyMass)
-                                               .Include(p => p.BloodPressureThreshold)
-                                               .Include(p => p.MedicalConditions)
-                                               .Include(p => p.PreviousMedication)
-                                               .Include(p => p.MedicalHistory)
-                                               .Include(p => p.BloodPressure)
-                                               .Include(p => p.Consultation)
-                                               .Include(p => p.archievedrecord)
-                                               .FirstOrDefault(p => p.usersID == users.usersID);
-            if (patient != null)
-            {
-                // Remove associated records
-                if (patient.BodyMass != null)
-                {
-                    _context.BodyMass.RemoveRange(patient.BodyMass);
-                }
-                if (patient.BloodPressureThreshold != null)
-                {
-                    _context.BloodPressureThreshold.Remove(patient.BloodPressureThreshold);
-                }
-                if (patient.MedicalConditions != null)
-                {
-                    _context.MedicalCondition.RemoveRange(patient.MedicalConditions);
-                }
-                if (patient.PreviousMedication != null)
-                {
-                    _context.PreviousMedication.RemoveRange(patient.PreviousMedication);
-                }
-                if (patient.MedicalHistory != null)
-                {
-                    _context.MedicalHistory.RemoveRange(patient.MedicalHistory);
-                }
-                if (patient.BloodPressure != null)
-                {
-                    _context.BloodPressure.RemoveRange(patient.BloodPressure);
-                }
-                if (patient.Consultation != null)
-                {
-                    _context.Consultation.RemoveRange(patient.Consultation);
-                }
-                if (patient.archievedrecord != null)
-                {
-                    _context.ArchievedRecord.RemoveRange(patient.archievedrecord);
-                }
 
-                // Remove the patient record
-                _context.Patients.Remove(patient);
-            }
-
-            // Check if the user is a doctor and remove the doctor record if it exists
-            var doctor = _context.HealthCareProfessional.FirstOrDefault(d => d.usersID == users.usersID);
-            if (doctor != null)
-            {
-                _context.HealthCareProfessional.Remove(doctor);
-            }
-
-            // Finally, remove the user
-            _context.Users.Remove(users);
-
+            _context.Update(users);
             return Save();
         }
 
@@ -203,5 +106,68 @@ namespace Hart_Check_Official.Repository
         {
             return _context.Users.Any(e => e.email == email);
         }
+        public bool DeleteUser(Users users)
+        {
+            var patient = _context.Patients.Include(p => p.BodyMass)
+                     .Include(p => p.BloodPressureThreshold)
+                     .Include(p => p.MedicalConditions)
+                     .Include(p => p.PreviousMedication)
+                     .Include(p => p.MedicalHistory)
+                     .Include(p => p.BloodPressure)
+                     .Include(p => p.Consultation)
+                     .Include(p => p.archievedrecord)
+                     .Include(p => p.patientDoctor)
+                     .FirstOrDefault(p => p.usersID == users.usersID);
+
+            if (patient != null)
+            {
+                // Get the Doctors associated with the Patient
+                var doctors = _context.HealthCareProfessional
+                    .Include(d => d.patientDoctor)
+                    .Where(d => d.patientDoctor.Any(pd => pd.patientID == patient.patientID))
+                    .ToList();
+
+                // Remove associations between the Patient and the Doctors
+                foreach (var doctor in doctors)
+                {
+                    var patientDoctor = doctor.patientDoctor.FirstOrDefault(pd => pd.patientID == patient.patientID);
+                    if (patientDoctor != null)
+                    {
+                        _context.PatientsDoctor.Remove(patientDoctor);
+                    }
+                }
+
+                _context.Patients.Remove(patient);
+            }
+
+            // Load the user and its related entities
+            var user = _context.Users
+                .Include(u => u.patients)
+                .Include(u => u.doctor)
+                .FirstOrDefault(u => u.usersID == users.usersID);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+
+            foreach (var doctor in user.doctor)
+            {
+                _context.HealthCareProfessional.Remove(doctor);
+            }
+
+            // Remove the user
+            _context.Users.Remove(user);
+
+            // Save changes
+            return Save();
+        }
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
+        }
+
     }
 }
