@@ -108,58 +108,7 @@ namespace Hart_Check_Official.Repository
         }
         public bool DeleteUser(Users users)
         {
-            var patient = _context.Patients.Include(p => p.BodyMass)
-                     .Include(p => p.BloodPressureThreshold)
-                     .Include(p => p.MedicalConditions)
-                     .Include(p => p.PreviousMedication)
-                     .Include(p => p.MedicalHistory)
-                     .Include(p => p.BloodPressure)
-                     .Include(p => p.Consultation)
-                     .Include(p => p.archievedrecord)
-                     .Include(p => p.patientDoctor)
-                     .FirstOrDefault(p => p.usersID == users.usersID);
-
-            if (patient != null)
-            {
-                // Get the Doctors associated with the Patient
-                var doctors = _context.HealthCareProfessional
-                    .Include(d => d.patientDoctor)
-                    .Where(d => d.patientDoctor.Any(pd => pd.patientID == patient.patientID))
-                    .ToList();
-
-                // Remove associations between the Patient and the Doctors
-                foreach (var doctor in doctors)
-                {
-                    var patientDoctor = doctor.patientDoctor.FirstOrDefault(pd => pd.patientID == patient.patientID);
-                    if (patientDoctor != null)
-                    {
-                        _context.PatientsDoctor.Remove(patientDoctor);
-                    }
-                }
-
-                _context.Patients.Remove(patient);
-            }
-
-            // Load the user and its related entities
-            var user = _context.Users
-                .Include(u => u.patients)
-                .Include(u => u.doctor)
-                .FirstOrDefault(u => u.usersID == users.usersID);
-
-            if (user == null)
-            {
-                return false;
-            }
-
-
-            foreach (var doctor in user.doctor)
-            {
-                _context.HealthCareProfessional.Remove(doctor);
-            }
-
-            // Remove the user
-            _context.Users.Remove(user);
-
+            _context.Users.Remove(users);
             // Save changes
             return Save();
         }
