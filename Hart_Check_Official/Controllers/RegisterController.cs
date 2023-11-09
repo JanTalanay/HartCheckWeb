@@ -75,63 +75,6 @@ namespace Hart_Check_Official.Controllers
             return Ok(user); ;
         }
 
-        //[HttpPost]//register
-        //[ProducesResponseType(204)]
-        //[ProducesResponseType(400)]
-        //public IActionResult CreateUser([FromBody] UserDto userCreate)
-        //{
-        //    if (userCreate == null)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    var users = _userRepository.GetUser()
-        //        .Where(e => e.email.Trim().ToUpper() == userCreate.password.TrimEnd().ToUpper())
-        //        .FirstOrDefault();
-
-        //    if (users != null)
-        //    {
-        //        ModelState.AddModelError("", "Already Exist");
-        //        return StatusCode(422, ModelState);
-        //    }
-
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    var userMap = _mapper.Map<Users>(userCreate);
-
-        //    if (!_userRepository.CreateUsers(userMap))
-        //    {
-        //        ModelState.AddModelError("", "Something Went Wrong while saving");
-        //        return StatusCode(500, ModelState);
-        //    }
-
-        //    // Generate a 4 digit OTP
-        //    var otp = new Random().Next(1000, 9999).ToString();
-        //    var otpHash = ComputeHash(otp + userCreate.email);
-
-        //    // SMTP client setup
-        //    var smtpClient = new SmtpClient("smtp.gmail.com")
-        //    {
-        //        Port = 587,
-        //        Credentials = new NetworkCredential("testing072301@gmail.com", "dsmnmkocsoyqfvhz"),
-        //        EnableSsl = true
-        //    };
-
-        //    // Create the email message
-        //    var mailMessage = new MailMessage
-        //    {
-        //        From = new MailAddress(userMap.email), // Sender's email
-        //        Subject = "Your OTP",
-        //        Body = $"Your OTP is {otp}"
-        //    };
-
-        //    mailMessage.To.Add(userCreate.email); // Receiver's email
-        //    smtpClient.Send(mailMessage);
-
-        //    return Ok(otpHash);
-        //}
-
         [HttpPost]//register also adding what role
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]

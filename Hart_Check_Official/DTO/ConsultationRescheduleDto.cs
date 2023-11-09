@@ -3,7 +3,6 @@
     public class ConsultationRescheduleDto
     {
         public string email { get; set; }
-        public string firstName { get; set; }
-        public string lastName { get; set; }
+        public string doctorName { get; set; }
     }
 }
