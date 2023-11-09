@@ -83,30 +83,30 @@ namespace HartCheck_Admin.Controllers
             var imagePath = Path.Combine(imageDetails.externalPath, imageDetails.fileName);
             return PhysicalFile(imagePath, "image/png");
         }
-
+        [Authorize]
         public async Task<IActionResult> ViewPending()
         {
             IEnumerable<User> users = await _userRepository.GetAll();
             IEnumerable<User> pending = users.Where(u => u.role == 1);
             return View(pending);
         }
-
+        [Authorize]
         public async Task<IActionResult> ViewApproved()
         {
-            IEnumerable<User> users = await _userRepository.GetAll();
-            IEnumerable<User> pending = users.Where(u => u.role == 1);
+          
             var approved = await DisplayApprovedHCProfessional();
-            return View(pending);
+            return View(approved);
             
         }
-
+        [Authorize]
         public async Task<IActionResult> ViewDenied()
         {
             IEnumerable<User> users = await _userRepository.GetAll();
             IEnumerable<User> declined = users.Where(u => u.role == 1);
-            return View (declined);
+            var denied = await DisplayDeniedHCProfessional();
+            return View (denied);
         }
-
+        [Authorize]
         public async Task<IActionResult> Approve(int id)
         {
             var userdetails = await _userRepository.GetByIdAsync(id);
@@ -121,14 +121,14 @@ namespace HartCheck_Admin.Controllers
         }
 
         [HttpPost, ActionName("Approve")]
+        [Authorize]
         public async Task<IActionResult> ApproveDoctor(int id)
         {
             var userdetails = await _userRepository.GetByIdAsync(id);
-            var doctorStatus = await _hcprofessionalRepository.GetByIdAsync(id);
+            var doctorStatus = await _hcprofessionalRepository.GetProfessionalByUserIdAsync(id);
 
             if (userdetails != null && doctorStatus != null)
             {
-                // Update the user's status in the UserStatus table
                 doctorStatus.verification = 1;
                  _hcprofessionalRepository.Update(doctorStatus);
             }
@@ -136,10 +136,42 @@ namespace HartCheck_Admin.Controllers
             {
                 return View("Error");
             }
-            return RedirectToAction("ViewPending");
+            return RedirectToAction("ViewApproved");
+        }
+        [Authorize]
+        public async Task<IActionResult> Deny(int id)
+        {
+            var userdetails = await _userRepository.GetByIdAsync(id);
+            if (userdetails == null)
+            {
+                ErrorViewModel m = new ErrorViewModel();
+                m.RequestId = Guid.NewGuid().ToString();
+                return View("Error", m);
+            }
+
+            return View(userdetails);
         }
 
-        public async Task<IActionResult> DisplayApprovedHCProfessional()
+        [HttpPost, ActionName("Deny")]
+        [Authorize]
+        public async Task<IActionResult> DenyDoctor(int id)
+        {
+            var userdetails = await _userRepository.GetByIdAsync(id);
+            var doctorStatus = await _hcprofessionalRepository.GetProfessionalByUserIdAsync(id);
+
+            if (userdetails != null && doctorStatus != null)
+            {
+                doctorStatus.verification = 0;
+                _hcprofessionalRepository.Update(doctorStatus);
+            }
+            else
+            {
+                return View("Error");
+            }
+            return RedirectToAction("ViewDenied");
+        }
+
+        public async Task<IEnumerable<User>> DisplayApprovedHCProfessional()
         {
             // Query the HealthcareProfessional table for records with the specific verification value.
             var healthcareProfessionals = await _hcprofessionalRepository.GetHealthcareProfessionalsWithVerification();
@@ -149,10 +181,34 @@ namespace HartCheck_Admin.Controllers
 
             // Query the User table to get the users associated with the extracted User IDs.
             var usersWithVerification = await _userRepository.GetUsersWithIds(userIds);
-            usersWithVerification.ToList();
-            return View(usersWithVerification);
+
+            var userViewModels = usersWithVerification.Select(user => new User
+            {
+                lastName = user.lastName,
+                firstName = user.firstName,
+                email = user.email,
+                phoneNumber = user.phoneNumber,
+                birthdate = user.birthdate
+
+            }).ToList();
+
+            return usersWithVerification;
         }
 
-        
+        public async Task<IEnumerable<User>> DisplayDeniedHCProfessional()
+        {
+            // Query the HealthcareProfessional table for records with the specific verification value.
+            var healthcareProfessionals = await _hcprofessionalRepository.GetHealthcareProfessionalsWithNoVerification();
+
+            // Extract the User IDs from the matching healthcare professional records.
+            var userIds = healthcareProfessionals.Select(h => h.userID).ToList();
+
+            // Query the User table to get the users associated with the extracted User IDs.
+            var usersWithNoVerification = await _userRepository.GetUsersWithIds(userIds);
+
+            return usersWithNoVerification;
+        }
+
+
     }
 } 

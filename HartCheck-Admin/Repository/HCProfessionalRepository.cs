@@ -58,6 +58,14 @@ namespace HartCheck_Admin.Repository
 
             return healthcareProfessionals;
         }
+        public async Task<IEnumerable<HCProfessional>> GetHealthcareProfessionalsWithNoVerification()
+        {
+            var healthcareProfessionals = await _context.HCProfessionals
+                .Where(h => h.verification == 0)
+                .ToListAsync();
+
+            return healthcareProfessionals;
+        }
         public async Task<HCProfessional> GetProfessionalByUserIdAsync(int userId)
         {
             var result = await _context.HCProfessionals

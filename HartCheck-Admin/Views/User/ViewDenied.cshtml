@@ -2,7 +2,7 @@
 @model IEnumerable<User>
 
 @{
-    ViewData["Title"] = "Declined Doctors";
+    ViewData["Title"] = "Denied Doctors";
 }
 <h1>@ViewData["Title"]</h1>
 
@@ -40,7 +40,7 @@ else
 						<td>@item.birthdate</td>
 						<td>
 							<a asp-controller="User" asp-action="Approve" asp-route-id="@item.usersID" data-user-id="@item.usersID" id="approve-button" class="btn btn-sm btn-outline-success">Approve</a>
-                            <a asp-controller="User" asp-action="Decline" asp-route-id="@item.usersID" class="btn btn-sm btn-outline-danger">Decline</a>
+                            <a asp-controller="User" asp-action="Deny" asp-route-id="@item.usersID" class="btn btn-sm btn-outline-danger">Deny</a>
                             
 							<a asp-controller="User" asp-action="View" asp-route-id="@item.usersID"
 								class="btn btn-info btn-sm">
@@ -60,7 +60,7 @@ else
 
 		<div class="button-box  btn-group viewbutton" >
 			<a asp-controller="User" asp-action="ViewApproved" class="btn btn-outline-info button-link"  id="approve-button"  > View Approved </a>
-            <a asp-controller="User" asp-action="ViewPending" class="btn btn-outline-info button-link"  id="loadViewPendingButton"  > View Pending </a>
+            <a asp-controller="User" asp-action="ViewPending" class="btn btn-outline-info button-link"  id="loadViewPendingButton"  > View Doctors </a>
             <a asp-controller="User" asp-action="ViewDenied" class="btn btn-outline-danger button-link"  id="loadViewDeniedButton"  >View Denied</a>
         </div>
 	</div>
