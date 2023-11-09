@@ -90,8 +90,12 @@ namespace Hart_Check_Official.Controllers
         [ProducesResponseType(400)]
         public IActionResult GetDoctorSchedulesForPatient(int patientID)
         {
-            var doctorSchedules = _doctorScheduleRepository.GetDoctorSchedulesForPatient(patientID);
+            if (!_doctorScheduleRepository.PatientDoctorExist(patientID))
+            {
+                return NotFound();
+            }
 
+            var doctorSchedules = _doctorScheduleRepository.GetDoctorSchedulesForPatient(patientID);
             var doctorSchedulesDto = _mapper.Map<List<DoctorScheduleDto>>(doctorSchedules);
 
             if (!ModelState.IsValid)
@@ -101,7 +105,5 @@ namespace Hart_Check_Official.Controllers
 
             return Ok(doctorSchedulesDto);
         }
-
-
     }
 }

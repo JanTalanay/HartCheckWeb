@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\james\\source\\repos\\HartCheckWeb\\WebApp_Doctor\\WebApp_Doctor.csproj": {}
+    "C:\\Users\\janta\\source\\repos\\Hart_Check_Official\\WebApp_Doctor\\WebApp_Doctor.csproj": {}
   },
   "projects": {
-    "C:\\Users\\james\\source\\repos\\HartCheckWeb\\Hart_Check_Official\\Hart_Check_Official.csproj": {
+    "C:\\Users\\janta\\source\\repos\\Hart_Check_Official\\Hart_Check_Official\\Hart_Check_Official.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\Hart_Check_Official\\Hart_Check_Official.csproj",
+        "projectUniqueName": "C:\\Users\\janta\\source\\repos\\Hart_Check_Official\\Hart_Check_Official\\Hart_Check_Official.csproj",
         "projectName": "Hart_Check_Official",
-        "projectPath": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\Hart_Check_Official\\Hart_Check_Official.csproj",
-        "packagesPath": "C:\\Users\\james\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\Hart_Check_Official\\obj\\",
+        "projectPath": "C:\\Users\\janta\\source\\repos\\Hart_Check_Official\\Hart_Check_Official\\Hart_Check_Official.csproj",
+        "packagesPath": "C:\\Users\\janta\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\janta\\source\\repos\\Hart_Check_Official\\Hart_Check_Official\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\james\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\janta\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -106,24 +107,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\james\\source\\repos\\HartCheckWeb\\WebApp_Doctor\\WebApp_Doctor.csproj": {
+    "C:\\Users\\janta\\source\\repos\\Hart_Check_Official\\WebApp_Doctor\\WebApp_Doctor.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\WebApp_Doctor\\WebApp_Doctor.csproj",
+        "projectUniqueName": "C:\\Users\\janta\\source\\repos\\Hart_Check_Official\\WebApp_Doctor\\WebApp_Doctor.csproj",
         "projectName": "WebApp_Doctor",
-        "projectPath": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\WebApp_Doctor\\WebApp_Doctor.csproj",
-        "packagesPath": "C:\\Users\\james\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\WebApp_Doctor\\obj\\",
+        "projectPath": "C:\\Users\\janta\\source\\repos\\Hart_Check_Official\\WebApp_Doctor\\WebApp_Doctor.csproj",
+        "packagesPath": "C:\\Users\\janta\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\janta\\source\\repos\\Hart_Check_Official\\WebApp_Doctor\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\james\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\janta\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -132,14 +133,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\james\\source\\repos\\HartCheckWeb\\Hart_Check_Official\\Hart_Check_Official.csproj": {
-                "projectPath": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\Hart_Check_Official\\Hart_Check_Official.csproj"
+              "C:\\Users\\janta\\source\\repos\\Hart_Check_Official\\Hart_Check_Official\\Hart_Check_Official.csproj": {
+                "projectPath": "C:\\Users\\janta\\source\\repos\\Hart_Check_Official\\Hart_Check_Official\\Hart_Check_Official.csproj"
               }
             }
           }
@@ -212,7 +214,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

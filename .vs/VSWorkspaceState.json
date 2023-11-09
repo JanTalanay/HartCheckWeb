@@ -3,8 +3,9 @@
     "",
     "\\HartCheck_Doctor_test",
     "\\HartCheck_Doctor_test\\Controllers",
-    "\\HartCheck_Doctor_test\\Data"
+    "\\Hart_Check_Official",
+    "\\Hart_Check_Official\\Data"
   ],
-  "SelectedNode": "\\HartCheck_Doctor_test\\Data\\datacontext.cs",
+  "SelectedNode": "\\Hart_Check_Official\\Data\\datacontext.cs",
   "PreviewInSolutionExplorer": false
 }

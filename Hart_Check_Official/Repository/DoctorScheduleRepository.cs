@@ -60,19 +60,23 @@ namespace Hart_Check_Official.Repository
         public List<DoctorSchedule> GetDoctorSchedulesForPatient(int patientID)
         {
             var patientDoctors = _context.PatientsDoctor
-                                       .Include(pd => pd.doctor)
+                                    .Include(pd => pd.doctor)
                                        .ThenInclude(d => d.DoctorSchedule)
-                                       .Where(pd => pd.patientID == patientID)
-                                       .ToList();
+                                    .Where(pd => pd.patientID == patientID)
+                                    .ToList();
 
             var doctorSchedules = new List<DoctorSchedule>();
 
             foreach (var patientDoctor in patientDoctors)
             {
-                doctorSchedules.AddRange(patientDoctor.doctor.DoctorSchedule);
+                if (patientDoctor.doctor != null && patientDoctor.doctor.DoctorSchedule != null)
+                {
+                    doctorSchedules.AddRange(patientDoctor.doctor.DoctorSchedule);
+                }
             }
 
             return doctorSchedules;
         }
+
     }
 }
