@@ -27,20 +27,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW5hbHl0aWNzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/BugReport/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnVnUmVwb3J0XERlbGV0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/BugReport/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnVnUmVwb3J0XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/EducationalResource/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWR1Y2F0aW9uYWxSZXNvdXJjZVxDcmVhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/EducationalResource/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWR1Y2F0aW9uYWxSZXNvdXJjZVxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/EducationalResource/Edit.cshtml]
@@ -83,12 +75,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/User/View.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxWaWV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/User/ViewApproved.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxWaWV3QXBwcm92ZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/User/ViewDeclined.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxWaWV3RGVjbGluZWQuY3NodG1s
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/User/ViewDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxWaWV3RGVuaWVkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/User/ViewPending.cshtml]

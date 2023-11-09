@@ -9,9 +9,10 @@ namespace HartCheck_Admin.Models
         [Key]
         public int doctorID { get; set; }
         [ForeignKey("User")]
-        public string userID { get; set; }
+        public int userID { get; set; }
         public string clinic { get; set; }
-        public string licenseID { get; set; }
+        [ForeignKey("DoctorLicense")]
+        public int licenseID { get; set; }
         public int verification { get; set; }
     }
 }
