@@ -1,10 +1,14 @@
 using HartCheck_Doctor_test.Data;
+using HartCheck_Doctor_test.FileUploadService;
+using HartCheck_Doctor_test.Hubs;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSignalR();
+builder.Services.AddScoped<IFileUploadService, LocalFileUploadService>();
 builder.Services.AddDbContext<datacontext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -28,8 +32,20 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "ChangePassword",
+        pattern: "Account/ChangePassword/{hash}",
+        defaults: new { controller = "Account", action = "ChangePassword" }
+    );
+
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}"
+    );
+});
+
+app.MapHub<ChatHub>("/chatHub");
 
 app.Run();

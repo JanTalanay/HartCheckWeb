@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "b4H6S3iH/hBEHGCcg71IAO44QF88+y/WLEzuZa+pmqoOyRPKuxcFIU80kFmnfuE+/sk2p/JcYJMm7riRE0ryXA==",
+  "dgSpecHash": "eTUi5dJSBoaT7+xgEVKnInfbAGcKQrjbnmn3TkkpCPx1Ru4zdXRIfZH2bDfRL048rndc9a5gD2wGw9PQl8tRSg==",
   "success": true,
   "projectFilePath": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\HartCheck_Doctor_test.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\james\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\james\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\james\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\james\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

@@ -75,3 +75,4 @@ C:\Users\james\source\repos\HartCheckWeb\HartCheck_Doctor_test\obj\Debug\net6.0\
 C:\Users\james\source\repos\HartCheckWeb\HartCheck_Doctor_test\obj\Debug\net6.0\ref\HartCheck_Doctor_test.dll
 C:\Users\james\source\repos\HartCheckWeb\HartCheck_Doctor_test\bin\Debug\net6.0\Humanizer.dll
 C:\Users\james\source\repos\HartCheckWeb\HartCheck_Doctor_test\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\james\source\repos\HartCheckWeb\HartCheck_Doctor_test\bin\Debug\net6.0\BCrypt.Net-Next.dll
