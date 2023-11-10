@@ -1,0 +1,31 @@
+﻿@model HartCheck_Doctor_test.DTO.HealthCareProfessionalDto
+
+@{
+    ViewBag.Title = "Register Doctor";
+    Layout = "_Layout";
+}
+
+
+@using (Html.BeginForm("RegisterHP", "Home", FormMethod.Post))
+{
+    
+    @Html.AntiForgeryToken()
+    <h2>Please enter your License ID for verification</h2>
+    <div class="form-group">
+        @Html.LabelFor(model => model.licenseID)
+        @Html.TextBoxFor(model => model.licenseID, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.licenseID)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.clinic)
+        @Html.DropDownListFor(model => model.clinic, new List<SelectListItem>
+        {
+            new SelectListItem { Text = "The Medical City", Value = "1" },
+            new SelectListItem { Text = "PGH", Value = "2" },
+            new SelectListItem { Text = "St. Luke's", Value = "3" }
+        }, "Select a Clinic/Hospital", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.clinic)
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Login</button>
+}

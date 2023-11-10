@@ -1,0 +1,31 @@
+﻿@model List<PatientDoctorViewModel>
+
+@{
+    ViewBag.Title = "View Patient";
+    Layout = "_Layout";
+}
+
+@if (Model != null)
+{
+    @foreach (var item in Model)
+    {
+        <h5>First Name:</h5>
+        <p>@item.FirstName</p>
+        <h5>Last Name:</h5>
+        <p>@item.LastName</p>
+        <h5>Phone:</h5>
+        <p>@item.Phone</p>
+        <h5>Current Condition:</h5>
+        <p>@item.CurrentCondition</p>
+        <h5>Previous Conditions:</h5>
+        <p>@item.PreviousCondition</p>
+        <h5>Previous Medications:</h5>
+        <p>@item.PreviousMedications</p>
+        <h5>Surgical History:</h5>
+        <p>@item.SurgicalHistory</p>
+    }
+}
+else
+{
+    <h2>No Info.</h2>
+}

@@ -1,0 +1,38 @@
+﻿@model HartCheck_Doctor_test.DTO.BugReportDto
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+
+@using (Html.BeginForm("ReportABug", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-group">
+        @Html.LabelFor(model => model.featureID)
+        @Html.DropDownListFor(model => model.featureID, new List<SelectListItem>
+        {
+            new SelectListItem { Text = "Login", Value = "1" },
+            new SelectListItem { Text = "Register", Value = "2" },
+            new SelectListItem { Text = "EditProfile", Value = "3" },
+            new SelectListItem { Text = "Manage/View Appointment", Value = "4" },
+            new SelectListItem { Text = "Home", Value = "5" },
+            new SelectListItem { Text = "Chat", Value = "6" },
+            new SelectListItem { Text = "BP Data", Value = "7" },
+            new SelectListItem { Text = "BP Threshold", Value = "8" },
+            new SelectListItem { Text = "Patient Management", Value = "9" },
+        }, "Select Feature", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.featureID)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.description)
+        @Html.TextAreaFor(model => model.description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.description)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+}
+

@@ -1,6 +1,8 @@
+using System.Security.Claims;
 using HartCheck_Doctor_test.Data;
 using HartCheck_Doctor_test.FileUploadService;
 using HartCheck_Doctor_test.Hubs;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +11,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
 builder.Services.AddScoped<IFileUploadService, LocalFileUploadService>();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";
+    });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Doctor", policy =>
+    {
+        policy.RequireClaim(ClaimTypes.Role, "2");
+    });
+    
+});
 builder.Services.AddDbContext<datacontext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -29,7 +44,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
@@ -39,10 +54,30 @@ app.UseEndpoints(endpoints =>
         pattern: "Account/ChangePassword/{hash}",
         defaults: new { controller = "Account", action = "ChangePassword" }
     );
+    endpoints.MapControllerRoute(
+        name: "AddMedicine",
+        pattern: "Patient/ViewPatient/{patientID}",
+        defaults: new { controller = "Patient", action = "ViewPatient" }
+    );
+    endpoints.MapControllerRoute(
+        name: "AddMedicine",
+        pattern: "Patient/AddMedicine/{patientID}",
+        defaults: new { controller = "Patient", action = "AddMedicine" }
+    );
+    endpoints.MapControllerRoute(
+        name: "AddDiagnosis",
+        pattern: "Patient/AddDiagnosis/{patientID}",
+        defaults: new { controller = "Patient", action = "AddDiagnosis" }
+    );
+    endpoints.MapControllerRoute(
+        name: "AddCondition",
+        pattern: "Patient/AddCondition/{patientID}",
+        defaults: new { controller = "Patient", action = "AddCondition" }
+    );
 
     endpoints.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}"
+        pattern: "{controller=Account}/{action=Login}/{id?}"
     );
 });
 

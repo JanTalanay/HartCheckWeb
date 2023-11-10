@@ -1,0 +1,39 @@
+﻿@page
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" >
+    <link rel="stylesheet" type="text/css" href="~/css/style.css">
+</head>
+<body>
+<div class="container-fluid h-100">
+    <div class="row justify-content-center h-100">
+        <div class="col-md-8 col-xl-6 chat">
+            <div class="card">
+                <div class="card-header msg_head">
+                    <div class="d-flex bd-highlight">
+                        <div class="user_info">
+                            <span class="user_name">Doctor</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body msg_card_body">
+                    <ul id ="messagesList"></ul>
+                </div>
+			
+                <div class="card-footer">
+                    <div class="input-group">
+                        <input type="text" id="userInput" hidden/>
+                        <input name="" type="text" class="form-control type_msg" placeholder="Type your message..." id="messageInput"/>
+                        <div class="input-group-append">
+                            <input class="input-group-text send_btn" type="button" id="sendButton" value="Send"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>

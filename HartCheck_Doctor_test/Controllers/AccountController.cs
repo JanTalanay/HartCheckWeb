@@ -1,10 +1,13 @@
 ﻿using System.Net;
 using System.Net.Mail;
 using System.Runtime.CompilerServices;
+using System.Security.Claims;
 using HartCheck_Doctor_test.Data;
 using HartCheck_Doctor_test.DTO;
 using HartCheck_Doctor_test.FileUploadService;
 using HartCheck_Doctor_test.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HartCheck_Doctor_test.Controllers
@@ -12,13 +15,10 @@ namespace HartCheck_Doctor_test.Controllers
     public class AccountController : Controller
     {
         private readonly datacontext _dbContext;
-        private readonly IFileUploadService fileUploadService;
-        private string filePath; 
         
-        public AccountController(datacontext dbContext, IFileUploadService fileUploadService)
+        public AccountController(datacontext dbContext)
         {
             _dbContext = dbContext;
-            this.fileUploadService = fileUploadService;
         }
         
         [HttpGet]
@@ -55,38 +55,11 @@ namespace HartCheck_Doctor_test.Controllers
                 return RedirectToAction("Login");
             }
 
+
             return View(userDto);
         }
 
-        [HttpGet]
-        public IActionResult License()
-        {
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> uploadLicense(DoctorLicenseDTO licenseDto,IFormFile licenseFile)
-        {
-            if (_dbContext.DoctorLicense.Any(u => u.licenseID == licenseDto.LicenseID))
-            {
-                ModelState.AddModelError("License", "License is already registered");
-                return View("License");
-            }
-            if (licenseFile != null && licenseFile.Length > 0)
-            {
-                filePath = await fileUploadService.UploadFileAsync(licenseFile);
-                var license = new DoctorLicense()
-                {
-                    licenseID = licenseDto.LicenseID,
-                    status = 0,
-                    fileName = licenseFile.Name,
-                    externalPath = filePath
-                };
-                _dbContext.DoctorLicense.Add(license);//Identity Insert is no
-                _dbContext.SaveChanges();
-                return View("Login");
-            }
-            return View("License");
-        }
+       
         
         [HttpGet]
         public IActionResult Login()
@@ -114,8 +87,21 @@ namespace HartCheck_Doctor_test.Controllers
                     ModelState.AddModelError("Password", "Invalid password");
                     return View("Login");
                 }
+                
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.NameIdentifier, existingUser.usersID.ToString()),
+                    new Claim(ClaimTypes.Email, existingUser.email),
+                    new Claim(ClaimTypes.GivenName, existingUser.firstName),
+                    new Claim(ClaimTypes.Surname, existingUser.lastName),
+                    new Claim(ClaimTypes.Role, existingUser.role.ToString()),
+                    
+                    
+                };
+                var identity = new ClaimsIdentity(claims, "CustomAuthentication");
+                var principal = new ClaimsPrincipal(identity);
 
-
+                HttpContext.SignInAsync(principal);
                 return RedirectToAction("Index", "Home");
             }
 
@@ -221,6 +207,54 @@ namespace HartCheck_Doctor_test.Controllers
             _dbContext.SaveChanges();
             return View("Login");
         }
+        
+        
+        [HttpGet]
+        [Authorize(Policy = "Doctor")]
+        public IActionResult EditProfile()
+        {
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var user = _dbContext.Users.FirstOrDefault(u => u.usersID == userId);
+    
+            if (user != null)
+            {
+                var userDto = new EditUserDto()
+                {
+                    firstName = user.firstName,
+                    lastName = user.lastName,
+                    phoneNumber = user.phoneNumber
+                };
+        
+                return View(userDto);
+            }
+            return View();
+        }
+        
+        [HttpPost]
+        [Authorize(Policy = "Doctor")]
+        public IActionResult EditProfile(EditUserDto userDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                var user = _dbContext.Users.FirstOrDefault(u => u.usersID == userId);
+                if(user!=null)
+                {
+
+                    user.firstName = userDto.firstName;
+                    user.lastName = userDto.lastName;
+                    user.phoneNumber = userDto.phoneNumber;
+                    
+                };
+                /*_dbContext.Users.Update(user);*/
+                _dbContext.SaveChanges();
+                
+                
+                return RedirectToAction("Index","Home");
+            }
+            
+            return View(userDto);
+        }
 
         private string ComputeHash(string input)
         {
@@ -231,6 +265,8 @@ namespace HartCheck_Doctor_test.Controllers
                 return Convert.ToBase64String(hash);
             }
         }
+        
+        
     }
 }
 

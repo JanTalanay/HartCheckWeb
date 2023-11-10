@@ -9,12 +9,48 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\css\\style.css",
+      "PackagePath": "staticwebassets\\css\\style.css"
+    },
+    {
       "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\img\\license\\All Items in Shop.jpeg",
+      "PackagePath": "staticwebassets\\img\\license\\All Items in Shop.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\img\\license\\Cavern Celestite_NO_ERROR.gbot",
+      "PackagePath": "staticwebassets\\img\\license\\Cavern Celestite_NO_ERROR.gbot"
+    },
+    {
+      "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\img\\license\\Dust, Energy and Essence.gbot",
+      "PackagePath": "staticwebassets\\img\\license\\Dust, Energy and Essence.gbot"
+    },
+    {
+      "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\img\\license\\Fud Bup.txt",
+      "PackagePath": "staticwebassets\\img\\license\\Fud Bup.txt"
+    },
+    {
       "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\img\\license\\ISPROJ2 UI.PNG",
       "PackagePath": "staticwebassets\\img\\license\\ISPROJ2 UI.PNG"
+    },
+    {
+      "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\img\\license\\Web Draft.txt",
+      "PackagePath": "staticwebassets\\img\\license\\Web Draft.txt"
+    },
+    {
+      "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\img\\license\\gs.png",
+      "PackagePath": "staticwebassets\\img\\license\\gs.png"
+    },
+    {
+      "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\img\\license\\narg.PNG",
+      "PackagePath": "staticwebassets\\img\\license\\narg.PNG"
+    },
+    {
+      "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\img\\license\\shopList.txt",
+      "PackagePath": "staticwebassets\\img\\license\\shopList.txt"
     },
     {
       "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\js\\chat.js",

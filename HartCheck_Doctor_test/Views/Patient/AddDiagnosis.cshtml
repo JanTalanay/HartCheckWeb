@@ -1,0 +1,19 @@
+﻿@model HartCheck_Doctor_test.DTO.DiagnosisDto
+
+@{
+    ViewBag.Title = "AddCondition";
+    Layout = "_Layout";
+}
+
+@using (Html.BeginForm("AddCondition", "Patient", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(model => model.Diagnosis)
+        @Html.TextBoxFor(model => model.Diagnosis, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Diagnosis)
+    </div>
+    <input type="hidden" name="patientID" value="@Model.patientID" />
+    <button type="submit" class="btn btn-primary">Add Condition</button>
+                                                     
+}

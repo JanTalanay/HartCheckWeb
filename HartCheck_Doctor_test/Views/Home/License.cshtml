@@ -1,4 +1,4 @@
-﻿@model HartCheck_Doctor_test.DTO.DoctorLicenseDTO
+﻿@model LicenseViewModel
 
 @{
     ViewBag.Title = "License Upload";
@@ -6,11 +6,12 @@
 }
 @if (ViewData.ModelState.IsValid)
 {
-    <form method="post" enctype="multipart/form-data" asp-controller="Account" asp-action="uploadLicense">
+    <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="uploadLicense">
         <div class="form-group">
             <label for="LicenseID">License ID:</label>
             <input type="text" class="form-control" id="LicenseID" name="LicenseID" />
         </div>
+
         <div class="form-group">
             <label for="LicenseFile">License File:</label>
             <input type="file" class="form-control-file" id="LicenseFile" name="licenseFile" />

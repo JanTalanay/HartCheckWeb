@@ -1,0 +1,31 @@
+﻿@model HartCheck_Doctor_test.DTO.EditUserDto
+
+@{
+    ViewBag.Title = "EditProfile";
+    Layout = "_Layout";
+}
+
+@using (Html.BeginForm("EditProfile", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.firstName)
+        @Html.TextBoxFor(model => model.firstName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.firstName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.lastName)
+        @Html.TextBoxFor(model => model.lastName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.lastName)
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(model => model.phoneNumber)
+        @Html.TextBoxFor(model => model.phoneNumber, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.phoneNumber)
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+}
