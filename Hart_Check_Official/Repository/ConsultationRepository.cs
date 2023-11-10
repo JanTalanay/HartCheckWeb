@@ -78,7 +78,7 @@ namespace Hart_Check_Official.Repository
 
         public HealthCareProfessional GetHealthCareProfessionalByID(int doctorID)
         {
-            return _context.HealthCareProfessional.FirstOrDefault(hcp => hcp.doctorID == doctorID);
+            return _context.HealthCareProfessional.FirstOrDefault(hcp => hcp.doctorID == doctorID); 
         }
 
 
