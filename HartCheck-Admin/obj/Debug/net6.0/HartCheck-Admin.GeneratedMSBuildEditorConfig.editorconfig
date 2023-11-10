@@ -31,6 +31,38 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnVnUmVwb3J0XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/Doctor/Approve.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXEFwcHJvdmUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/Doctor/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/Doctor/Deny.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXERlbnkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/Doctor/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/Doctor/View.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXFZpZXcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/Doctor/ViewApproved.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXFZpZXdBcHByb3ZlZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/Doctor/ViewDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXFZpZXdEZW5pZWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/Doctor/ViewPending.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXFZpZXdQZW5kaW5nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/EducationalResource/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWR1Y2F0aW9uYWxSZXNvdXJjZVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -51,6 +83,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/Patient/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -61,38 +97,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/User/Approve.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxBcHByb3ZlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/User/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxEZWxldGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/User/Deny.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxEZW55LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/User/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/User/View.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxWaWV3LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/User/ViewApproved.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxWaWV3QXBwcm92ZWQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/User/ViewDenied.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxWaWV3RGVuaWVkLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/User/ViewPending.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxWaWV3UGVuZGluZy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/GitHub/HartCheckWeb/HartCheck-Admin/Views/_ViewImports.cshtml]
