@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "esPl+lFaqgrHk1D+Iwwsug7ftvJNfHBA+RY1jEdU7Ok=",
+  "Hash": "ffYPj0WnfZBkeF36Tc8waYruA3rytAlXGtXb+FsL6Jg=",
   "Source": "HartCheck-Admin",
   "BasePath": "_content/HartCheck-Admin",
   "Mode": "Default",
@@ -83,6 +83,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "E:\\GitHub\\HartCheckWeb\\HartCheck-Admin\\wwwroot\\images\\doctorlicense1.png",
+      "SourceId": "HartCheck-Admin",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\GitHub\\HartCheckWeb\\HartCheck-Admin\\wwwroot\\",
+      "BasePath": "_content/HartCheck-Admin",
+      "RelativePath": "images/doctorlicense1.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\doctorlicense1.png"
     },
     {
       "Identity": "E:\\GitHub\\HartCheckWeb\\HartCheck-Admin\\wwwroot\\js\\site.js",

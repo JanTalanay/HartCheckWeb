@@ -1,53 +1,104 @@
 ﻿@using HartCheck_Admin.Models
-@model IEnumerable<User>
+@model IEnumerable<User> 
+
 @{
     ViewData["Title"] = "Approved Doctors";
 }
-<h1 >@ViewData["Title"]</h1>
+<h1>@ViewData["Title"]</h1>
 
-<div class="album py-5 bg-body-tertiary">
-    <div class="row row-cols-1 row-cols-sm-5 row-cols-md-3 g-3" >
-            @if (Model != null)
-            {
-                @foreach(var item in Model)
-                {
-                    <div class="card shadow-sm w-100">
+<br /><br />
+@if (Model.Count() < 1)
+{
+	<div class="alert alert-info">
+		No Doctor records found.
+	</div>
+}
+else
+{
+	<div id="role1">
+		<table id="User" class="table table-striped table-hover">
+		<thead>
+			<tr>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Email Address</th>
+				<th>Phone Number</th>
+				<th>Birthdate</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				@if (item.role == 1)
+				{
+					<tr>
+						<td>@item.firstName</td>
+						<td>@item.lastName</td>
+						<td>@item.email</td>
+						<td>@item.phoneNumber</td>
+						<td>@item.birthdate</td>
+						<td>
+							<a asp-controller="User" asp-action="Approve" asp-route-id="@item.usersID" data-user-id="@item.usersID" id="approve-button" class="btn btn-sm btn-outline-success">Approve</a>
+                            <a asp-controller="User" asp-action="Deny" asp-route-id="@item.usersID" class="btn btn-sm btn-outline-danger">Deny</a>
+                            
+							<a asp-controller="User" asp-action="View" asp-route-id="@item.usersID"
+								class="btn btn-info btn-sm">
+								<i class="fas fa-eye"></i>
+								View
+							</a>
+							<button class="btn btn-danger btn-sm deleteBtn" data-id="@item.usersID">
+								<i class="fas fa-trash"></i>
+								Delete
+							</button>           
+						</td>
+					</tr>
+				}
+			}
+		</tbody>
+		</table>
 
-                        @if (item.role == 1)
-                        {
-                            <div class="card-body">
-                                <p class="card-text">@item.firstName</p>
-                                <p class="card-text">@item.lastName</p>
-                                <p class="card-text">@item.email</p>
-                                <p class="card-text">@item.birthdate</p>
-                                <p class="card-text">@item.phoneNumber</p>
-                                <p class="card-text">@item.role</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">  
-                                        <a asp-controller="User" asp-action="Approve" asp-route-id="@item.usersID" data-user-id="@item.usersID" id="approve-button" class="btn btn-sm btn-outline-success">Approve</a>
-                                        <a asp-controller="User" asp-action="Decline" asp-route-id="@item.usersID" class="btn btn-sm btn-outline-danger">Decline</a>
-                                        <a asp-controller="User" asp-action="Delete" asp-route-id="@item.usersID" class="btn btn-sm btn-outline-secondary">Delete</a>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                      
-                    </div>      
-                }
-            } 
-    </div>
-</div>
+		<div class="button-box  btn-group viewbutton" >
+			<a asp-controller="User" asp-action="ViewApproved" class="btn btn-outline-info button-link"  id="approve-button"  > View Approved </a>
+            <a asp-controller="User" asp-action="ViewPending" class="btn btn-outline-info button-link"  id="loadViewPendingButton"  > View Doctors </a>
+            <a asp-controller="User" asp-action="ViewDenied" class="btn btn-outline-danger button-link"  id="loadViewDeniedButton"  >View Denied</a>
+         </div>
+	</div>
+}
 
-<div class="button-box col-lg-12 btn-group">
-     <a asp-controller="User" asp-action="ViewApproved" class="btn btn-outline-info button-link"  id="approve-button"  > View Approved </a>
-     <a asp-controller="User" asp-action="ViewPending" class="btn btn-outline-info button-link"  id="loadViewPendingButton"  > View Pending </a>
-     <a asp-controller="User" asp-action="ViewDenied" class="btn btn-outline-danger button-link"  id="loadViewDeniedButton"  >View Denied</a>
-</div>
+<form id="DeleteForm" asp-controller="User" asp-action="Delete" method="post">
+	<input type="hidden" id="HiddenUserID" name="Id" value="" /> 
+</form>
 
-<script>
-     $(document).ready(function () {
+@{
+    var viewPendingUrl = Url.Action("ViewApproved", "User");
+}
+
+@section Scripts {
+	<script>
+		$(document).ready( function () {
+			 $('#User').DataTable();
+				} );
+		$('.deleteBtn').click(function(e) {
+            swal({
+                title: "Are you sure?",
+                text: "Are you sure you want to delete this record?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true
+            }).then((confirm) => {
+                if (confirm) {
+                    var btn = $(this);
+                    var id = btn.data("id");
+                    $("#HiddenUserID").val(id);
+                    $('#DeleteForm').submit();
+				}
+			});
+		});
+
+		 $(document).ready(function () {
         $(".approve-button").click(function () {
-            var usersID = $(this).data("user-id"); // Get the user's ID from a data attribute
+            var usersID = $(this).data("data-user-id"); // Get the user's ID from a data attribute
             $.ajax({
                 url: "@Url.Action("ApproveDoctor", "User")",
                 type: "POST",
@@ -55,8 +106,9 @@
                 success: function () {
                     // Reload the page or update the UI to reflect the change
                     location.reload();
-                }
+                } 
             });
         });
     });
-</script>
+	</script>
+}

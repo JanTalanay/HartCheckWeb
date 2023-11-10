@@ -19,6 +19,8 @@ builder.Services.AddScoped<IEducationalResourceRepository, EducationalResourceRe
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IBugReportRepository, BugReportRepository>();
 builder.Services.AddScoped<IHCProfessionalRepository, HCProfessionalRepository>();
+builder.Services.AddScoped<IDoctorLicenseRepository, DoctorLicenseRepository>();
+
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {

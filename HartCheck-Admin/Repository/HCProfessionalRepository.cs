@@ -1,6 +1,7 @@
 ﻿using HartCheck_Admin.Data;
 using HartCheck_Admin.Interfaces;
 using HartCheck_Admin.Models;
+using HartCheck_Admin.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace HartCheck_Admin.Repository
@@ -56,6 +57,34 @@ namespace HartCheck_Admin.Repository
                 .ToListAsync();
 
             return healthcareProfessionals;
+        }
+        public async Task<IEnumerable<HCProfessional>> GetHealthcareProfessionalsWithNoVerification()
+        {
+            var healthcareProfessionals = await _context.HCProfessionals
+                .Where(h => h.verification == 0)
+                .ToListAsync();
+
+            return healthcareProfessionals;
+        }
+        public async Task<HCProfessional> GetProfessionalByUserIdAsync(int userId)
+        {
+            var result = await _context.HCProfessionals
+               .Join(
+                   _context.Patients,
+                   hcp => hcp.userID,
+                   user => user.usersID,
+                   (hcp, user) => new { HCProfessional = hcp, User = user }
+               )
+               .Join(
+                   _context.DoctorLicenses,
+                   joinedData => joinedData.HCProfessional.licenseID,
+                   license => license.licenseID,
+                   (joinedData, license) => new { joinedData.HCProfessional, joinedData.User, DoctorLicense = license }
+               )
+
+               .FirstOrDefaultAsync(joinedData => joinedData.User.usersID == userId);
+
+            return result?.HCProfessional;
         }
     }
 }
