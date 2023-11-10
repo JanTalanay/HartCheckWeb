@@ -9,6 +9,7 @@ namespace HartCheck_Admin.Interfaces
         Task<HCProfessional> GetByIdAsyncNoTracking(int id);
         Task<IEnumerable<HCProfessional>> GetHealthcareProfessionalsWithVerification();
         Task<IEnumerable<HCProfessional>> GetHealthcareProfessionalsWithNoVerification();
+        Task<IEnumerable<HCProfessional>> GetHealthcareProfessionalsWithPendingVerification();
         Task<HCProfessional> GetProfessionalByUserIdAsync(int userId);
         bool Add(HCProfessional hcprofessional);
         bool Update(HCProfessional hcprofessional);

@@ -4,7 +4,7 @@
     
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - HartCheck</title>
+    <title>@ViewData["Title"] - HärtCheck</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
@@ -38,19 +38,21 @@
 
     <div class="l-navbar" id="nav-bar" >
         <nav class="nav">
-            <div> <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name" >Hartcheck-Admin</span> </a>
+            <div> <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name" >HärtCheck-Admin</span> </a>
                 <div class="nav_list"> 
                     <a class="nav_link" asp-area="" asp-controller="Analytics" asp-action="Index"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">User Analytics</span> </a> 
-                    <a class="nav_link" id="role0Button" asp-area="" asp-controller="User" asp-action="Index"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Patient List Management</span> </a> 
-                    <a class="nav_link" id="role1Button" asp-area="" asp-controller="User" asp-action="Index"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Doctor List Management</span> </a> 
+                    <a class="nav_link"  asp-area="" asp-controller="Patient" asp-action="Index"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Patient List Management</span> </a> 
+                    <a class="nav_link"  asp-area="" asp-controller="Doctor" asp-action="Index"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Doctor List Management</span> </a> 
                     <a class="nav_link" asp-area="" asp-controller="EducationalResource" asp-action="Index"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Educational Resource</span> </a> 
                     <a class="nav_link" asp-area="" asp-controller="BugReport" asp-action="Index"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Bug Report</span> </a> 
                 </div>
             </div> 
             <div>
             @if (User.Identity.IsAuthenticated)
-            {
-                <a class="nav_link" asp-area="" asp-controller="Account" asp-action="Logout"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Logout</span> </a>
+            {    
+                <form asp-controller="Account" asp-action="Logout" method="post">
+                    <a class="nav_link"> <i class='bx bx-log-out nav_icon'></i>  <input type="submit" value="Logout" class="b1 nav_name"/> </a>
+                </form>
             }else
             {
                 <a class="nav_link" asp-area="" asp-controller="Account" asp-action="Login"> <i class='bx bx-log-in nav_icon'></i> <span class="nav_name">Login</span> </a>
@@ -68,7 +70,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - Hartcheck-Admin - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - HärtCheck-Admin - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.js"></script>

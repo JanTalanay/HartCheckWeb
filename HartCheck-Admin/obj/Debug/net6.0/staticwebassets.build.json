@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ffYPj0WnfZBkeF36Tc8waYruA3rytAlXGtXb+FsL6Jg=",
+  "Hash": "ZJ4KgQ7uxmy5F/wGL89iBCC14iJEHnPAG82UwIHOIdk=",
   "Source": "HartCheck-Admin",
   "BasePath": "_content/HartCheck-Admin",
   "Mode": "Default",
@@ -100,6 +100,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\doctorlicense1.png"
+    },
+    {
+      "Identity": "E:\\GitHub\\HartCheckWeb\\HartCheck-Admin\\wwwroot\\images\\doctorlicense2.png",
+      "SourceId": "HartCheck-Admin",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\GitHub\\HartCheckWeb\\HartCheck-Admin\\wwwroot\\",
+      "BasePath": "_content/HartCheck-Admin",
+      "RelativePath": "images/doctorlicense2.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\doctorlicense2.png"
+    },
+    {
+      "Identity": "E:\\GitHub\\HartCheckWeb\\HartCheck-Admin\\wwwroot\\images\\doctorlicense3.png",
+      "SourceId": "HartCheck-Admin",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\GitHub\\HartCheckWeb\\HartCheck-Admin\\wwwroot\\",
+      "BasePath": "_content/HartCheck-Admin",
+      "RelativePath": "images/doctorlicense3.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\doctorlicense3.png"
     },
     {
       "Identity": "E:\\GitHub\\HartCheckWeb\\HartCheck-Admin\\wwwroot\\js\\site.js",
