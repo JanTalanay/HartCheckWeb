@@ -47,6 +47,16 @@ namespace Hart_Check_Official.Repository
         {
             _context.Add(consultation);
             _context.SaveChanges();
+
+            int consultationID = consultation.consultationID;
+
+            var chat = new Chat
+            {
+                consultationID = consultationID
+            };
+            _context.Add(chat);
+            _context.SaveChanges();
+
             return (consultation);
         }
 
