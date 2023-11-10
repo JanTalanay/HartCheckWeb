@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "714wDkuCdSWTBC1/Bn18/g/K8/L2GLL2h0sop2L3Nc0=",
+  "Hash": "2xG4pdG2+hi94e56EdxQNy8ly1rtbVsg+eMxVQGAUYw=",
   "Source": "HartCheck_Doctor_test",
   "BasePath": "_content/HartCheck_Doctor_test",
   "Mode": "Default",
@@ -151,6 +151,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\license\\Dust, Energy and Essence.gbot"
+    },
+    {
+      "Identity": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\img\\license\\FINAL_ERD6.jpg",
+      "SourceId": "HartCheck_Doctor_test",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\",
+      "BasePath": "_content/HartCheck_Doctor_test",
+      "RelativePath": "img/license/FINAL_ERD6.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\license\\FINAL_ERD6.jpg"
     },
     {
       "Identity": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\img\\license\\Fud Bup.txt",

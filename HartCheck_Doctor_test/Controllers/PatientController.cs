@@ -45,6 +45,7 @@ public class PatientController : Controller
     [Route("Patient/AddDiagnosis")]
     public IActionResult AddDiagnosis(DiagnosisDto diagnosisDto)
     {
+        Console.WriteLine(diagnosisDto.patientID);
         var userID = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         
         if (int.TryParse(userID, out int userIDInt))
