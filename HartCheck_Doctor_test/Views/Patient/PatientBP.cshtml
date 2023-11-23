@@ -1,0 +1,66 @@
+﻿@model IEnumerable<HartCheck_Doctor_test.Models.BpViewModel>
+
+@{
+    ViewBag.Title = "Patient BP";
+    Layout = "_Layout";
+}
+
+
+<select id="patientDropdown">
+    @foreach (var patient in Model)
+    {
+        <option value="@patient.PatientID">@patient.FirstName @patient.LastName</option>
+    }
+</select>
+
+<canvas id="myChart"></canvas>
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+   type: 'line',
+   data: {
+       labels: [],
+       datasets: [
+           {
+               label: 'Systolic',
+               data: [],
+               backgroundColor: 'rgba(75, 192, 192, 0.2)',
+               borderColor: 'rgba(75, 192, 192, 1)',
+               borderWidth: 1
+           },
+           {
+               label: 'Diastolic',
+               data: [],
+               backgroundColor: 'rgba(255, 99, 132, 0.2)',
+               borderColor: 'rgba(255, 99, 132, 1)',
+               borderWidth: 1
+           }
+       ]
+   },
+   options: {
+       scales: {
+           y: {
+               beginAtZero: true
+           }
+       }
+   }
+});
+
+document.getElementById('patientDropdown').addEventListener('change', function() {
+  var patientId = this.value;
+  console.log('Selected patient ID:', patientId);
+
+  var url = '/Patient/GetPatientBP/' + patientId;
+  console.log('Fetch API call URL:', url);
+
+  fetch(url)
+      .then(response => response.json())
+      .then(data => {
+          myChart.data.labels = data.map(bp => bp.dateTaken);
+          myChart.data.datasets[0].data = data.map(bp => bp.systolic);
+          myChart.data.datasets[1].data = data.map(bp => bp.diastolic);
+          myChart.update();
+      });
+});
+</script>
+

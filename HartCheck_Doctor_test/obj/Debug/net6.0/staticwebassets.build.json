@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2xG4pdG2+hi94e56EdxQNy8ly1rtbVsg+eMxVQGAUYw=",
+  "Hash": "SLuorjckr0Wh2ollIM5/mbiLvfEfTMdBQ7+JCfnyQBA=",
   "Source": "HartCheck_Doctor_test",
   "BasePath": "_content/HartCheck_Doctor_test",
   "Mode": "Default",
@@ -117,6 +117,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\license\\All Items in Shop.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\img\\license\\BBQ08 2.PNG",
+      "SourceId": "HartCheck_Doctor_test",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\",
+      "BasePath": "_content/HartCheck_Doctor_test",
+      "RelativePath": "img/license/BBQ08 2.PNG",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\license\\BBQ08 2.PNG"
+    },
+    {
+      "Identity": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\img\\license\\BBQ18.PNG",
+      "SourceId": "HartCheck_Doctor_test",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\",
+      "BasePath": "_content/HartCheck_Doctor_test",
+      "RelativePath": "img/license/BBQ18.PNG",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\license\\BBQ18.PNG"
     },
     {
       "Identity": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\img\\license\\Cavern Celestite_NO_ERROR.gbot",

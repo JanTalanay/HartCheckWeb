@@ -7,11 +7,13 @@ using System.Security.Claims;
 using HartCheck_Doctor_test.Data;
 using HartCheck_Doctor_test.DTO;
 using HartCheck_Doctor_test.FileUploadService;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 namespace HartCheck_Doctor_test.Controllers
 {
+    [Authorize(Policy = "Doctor")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -25,11 +27,9 @@ namespace HartCheck_Doctor_test.Controllers
             _logger = logger;
             this.fileUploadService = fileUploadService;
         }
-
-        [Authorize(Policy = "Doctor")]
+        
         public IActionResult Index()
         {
-            var roleClaim = User.FindFirst(ClaimTypes.Role)?.Value;
             var userID = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             
             //var doctorID = _dbContext.Users.FirstOrDefault(u => u.usersID == userID );
@@ -73,7 +73,6 @@ namespace HartCheck_Doctor_test.Controllers
         }
         
         [HttpGet]
-        [Authorize(Policy = "Doctor")]
         public IActionResult License()
         {
             var roleClaim = User.FindFirst(ClaimTypes.Role)?.Value;
@@ -81,7 +80,6 @@ namespace HartCheck_Doctor_test.Controllers
         }
         
         [HttpPost]
-        [Authorize(Policy = "Doctor")]
         public async Task<IActionResult> uploadLicense(DoctorLicenseDTO licenseDto,IFormFile licenseFile)
         {
             
@@ -111,7 +109,6 @@ namespace HartCheck_Doctor_test.Controllers
         
 
         [HttpGet]
-        [Authorize(Policy = "Doctor")]
         public IActionResult RegisterHP()
         {
             return View();
@@ -140,14 +137,12 @@ namespace HartCheck_Doctor_test.Controllers
         }
 
         [HttpGet]
-        [Authorize(Policy = "Doctor")]
         public IActionResult RegisterClinic()
         {
             return View();
         }
         
         [HttpPost]
-        [Authorize(Policy = "Doctor")]
         public IActionResult RegisterClinic(string id)
         {
             if (id == null)
@@ -172,14 +167,12 @@ namespace HartCheck_Doctor_test.Controllers
         }
         
         [HttpGet]
-        [Authorize(Policy = "Doctor")]
         public IActionResult ScheduleAppointment()
         {
             return View();
         }
         
         [HttpPost]
-        [Authorize(Policy = "Doctor")]
         public IActionResult ScheduleAppointment(DoctorScheduleDto scheduleDto)
         {
             int rowCount = _dbContext.DoctorSchedule.Count();
@@ -202,14 +195,12 @@ namespace HartCheck_Doctor_test.Controllers
             return View("Index");
         }
         [HttpGet]
-        [Authorize(Policy = "Doctor")]
         public IActionResult ReportABug()
         {
             return View();
         }
         
         [HttpPost]
-        [Authorize(Policy = "Doctor")]
         public IActionResult ReportABug(BugReportDto bugReportDto)
         {
             if (ModelState.IsValid)
@@ -229,6 +220,12 @@ namespace HartCheck_Doctor_test.Controllers
                 return RedirectToAction("Index","Home");
             }
             return View(bugReportDto);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Login", "Account");
         }
         
         

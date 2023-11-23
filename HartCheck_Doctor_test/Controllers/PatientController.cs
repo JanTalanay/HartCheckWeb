@@ -4,9 +4,12 @@ using HartCheck_Doctor_test.DTO;
 using HartCheck_Doctor_test.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace HartCheck_Doctor_test.Controllers;
 
+[Authorize(Policy = "Doctor")]
 public class PatientController : Controller
 {
     private readonly ILogger<HomeController> _logger;
@@ -20,7 +23,6 @@ public class PatientController : Controller
     }
     
     [HttpGet]
-    [Authorize(Policy = "Doctor")]
     [Route("Patient/AddDiagnosis")]
     public IActionResult AddDiagnosis()
     {
@@ -41,7 +43,6 @@ public class PatientController : Controller
     }
         
     [HttpPost]
-    [Authorize(Policy = "Doctor")]
     [Route("Patient/AddDiagnosis")]
     public IActionResult AddDiagnosis(DiagnosisDto diagnosisDto)
     {
@@ -81,7 +82,6 @@ public class PatientController : Controller
     }
         
     [HttpGet]
-    [Authorize(Policy = "Doctor")]
     [Route("Patient/AddCondition")]
     public IActionResult AddCondition()
     {
@@ -103,7 +103,6 @@ public class PatientController : Controller
     }
         
     [HttpPost]
-    [Authorize(Policy = "Doctor")]
     [Route("Patient/AddCondition")]
     public IActionResult AddCondition(ConditionDto conditionDto)
     {
@@ -139,7 +138,6 @@ public class PatientController : Controller
         return View();
     }
     [HttpGet]
-    [Authorize(Policy = "Doctor")]
     [Route("Patient/AddMedicine")]
     public IActionResult AddMedicine()
     {
@@ -160,8 +158,7 @@ public class PatientController : Controller
     }
         
     [HttpPost]
-    [Authorize(Policy = "Doctor")]
-    [Route("Patient/AddMedicine")]
+    [Route("Patient/AddMedicine")]//to be revised
     public IActionResult AddMedicine(MedicineDto medicineDto)
     {
         var userID = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -199,8 +196,115 @@ public class PatientController : Controller
     }
 
     [HttpGet]
-    [Authorize(Policy = "Doctor")]
-    [Route("Patient/ViewPatient")]
+    public IActionResult BpThreshold()
+    {
+        var userID = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (int.TryParse(userID, out int userIDInt))
+        {
+            var doctor = _dbContext.HealthCareProfessional.FirstOrDefault(d => d.usersID == userIDInt);
+            if (doctor != null)
+            {
+                var doctorID = doctor.doctorID;
+                var viewModel = new BpThresholdViewModel();
+                viewModel.Patients = _dbContext.PatientsDoctor
+                    .Where(pd => pd.doctorID == doctorID)
+                    .Select(pd => new SelectListItem
+                    {
+                        Value = pd.patientID.ToString(),
+                        Text = pd.patient.User.firstName +" "+ pd.patient.User.lastName // replace Patient.Name with the actual patient name
+                    });
+                return View(viewModel);
+            }
+        }
+        return View();
+    }
+    
+    [HttpPost]
+    public IActionResult BpThreshold(BpThresholdViewModel bpThresholdView)
+    {
+        var userID = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (int.TryParse(userID, out int userIDInt))
+        {
+            var doctor = _dbContext.HealthCareProfessional.FirstOrDefault(d => d.usersID == userIDInt);
+            if (doctor != null)
+            {
+                var bpThreshold = new BloodPressureThreshold()
+                {
+                    patientID = bpThresholdView.SelectedPatientId,
+                    doctorID = doctor.doctorID,
+                    systolicLevel = bpThresholdView.SystolicLevel,
+                    diastolicLevel = bpThresholdView.DiastolicLevel,
+                };
+                _dbContext.BloodPressureThreshold.Add(bpThreshold);
+                _dbContext.SaveChanges();
+                return RedirectToAction("Index","Home");
+            }
+            return View();
+        }
+        
+        return View();
+    }
+    public IActionResult PatientBP()
+    {
+        var userID = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (int.TryParse(userID, out int userIDInt))
+        {
+            var doctor = _dbContext.HealthCareProfessional.FirstOrDefault(d => d.usersID == userIDInt);
+            if (doctor != null)
+            {
+                var patients = _dbContext.PatientsDoctor
+                    .Where(pd => pd.doctorID == doctor.doctorID)
+                    .Join(_dbContext.Patients,
+                        pd => pd.patientID,
+                        p => p.patientID,
+                        (pd, p) => new { PatientsDoctor = pd, Patient = p })
+                    .Join(_dbContext.Users,
+                        pdp => pdp.Patient.usersID,
+                        u => u.usersID,
+                        (pdp, u) => new BpViewModel()
+                        {
+                            PatientID = pdp.Patient.patientID,
+                            FirstName = u.firstName,
+                            LastName = u.lastName,
+                        }).ToList();
+
+                return View(patients);
+            }
+        }
+
+        return View();
+
+        /*return Json(new {});*/
+    }
+    [HttpGet]
+    [Route("Patient/GetPatientBP/{patientId:int}")]
+    public IActionResult GetPatientBP(int patientId)
+    {
+        var userID = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (int.TryParse(userID, out int userIDInt))
+        {
+            var doctor = _dbContext.HealthCareProfessional.FirstOrDefault(d => d.usersID == userIDInt);
+            if (doctor != null)
+            {
+                var isAssociated = _dbContext.PatientsDoctor
+                    .Any(pd => pd.doctorID == doctor.doctorID && pd.patientID == patientId);
+                if (isAssociated)
+                {
+                    var bloodPressureData = _dbContext.BloodPressure
+                        .Where(bp => bp.patientID == patientId)
+                        .Select(bp => new { bp.dateTaken, bp.systolic, bp.diastolic })
+                        .ToList();
+           
+                    return Json(bloodPressureData);
+                }
+            }
+        }
+        return Json(null);
+    }
+    
+    
+    [HttpGet]
+    [Route("Patient/ViewPatient")]//to be fixed link
     public IActionResult ViewPatient()
     {
 
@@ -221,7 +325,11 @@ public class PatientController : Controller
                 Console.WriteLine(doctor.doctorID);
                 if (doctor != null)
                 {
-                    var patientsDoctors = _dbContext.Patients
+                    var isAssociated = _dbContext.PatientsDoctor
+                        .Any(pd => pd.doctorID == doctor.doctorID && pd.patientID == patientID);
+                    if (isAssociated)
+                    {
+                        var patientsDoctors = _dbContext.Patients
                         .Where(p => p.patientID == patId.patientID)
                         .Join(_dbContext.Users,
                             p => p.usersID,
@@ -257,6 +365,8 @@ public class PatientController : Controller
                         .ToList();
 
                     return View(patientsDoctors);
+                    }
+                    
                 }
             }
 
@@ -266,7 +376,6 @@ public class PatientController : Controller
     }
 
     [HttpGet]
-    [Authorize(Policy = "Doctor")]
     public IActionResult ViewConsultation()
     {
         var userID = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -314,7 +423,6 @@ public class PatientController : Controller
     }
 
     [HttpPost]
-    [Authorize(Policy = "Doctor")]
     public IActionResult ViewConsultation(int consultationId)
     {
         DeleteConsultation(consultationId);
@@ -332,8 +440,10 @@ public class PatientController : Controller
         }
     }
 
+
+    
+
     [HttpGet]
-    [Authorize(Policy = "Doctor")]
     public IActionResult Chat()
     {
         return View();

@@ -1,0 +1,13 @@
+﻿@model BpThresholdViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<form asp-action="BpThreshold">
+  <select asp-for="SelectedPatientId" asp-items="Model.Patients"></select>
+  <input asp-for="SystolicLevel" />
+  <input asp-for="DiastolicLevel" />
+  <input type="submit" value="Submit" />
+</form>
