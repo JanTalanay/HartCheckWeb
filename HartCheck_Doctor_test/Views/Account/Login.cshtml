@@ -4,26 +4,25 @@
     ViewBag.Title = "Login";
     Layout = "_Layout";
 }
-
-@using (Html.BeginForm("Login", "Account", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.email)
-        @Html.TextBoxFor(model => model.email, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.email)
+   
+    <div class="main_container">
+        <div class="loginform">
+            <h2>Login</h2>
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                
+                @Html.TextBoxFor(model => model.email, new { @class = "inp_log",placeholder="Email" })
+                @Html.ValidationMessageFor(model => model.email)
+                
+                @Html.PasswordFor(model => model.password, new { @class = "inp_log_pass",placeholder="Password" })
+                @Html.ValidationMessageFor(model => model.password)
+                
+                <a href="@Url.Action("ForgotPassword", "Account")">Forgot Password?</a>
+                <button type="submit" class="btn_primary">Login</button>
+            }
+            
+            <button class="btn_secondary" href="@Url.Action("Register", "Account")">Register Here!</button>
+        </div>
+        <div class="footer">© 2023 - 2025 All Rights Reserved. HartCheck</div>
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.password)
-        @Html.PasswordFor(model => model.password, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.password)
-    </div>
-
-    <button type="submit" class="btn btn-primary">Login</button>
-}
-<div>
-    <a href="@Url.Action("ForgotPassword", "Account")">Forgot Password?</a>
-     <a href="@Url.Action("Register", "Account")">Register Here!</a>
-</div>
