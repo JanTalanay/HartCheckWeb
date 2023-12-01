@@ -8,6 +8,7 @@
 	--green: #47AB9D;
 	--black: #212121;
 	--grey: #8E8E8E;
+	--clr: #EDF2F4;
 }
 body{
 	min-height: 100vh;
@@ -26,7 +27,7 @@ h1,h2{
 }
 
 .logobar{
-	background-image: linear-gradient(var(--green),#fff);
+	background-image: linear-gradient(var(--green),var(--clr));
 	height: 100vh;
 	width: 400px;
 	display: flex;
@@ -44,12 +45,14 @@ h1,h2{
 }
 
 .main_container{
+	width: 50vw;
 	margin-left: 20%;
+	margin-top: 10%;
 	justify-content: center;
 }
 .main_container.b{
 	margin-left: 0;
-	width: 100vw;
+	width: 70vw;
 	justify-content: center;
 	display: flex;
 	flex-direction: column;
@@ -68,8 +71,22 @@ h1,h2{
 	width: 500px;
 	height: 550px;
 }
+
+.loginform .inp_log,
+.loginform .inp_log_pass{
+	margin-left: 12%;
+}
+
+.loginform .inp_log_pass{
+	margin-bottom: 5%;
+}
+
+.loginform .btn_primary{
+	margin-left: 12%;
+}
+
 .loginform.b{
-	height: 730px;
+	height: 800px;
 }
 
 .loginform.c,.loginform.d{
@@ -138,13 +155,13 @@ h1,h2{
 }
 
 .loginform a{
-	margin-top: 5%;
-	margin-left: 50%;
+	margin-top: 10%;
+	margin-left: 60%;
 	text-decoration: underline;
 	color: var(--black);
 }
 .loginform.b a{
-	margin-left: 0;
+	margin-left: 47%;
 }
 
 .btn_primary,

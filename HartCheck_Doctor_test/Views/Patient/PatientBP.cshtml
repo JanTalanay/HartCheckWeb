@@ -5,15 +5,18 @@
     Layout = "_Layout";
 }
 
+<div class="main_container" style="margin-left: 50%">
+    <h2 style="margin-bottom: 10%">Patient BP</h2>
+    <select id="patientDropdown" class="inp_log_pass" style="margin-bottom: 5%">
+        @foreach (var patient in Model)
+        {
+            <option value="@patient.PatientID">@patient.FirstName @patient.LastName</option>
+        }
+    </select>
 
-<select id="patientDropdown">
-    @foreach (var patient in Model)
-    {
-        <option value="@patient.PatientID">@patient.FirstName @patient.LastName</option>
-    }
-</select>
+    <canvas id="myChart"></canvas>
+</div>
 
-<canvas id="myChart"></canvas>
 <script>
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {

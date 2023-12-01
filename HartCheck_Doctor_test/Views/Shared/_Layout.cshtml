@@ -7,9 +7,11 @@
     @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
     @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css"/>*@
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist&display=swap" rel="stylesheet" asp-append-version="true">
-    <link rel="stylesheet" href="~/css/nav.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/nav.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist&display=swap" rel="stylesheet" asp-append-version="true">
+    
+    
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -40,7 +42,7 @@
                     <li style="--bg:#009D68">
                         <a asp-controller="Patient" asp-action="ViewPatient">
                             <div class="icon"><ion-icon name="accessibility"></ion-icon></div>
-                            <div class="text">Patient List</div>
+                            <div class="text">View Consultations</div>
                         </a>
                     </li>
                     <li style="--bg:#009D68">
@@ -56,7 +58,7 @@
                         </a>
                     </li>
                     <li style="--bg:#009D68">
-                        <a href="#">
+                        <a asp-controller="Patient" asp-action="PatientBP">
                             <div class="icon"><ion-icon name="bar-chart"></ion-icon></div>
                             <div class="text">Patients'Blood Pressure</div>
                         </a>
@@ -68,7 +70,7 @@
                         </a>
                     </li>
                     <li style="--bg:#009D68">
-                        <a href="#">
+                        <a asp-controller="Patient" asp-action="BpThreshold">
                             <div class="icon"><ion-icon name="fitness"></ion-icon></div>
                             <div class="text">Set BP Threshold</div>
                         </a>

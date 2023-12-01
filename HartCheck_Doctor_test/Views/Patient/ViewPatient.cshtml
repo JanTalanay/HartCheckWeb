@@ -4,29 +4,56 @@
     ViewBag.Title = "View Patient";
     Layout = "_Layout";
 }
-
-@if (Model != null)
-{
-    @foreach (var item in Model)
-    {
-        <h5>First Name:</h5>
-        <p>@item.FirstName</p>
-        <h5>Last Name:</h5>
-        <p>@item.LastName</p>
-        <h5>Phone:</h5>
-        <p>@item.Phone</p>
-        <h5>Current Condition:</h5>
-        <p>@item.CurrentCondition</p>
-        <h5>Previous Conditions:</h5>
-        <p>@item.PreviousCondition</p>
-        <h5>Previous Medications:</h5>
-        <p>@item.PreviousMedications</p>
-        <h5>Surgical History:</h5>
-        <p>@item.SurgicalHistory</p>
-    }
-}
-else
-{
-    <h2>No Info.</h2>
-}
-
+    <div class="main_container b" style="margin-left: 20%">
+        <div class="loginform e">
+            <h1>Patient Info</h1>
+                
+            @if (Model != null)
+            {
+                <div class="patinfo">
+                    @foreach (var item in Model)
+                    {
+                        <div class="pat-item">
+                            <h3>First Name:</h3>
+                            <p>@item.FirstName</p>
+                        </div>
+                        
+                        <div class="pat-item">
+                            <h3>Last Name:</h3>
+                            <p>@item.LastName</p>
+                        </div>        
+                        
+                        <div class="pat-item">
+                            <h3>Phone:</h3>
+                            <p>@item.Phone</p>
+                        </div>     
+                        
+                        <div class="pat-item">
+                            <h3>Current Condition:</h3>
+                            <p>@item.CurrentCondition</p>
+                        </div>      
+                        
+                        <div class="pat-item">
+                            <h3>Previous Conditions:</h3>
+                            <p>@item.PreviousCondition</p>
+                        </div>      
+                        
+                        <div class="pat-item">
+                            <h3>Previous Medications:</h3>
+                            <p>@item.PreviousMedications</p>
+                        </div>       
+                        
+                        <div class="pat-item">
+                            <h3>Surgical History:</h3>
+                            <p>@item.SurgicalHistory</p>
+                        </div>
+                    }
+                </div>
+            }
+                
+            else
+            {
+                <h2>No Info.</h2>
+            }
+        </div>
+    </div>

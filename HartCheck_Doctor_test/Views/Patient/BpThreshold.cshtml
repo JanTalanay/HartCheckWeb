@@ -5,9 +5,18 @@
     Layout = "_Layout";
 }
 
-<form asp-action="BpThreshold">
-  <select asp-for="SelectedPatientId" asp-items="Model.Patients"></select>
-  <input asp-for="SystolicLevel" />
-  <input asp-for="DiastolicLevel" />
-  <input type="submit" value="Submit" />
-</form>
+   <div class="main_container" style="margin-left: 50%">
+       <div class="loginform" style="height: 600px">
+           <h2>BP Threshold</h2>
+           <p style="margin-bottom: 5%; width: 70%">Please select a patient to set their Systolic and Diastolic Threshold.
+           </p>
+           <form asp-action="BpThreshold">
+               <select asp-for="SelectedPatientId" asp-items="Model.Patients" class="inp_log_pass"></select>
+               <input asp-for="SystolicLevel" class="inp_log"/>
+               <input asp-for="DiastolicLevel" class="inp_log_pass"/>
+               <input type="submit" value="Submit" class="btn_primary"/>
+           </form>
+       </div>
+   </div>
+
+
