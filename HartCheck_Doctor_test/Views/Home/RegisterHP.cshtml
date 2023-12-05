@@ -2,30 +2,42 @@
 
 @{
     ViewBag.Title = "Register Doctor";
-    Layout = "_Layout";
+    Layout = null;
 }
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist&display=swap" rel="stylesheet" asp-append-version="true">
+</head>
+<body style="height: 100vh;">
+    <div class="main_container b"style="margin-left: 15%; margin-bottom: 10%;">
+        <div class="loginform c"style="height: 500px;">
+            <h2>Select a Clinic</h2>
+            <p>Please verify if the license ID is correct and select a clinic where you are currently active.
+            </p>
+            @using (Html.BeginForm("RegisterHP", "Home", FormMethod.Post))
+            {
 
-@using (Html.BeginForm("RegisterHP", "Home", FormMethod.Post))
-{
-    
-    @Html.AntiForgeryToken()
-    <h2>Please enter your License ID for verification</h2>
-    <div class="form-group">
-        @Html.LabelFor(model => model.licenseID)
-        @Html.TextBoxFor(model => model.licenseID, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.licenseID)
+                @Html.AntiForgeryToken()
+                @Html.TextBoxFor(model => model.licenseID, new { @placeholder="Re-input License ID", @class = "inp_log" })
+                @Html.ValidationMessageFor(model => model.licenseID)
+
+                @Html.DropDownListFor(model => model.clinic, new List<SelectListItem>
+                {
+                    new SelectListItem { Text = "The Medical City", Value = "1" },
+                    new SelectListItem { Text = "PGH", Value = "2" },
+                    new SelectListItem { Text = "St. Luke's", Value = "3" }
+                }, "Select a Clinic/Hospital", new { @class = "inp_log_pass" })
+                @Html.ValidationMessageFor(model => model.clinic)
+
+                <div style="margin-bottom: 5%;">
+                    <button type="submit" class="btn_primary">Login</button>
+                </div>
+                
+            }
+        </div>
+        <div class="footer">© 2023 - 2025 All Rights Reserved. HartCheck</div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.clinic)
-        @Html.DropDownListFor(model => model.clinic, new List<SelectListItem>
-        {
-            new SelectListItem { Text = "The Medical City", Value = "1" },
-            new SelectListItem { Text = "PGH", Value = "2" },
-            new SelectListItem { Text = "St. Luke's", Value = "3" }
-        }, "Select a Clinic/Hospital", new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.clinic)
-    </div>
-    
-    <button type="submit" class="btn btn-primary">Login</button>
-}
+</body>
