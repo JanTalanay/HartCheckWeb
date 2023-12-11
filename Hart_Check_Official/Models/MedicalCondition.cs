@@ -9,8 +9,7 @@ namespace Hart_Check_Official.Models
         public int patientID { get; set; }
         public string medicalCondition { get; set; }
         public string conditionName { get; set; }
-
-
+        public DateTime date { get; set; }
         public Patients patients { get; set; }
 
     }

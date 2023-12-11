@@ -9,7 +9,7 @@ namespace Hart_Check_Official.Models
         public int patientID { get; set; }
         public string medicalHistory {  get; set; }
         public string pastSurgicalHistory { get; set; }
-
+        public DateTime date { get; set; }
         public Patients patients { get; set; }
 
     }

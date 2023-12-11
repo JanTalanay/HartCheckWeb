@@ -59,11 +59,17 @@ namespace Hart_Check_Official.Repository
 
         public List<DoctorSchedule> GetDoctorSchedulesForPatient(int patientID)
         {
+            // Get all the doctorSchedID from the Consultation table that are already booked
+            var bookedDoctorSchedIDs = _context.Consultation
+                                             .Where(c => c.patientID == patientID)
+                                             .Select(c => c.doctorSchedID)
+                                             .ToList();
+
             var patientDoctors = _context.PatientsDoctor
-                                    .Include(pd => pd.doctor)
-                                       .ThenInclude(d => d.DoctorSchedule)
-                                    .Where(pd => pd.patientID == patientID)
-                                    .ToList();
+                                       .Include(pd => pd.doctor)
+                                         .ThenInclude(d => d.DoctorSchedule)
+                                       .Where(pd => pd.patientID == patientID)
+                                       .ToList();
 
             var doctorSchedules = new List<DoctorSchedule>();
 
@@ -71,12 +77,15 @@ namespace Hart_Check_Official.Repository
             {
                 if (patientDoctor.doctor != null && patientDoctor.doctor.DoctorSchedule != null)
                 {
-                    doctorSchedules.AddRange(patientDoctor.doctor.DoctorSchedule);
+                    // Add only those schedules that are not already booked
+                    doctorSchedules.AddRange(patientDoctor.doctor.DoctorSchedule
+                                                       .Where(ds => !bookedDoctorSchedIDs.Contains(ds.doctorSchedID)));
                 }
             }
 
             return doctorSchedules;
         }
+
 
     }
 }

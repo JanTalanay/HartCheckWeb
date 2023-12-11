@@ -235,6 +235,40 @@ namespace Hart_Check_Official.Controllers
             //return Ok(new { Message = $"An OTP has been sent to {forgotPassword}", OtpHash = otpHash });
             return Ok(otpHash);
         }
+        [HttpPost("ConfirmUser")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public IActionResult ConfirmUser([FromBody] ConfirmUserDto confirmUser)
+        {
+            if (!_userRepository.UserExistsEmail(confirmUser.Email))
+            {
+                return NotFound();
+            }
+
+            var user = _userRepository.GetUsersEmail(confirmUser.Email);
+            var otp = new Random().Next(1000, 9999).ToString(); // Generate a 4 digit OTP
+            var otpHash = ComputeHash(otp + confirmUser.Email);  // Compute the hash of the OTP and email
+
+            var smtpClient = new SmtpClient("smtp.gmail.com") // Replace with your SMTP server
+            {
+                Port = 587, // Replace with your SMTP server's port
+                Credentials = new NetworkCredential("testing072301@gmail.com", "dsmnmkocsoyqfvhz"), // Replace with your SMTP server's username and password
+                EnableSsl = true
+            };
+
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress(user.email), // Replace with the sender's email
+                Subject = "Your OTP",
+                Body = $"Your OTP is {otp}"
+            };
+
+            mailMessage.To.Add(confirmUser.Email);
+            smtpClient.Send(mailMessage);
+
+            //return Ok(new { Message = $"An OTP has been sent to {forgotPassword}", OtpHash = otpHash });
+            return Ok(otpHash);
+        }
         [HttpPost("VerifyOtp")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
