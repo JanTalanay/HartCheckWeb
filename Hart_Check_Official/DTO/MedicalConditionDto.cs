@@ -7,7 +7,6 @@ namespace Hart_Check_Official.DTO
         public int medCondID { get; set; }
         public int patientID { get; set; }
         public string medicalCondition { get; set; }
-        public string conditionName { get; set; }
         public DateTime date { get; set; }
     }
 }

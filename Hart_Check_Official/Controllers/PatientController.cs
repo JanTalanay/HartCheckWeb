@@ -81,5 +81,19 @@ namespace Hart_Check_Official.Controllers
             }
             return Ok("Successfully created");
         }
+        [HttpGet("{patientId}/email")]
+        public IActionResult GetEmailByPatientId(int patientId)
+        {
+            try
+            {
+                var email = _patientRepository.GetEmailByPatientId(patientId);
+                return Ok(email);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }

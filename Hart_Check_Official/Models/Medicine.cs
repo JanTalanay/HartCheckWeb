@@ -8,8 +8,8 @@ namespace Hart_Check_Official.Models
         public int medicineID { get; set; }
         public int consultationID { get; set; }
         public string medicine {  get; set; }
-        public DateTime date { get; set; }
-        public float dosage { get; set; }
+        public DateTime dateTime { get; set; }
+        public double dosage { get; set; }
 
         public Consultation consultation { get; set; }
     }

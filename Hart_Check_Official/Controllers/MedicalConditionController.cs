@@ -116,7 +116,7 @@ namespace Hart_Check_Official.Controllers
                 return BadRequest(ModelState);
             }
             var medCond = _medicalConditionRepository.GetMedicalConditions()
-                .Where(e => e.medicalCondition.Trim().ToUpper() == medCondCreate.conditionName.Trim().ToUpper())
+                .Where(e => e.medicalCondition.Trim().ToUpper() == medCondCreate.medicalCondition.Trim().ToUpper())
                 .FirstOrDefault();
 
             if (medCond != null)

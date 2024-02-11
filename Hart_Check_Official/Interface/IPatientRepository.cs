@@ -7,6 +7,7 @@ namespace Hart_Check_Official.Interface
         ICollection<Patients> GetPatient();
 
         Patients GetPatients(int usersID);
+        string GetEmailByPatientId(int patientId);
 
         //Patients GetBugReport(string description);
         bool patientExist(int usersID);
