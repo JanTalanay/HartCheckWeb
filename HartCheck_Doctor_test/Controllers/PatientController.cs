@@ -123,12 +123,15 @@ public class PatientController : Controller
                     .Where(cp => cp.PatientsDoctor.doctorID == doctorID) // Replace doctorID with the actual doctor ID from the claims
                     .Select(cp => cp.Consultation.consultationID)
                     .FirstOrDefault();
-                var condition = new Condition()
+                foreach (var condition in conditionDto.Condition)
                 {
-                    consultationID = consultationID,
-                    condition = conditionDto.Condition
-                };
-                _dbContext.Condition.Add(condition);
+                    var newCondition = new Condition()
+                    {
+                        consultationID = consultationID,
+                        condition = condition
+                    };
+                    _dbContext.Condition.Add(newCondition);
+                }
                 _dbContext.SaveChanges();
                 
                 return RedirectToAction("Index","Home");

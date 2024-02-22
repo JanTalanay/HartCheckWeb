@@ -57,8 +57,20 @@
       "PackagePath": "staticwebassets\\img\\license\\ISPROJ2 UI.PNG"
     },
     {
+      "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\img\\license\\PROJ2 Revisions.png",
+      "PackagePath": "staticwebassets\\img\\license\\PROJ2 Revisions.png"
+    },
+    {
       "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\img\\license\\Web Draft.txt",
       "PackagePath": "staticwebassets\\img\\license\\Web Draft.txt"
+    },
+    {
+      "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\img\\license\\berserk.jpg",
+      "PackagePath": "staticwebassets\\img\\license\\berserk.jpg"
+    },
+    {
+      "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\img\\license\\config.cfg",
+      "PackagePath": "staticwebassets\\img\\license\\config.cfg"
     },
     {
       "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\img\\license\\gs.png",

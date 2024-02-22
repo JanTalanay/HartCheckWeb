@@ -4,6 +4,7 @@
     ViewBag.Title = "Login";
     Layout = "_Layout";
 }
+
    
     <div class="main_container">
         <div class="loginform">
@@ -24,5 +25,11 @@
             
             <button class="btn_secondary" onclick="window.location.href='@Url.Action("Register", "Account")'">Register Here!</button>
         </div>
+        @if (!string.IsNullOrEmpty(ViewBag.Message))
+        {
+            <div class="alert alert-info">
+                @ViewBag.Message
+            </div>
+        }
         <div class="footer">© 2023 - 2025 All Rights Reserved. HartCheck</div>
     </div>

@@ -5,15 +5,68 @@
     Layout = "_Layout";
 }
 
-@using (Html.BeginForm("AddCondition", "Patient", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-    <div class="form-group">
-        @Html.LabelFor(model => model.Condition)
-        @Html.TextBoxFor(model => model.Condition, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.Condition)
+<div class="main_container" style=" display: flex; height:  100vh; overflow-y: auto;flex-direction: column;margin-left: 50%; margin-bottom: 10%">
+    <div class="loginform c" style="flex-grow:  1;overflow-y: auto;background-color: white; border-radius:  10px; box-shadow:  0  4px  8px  0 rgba(0,  0,  0,  0.2),  0  6px  20px  0 rgba(0,  0,  0,  0.19); ">
+        <h2 style="margin-top: 5%">Add Condition</h2>
+
+        @using (Html.BeginForm("AddCondition", "Patient", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div id="conditionsContainer" style="overflow-y:auto;">
+                <!-- Existing condition inputs will be added here dynamically -->
+            </div>
+            //@for (int i =  0; i <  5; i++) // Adjust the number of conditions as needed
+            //{
+                //@Html.TextBoxFor(model => model.Condition, new { @class = "inp_log_pass" , placeholder = "Medical Condition"})
+                //@Html.ValidationMessageFor(model => model.Condition)
+                //<input type="hidden" name="patientID" value="@Model.patientID" />
+            //}
+            <button type="button" id="addConditionBtn" class="btn_secondary" style="margin-left: 12% ">Add Condition</button>
+            <button type="submit" class="btn_primary">Add Conditions</button>
+        }
+        
+        
     </div>
-    <input type="hidden" name="patientID" value="@Model.patientID" />
-    <button type="submit" class="btn btn-primary">Add Condition</button>
-                                                     
-}
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var conditionIndex =  0;
+        var containerHeight =   50;
+        var containerHeightForm = 400;
+        function addConditionInput() {
+
+            if (conditionIndex >=  5) {
+                alert("You can only add up to  5 conditions.");
+                return;
+            }
+            
+            var newConditionInput = '<div id="condition_' + conditionIndex + '">' +
+                    '<label for="Conditions[' + conditionIndex + ']" style="margin-left:12%">Condition ' + (conditionIndex +  1) + ':</label>' +
+                    '@Html.TextBoxFor(model => model.Condition, new { @class = "inp_log_pass" , placeholder = "Medical Condition",id = "conditionInput"})' +
+                    '<input type="hidden" name="patientID" value="@Model.patientID" />'+
+                    '</div>';
+            $('#conditionsContainer').append(newConditionInput);
+            
+            conditionIndex++;
+            
+            containerHeight += 10;
+            containerHeightForm += 100;// Increase height by  100px
+            $('.main_container').css('height', containerHeight + 'vh');
+            $('.loginform c').css('height', containerHeight + 'px');
+        }
+        $('#conditionsContainer').on('focus', 'input[type="text"]', function() {
+                    $(this).val('');
+                });
+
+        addConditionInput(); // Add the first condition input field on page load
+
+        $('#addConditionBtn').click(function () {
+            addConditionInput();
+        });
+       
+    });
+</script>
+
+

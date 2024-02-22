@@ -8,6 +8,7 @@ using HartCheck_Doctor_test.Data;
 using HartCheck_Doctor_test.DTO;
 using HartCheck_Doctor_test.FileUploadService;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
@@ -221,12 +222,7 @@ namespace HartCheck_Doctor_test.Controllers
             }
             return View(bugReportDto);
         }
-        [HttpPost]
-        public async Task<IActionResult> Logout()
-        {
-            await HttpContext.SignOutAsync();
-            return RedirectToAction("Login", "Account");
-        }
+
         
         
         
