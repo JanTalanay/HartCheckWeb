@@ -11,8 +11,6 @@
     <link rel="stylesheet" href="~/css/nav.css" asp-append-version="true" />
     <link href="https://fonts.googleapis.com/css2?family=Urbanist&display=swap" rel="stylesheet" asp-append-version="true">
     
-    
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -28,67 +26,67 @@
                 </li>
                 <div class="Menulist">
                     <li id="home" style="--bg:#009D68">
-                       <a asp-area="" asp-controller="Home" asp-action="Index">
-                           <div class="icon"><ion-icon name="home"></ion-icon></div>
-                           <div class="text">Home</div>
-                       </a>
+                        <a asp-area="" asp-controller="Home" asp-action="Index">
+                            <div class="icon"><ion-icon name="home"></ion-icon></div>
+                            <div class="text">Home</div>
+                        </a>
                     </li>
-                    <li style="--bg:#009D68">
+                    <li id="notifx" style="--bg:#009D68">
                         <a href="#">
-                            <div class="icon"><ion-icon name="notifications"></ion-icon></div>
+                            <div class="icon"><ion-icon name="notifications" ></ion-icon></div>
                             <div class="text">Notifications</div>
                         </a>
                     </li>
-                    <li style="--bg:#009D68">
+                    <li id="notif" style="--bg:#009D68">
                         <a asp-controller="Patient" asp-action="ViewPatient">
                             <div class="icon"><ion-icon name="accessibility"></ion-icon></div>
                             <div class="text">View Consultations</div>
                         </a>
                     </li>
-                    <li style="--bg:#009D68">
+                    <li id="consul" style="--bg:#009D68">
                         <a asp-controller="Patient" asp-action="ViewConsultation">
                             <div class="icon"><ion-icon name="calendar"></ion-icon></div>
                             <div class="text">Appointments</div>
                         </a>
                     </li>
-                    <li style="--bg:#009D68">
-                        <a href="#">
+                    <li id="chat" style="--bg:#009D68">
+                        <a asp-controller="Patient" asp-action="Chat" >
                             <div class="icon"><ion-icon name="chatbubble-ellipses"></ion-icon></div>
                             <div class="text">Chat</div>
                         </a>
                     </li>
-                    <li style="--bg:#009D68">
+                    <li id="bp" style="--bg:#009D68">
                         <a asp-controller="Patient" asp-action="PatientBP">
                             <div class="icon"><ion-icon name="bar-chart"></ion-icon></div>
                             <div class="text">Patients'Blood Pressure</div>
                         </a>
                     </li>
-                    <li style="--bg:#009D68">
+                    <li id="notif" style="--bg:#009D68">
                         <a asp-controller="Home" asp-action="ScheduleAppointment">
                             <div class="icon"><ion-icon name="calendar-number"></ion-icon></div>
                             <div class="text">Set an Appointment Date</div>
                         </a>
                     </li>
-                    <li style="--bg:#009D68">
+                    <li id="notif" style="--bg:#009D68">
                         <a asp-controller="Patient" asp-action="BpThreshold">
                             <div class="icon"><ion-icon name="fitness"></ion-icon></div>
                             <div class="text">Set BP Threshold</div>
                         </a>
                     </li>
-                    <li style="--bg:#009D68">
+                    <li id="notif" style="--bg:#009D68">
                         <a asp-area="" asp-controller="Home" asp-action="ReportABug">
                             <div class="icon"><ion-icon name="bug"></ion-icon></div>
                             <div class="text">Report a Problem</div>
                         </a>
                     </li>
-                    <li style="--bg:#009D68">
+                    <li id="edit" style="--bg:#009D68">
                         <a asp-controller="Account" asp-action="EditProfile">
                             <div class="icon"><ion-icon name="person-circle"></ion-icon></div>
                             <div class="text">Profile</div>
                         </a>
                     </li>
-                    <li style="--bg:#009D68">
-                        <a href="#">
+                    <li id="notif" style="--bg:#009D68">
+                        <a asp-controller="Account" asp-action="Logout">
                             <div class="icon"><ion-icon name="log-out-outline"></ion-icon></div>
                             <div class="text">Logout</div>
                         </a>
@@ -135,6 +133,7 @@
        if (home.classList.contains('active')) {
           home.classList.remove('active');
        }
+       
 </script>
 }
 else

@@ -5,4 +5,5 @@ public class MedicineDto
     public int patientID { get; set; }
     public int consultationID { get; set; }
     public string Medicine { get; set; }
+    public string Dosage { get; set; }
 }

@@ -4,17 +4,18 @@
     ViewBag.Title = "Patient BP";
     Layout = "_Layout";
 }
-
-<div class="main_container" style="margin-left: 50%">
-    <h2 style="margin-bottom: 10%">Patient BP</h2>
-    <select id="patientDropdown" class="inp_log_pass" style="margin-bottom: 5%">
-        @foreach (var patient in Model)
-        {
-            <option value="@patient.PatientID">@patient.FirstName @patient.LastName</option>
-        }
-    </select>
-
-    <canvas id="myChart"></canvas>
+<div class="main_container" style="width:55vw;margin-left: 50%;height:70%; border: solid #212121 2px;  background-color: white; border-radius:  10px; box-shadow:  0  4px  8px  0 rgba(0,  0,  0,  0.2),  0  6px  20px  0 rgba(0,  0,  0,  0.19);">
+    <div class="main_container_x">
+        <h2 style="margin-bottom: 5%; margin-top: 3%;">Patient BP</h2>
+            <select id="patientDropdown" class="inp_log_pass" style="margin-bottom: 5%">
+                @foreach (var patient in Model)
+                {
+                    <option value="@patient.PatientID">@patient.FirstName @patient.LastName</option>
+                }
+            </select>
+        
+            <canvas id="myChart" style="width: 80%; margin-bottom: 5%;"></canvas>
+    </div>
 </div>
 
 <script>

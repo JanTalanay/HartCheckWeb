@@ -7,6 +7,7 @@ using HartCheck_Doctor_test.DTO;
 using HartCheck_Doctor_test.FileUploadService;
 using HartCheck_Doctor_test.Models;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -58,12 +59,24 @@ namespace HartCheck_Doctor_test.Controllers
 
             return View(userDto);
         }
+        
+        
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            HttpContext.Session.Clear();
+            await HttpContext.SignOutAsync("Doctor");
+            TempData["Message"] = "You have been logged out.";
+            return RedirectToAction("Login","Account");
+        }
 
        
         
         [HttpGet]
         public IActionResult Login()
         {
+            var message = TempData["Message"] as string;
+            ViewBag.Message = message;
             return View();
         }
 
@@ -100,8 +113,8 @@ namespace HartCheck_Doctor_test.Controllers
                 };
                 var identity = new ClaimsIdentity(claims, "CustomAuthentication");
                 var principal = new ClaimsPrincipal(identity);
-
-                HttpContext.SignInAsync(principal);
+                HttpContext.SignInAsync("Doctor",principal);
+                HttpContext.Session.SetString("is_logged", "true");
                 return RedirectToAction("Index", "Home");
             }
 

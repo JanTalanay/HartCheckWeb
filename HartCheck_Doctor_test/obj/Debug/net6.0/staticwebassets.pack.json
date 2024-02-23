@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\HartCheck_Doctor_test.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\css\\chat.css",
+      "PackagePath": "staticwebassets\\css\\chat.css"
+    },
+    {
       "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\css\\datatables.min.css",
       "PackagePath": "staticwebassets\\css\\datatables.min.css"
     },
@@ -57,8 +61,20 @@
       "PackagePath": "staticwebassets\\img\\license\\ISPROJ2 UI.PNG"
     },
     {
+      "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\img\\license\\PROJ2 Revisions.png",
+      "PackagePath": "staticwebassets\\img\\license\\PROJ2 Revisions.png"
+    },
+    {
       "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\img\\license\\Web Draft.txt",
       "PackagePath": "staticwebassets\\img\\license\\Web Draft.txt"
+    },
+    {
+      "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\img\\license\\berserk.jpg",
+      "PackagePath": "staticwebassets\\img\\license\\berserk.jpg"
+    },
+    {
+      "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\img\\license\\config.cfg",
+      "PackagePath": "staticwebassets\\img\\license\\config.cfg"
     },
     {
       "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\img\\license\\gs.png",
@@ -331,6 +347,10 @@
     {
       "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\logo\\Logo.png",
       "PackagePath": "staticwebassets\\logo\\Logo.png"
+    },
+    {
+      "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\sound\\ping.mp3",
+      "PackagePath": "staticwebassets\\sound\\ping.mp3"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.HartCheck_Doctor_test.Microsoft.AspNetCore.StaticWebAssets.props",

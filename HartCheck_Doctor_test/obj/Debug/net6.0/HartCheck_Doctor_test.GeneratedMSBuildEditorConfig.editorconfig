@@ -85,8 +85,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxDaGF0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/james/source/repos/HartCheckWeb/HartCheck_Doctor_test/Views/Patient/ChatDoc.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxDaGF0RG9jLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/james/source/repos/HartCheckWeb/HartCheck_Doctor_test/Views/Patient/PatientBP.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxQYXRpZW50QlAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/james/source/repos/HartCheckWeb/HartCheck_Doctor_test/Views/Patient/Payment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxQYXltZW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/james/source/repos/HartCheckWeb/HartCheck_Doctor_test/Views/Patient/ViewConsultation.cshtml]

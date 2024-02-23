@@ -1,4 +1,9 @@
-﻿using System.Security.Claims;
+﻿using System.Net;
+using System.Net.Http.Headers;
+using System.Net.Mail;
+using System.Security.Claims;
+using System.Text;
+using System.Text.Json;
 using HartCheck_Doctor_test.Data;
 using HartCheck_Doctor_test.DTO;
 using HartCheck_Doctor_test.Models;
@@ -7,21 +12,162 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace HartCheck_Doctor_test.Controllers;
 
 [Authorize(Policy = "Doctor")]
 public class PatientController : Controller
 {
+    
     private readonly ILogger<HomeController> _logger;
     private readonly datacontext _dbContext;
-
-    public PatientController(ILogger<HomeController> logger,datacontext dbContext)
+    private readonly HttpClient _httpClient;
+    public PatientController(ILogger<HomeController> logger,datacontext dbContext, IHttpClientFactory httpClientFactory)
     {
         _dbContext = dbContext;
         _logger = logger;
+        _httpClient = httpClientFactory.CreateClient();
         
     }
-    
+
+    [HttpGet]
+    [Route("Patient/Payment")]
+    public IActionResult Payment()
+    {
+        if (int.TryParse(Request.Query["patientID"], out int patientID))
+        {
+            var patId = _dbContext.Patients.FirstOrDefault(p => p.patientID == patientID);
+            var patEmail = _dbContext.Patients
+                .Where(c => c.patientID == patId.patientID)
+                .Join(_dbContext.Users,
+                    p => p.usersID,
+                    u => u.usersID,
+                    (p, u) => u) // Select the User entity from the join
+                .Select(u => u.email) // Assuming the property name is Email
+                .FirstOrDefault();
+            if (patId == null)
+            {
+                return NotFound();
+            }
+            var model = new PaymentDto()
+            {
+                patientID = patId.patientID,
+                email = patEmail
+            };
+            return View(model);
+        }
+        return BadRequest();
+    }
+
+    [HttpPost]
+    [Route("Patient/Payment")]
+    public async Task<IActionResult> Payment(PaymentDto userInvoice)
+    {
+        string url = "https://pg-sandbox.paymaya.com/invoice/v2/invoices";
+        Console.WriteLine(userInvoice.patientID);
+        var userID = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+        
+        if (int.TryParse(userID, out int userIDInt))
+        {
+            var doctor = _dbContext.HealthCareProfessional.FirstOrDefault(d => d.usersID == userIDInt);
+            if (doctor != null)
+            {
+                var doctorID = doctor.doctorID;
+                var consultationID = _dbContext.Consultation
+                    .Where(c => c.patientID == userInvoice.patientID) // Filter by patient ID
+                    .Join(_dbContext.PatientsDoctor,
+                        c => c.patientID,
+                        pd => pd.patientID,
+                        (c, pd) => new { Consultation = c, PatientsDoctor = pd })
+                    .Join(_dbContext.Patients,
+                        cp => cp.PatientsDoctor.patientID,
+                        p => p.patientID,
+                        (cp, p) => new { cp.Consultation, cp.PatientsDoctor, Patient = p })
+                    .Join(_dbContext.Users,
+                        cp => cp.Patient.usersID,
+                        u => u.usersID,
+                        (cp, u) => new { cp.Consultation, cp.PatientsDoctor, cp.Patient, User = u })
+                    .Where(cp => cp.User.usersID == doctorID) // Filter by doctor ID
+                    .Select(cp => new PaymentDto()
+                    {
+                        email = cp.User.email
+                    });
+                var request = new RequestModel
+                {
+                    invoiceNumber = "INV0001",
+                    type = "SINGLE",
+                    totalAmount = new TotalAmountModel
+                    {
+                        value = 300,
+                        currency = "PHP"
+                    },
+                    items = new List<ItemModel>
+                    {
+                        new ItemModel
+                        {
+                            name = "HartCheck Subscription",
+                            quantity = "1",
+                            totalAmount = new TotalAmountModel
+                            {
+                                value = 300,
+                                currency = "PHP"
+                            }
+                        }
+                    },
+                    redirectUrl = new RedirectModel
+                    {
+                        success = "https://www.merchantsite.com/success",//change to payment success go back to mobile app
+                        failure = "https://www.merchantsite.com/failure",//payment failed html
+                        cancel = "https://www.merchantsite.com/cancel"//payment has been cancelled html
+                    },
+                    requestReferenceNumber = "1551191039",
+                    metadata = new { }
+                };
+
+                var json = JsonSerializer.Serialize(request);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes("sk-X8qolYjy62kIzEbr0QRK1h4b4KDVHaNcwMYk39jInSl")));
+
+                var response = await _httpClient.PostAsync(url, content);
+                var responseJson = await response.Content.ReadAsStringAsync();
+                
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var user = userInvoice.email;
+                    var invoiceUrl = JsonSerializer.Deserialize<ResponseModel>(responseJson).invoiceUrl;
+                    //Email code here
+                    var smtpClient = new SmtpClient("smtp.gmail.com") // Replace with your SMTP server
+                    {
+                        Port = 587, // Replace with your SMTP server's port
+                        Credentials = new NetworkCredential("testing072301@gmail.com", "dsmnmkocsoyqfvhz"), // Replace with your SMTP server's username and password
+                        EnableSsl = true
+                    };
+
+                    var mailMessage = new MailMessage
+                    {
+                        From = new MailAddress(user), // Replace with the sender's email
+                        Subject = "Pending Payment - HartCheck",
+                        Body = $"Click here to pay for the subscription: {invoiceUrl}"
+                    };
+
+                    mailMessage.To.Add(userInvoice.email);
+                    smtpClient.Send(mailMessage);
+
+                    return RedirectToAction("Index","Home");
+                }
+                        
+                        
+                return RedirectToAction("Index","Home");
+            }
+            return View();
+        }
+        return View();
+    }
+
     [HttpGet]
     [Route("Patient/AddDiagnosis")]
     public IActionResult AddDiagnosis()
@@ -123,12 +269,15 @@ public class PatientController : Controller
                     .Where(cp => cp.PatientsDoctor.doctorID == doctorID) // Replace doctorID with the actual doctor ID from the claims
                     .Select(cp => cp.Consultation.consultationID)
                     .FirstOrDefault();
-                var condition = new Condition()
+                foreach (var condition in conditionDto.Condition)
                 {
-                    consultationID = consultationID,
-                    condition = conditionDto.Condition
-                };
-                _dbContext.Condition.Add(condition);
+                    var newCondition = new Condition()
+                    {
+                        consultationID = consultationID,
+                        condition = condition
+                    };
+                    _dbContext.Condition.Add(newCondition);
+                }
                 _dbContext.SaveChanges();
                 
                 return RedirectToAction("Index","Home");
@@ -449,5 +598,12 @@ public class PatientController : Controller
         return View();
     }
     
+    [HttpGet]
+    [AllowAnonymous]
+    public IActionResult ChatDoc()
+    {
+        return View();
+    }
+    //chat logic here (post) 
 
 }
