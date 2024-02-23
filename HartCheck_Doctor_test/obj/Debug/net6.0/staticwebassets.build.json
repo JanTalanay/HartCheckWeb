@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "AtmIQVEeSBdBI7UTdRjNGDEwKlLQ9fTugf1RSqVdAgE=",
+  "Hash": "ygqFQ5vNpdJ1Wt0g8U19bpThxaHtYuMYCAPizCpdSb4=",
   "Source": "HartCheck_Doctor_test",
   "BasePath": "_content/HartCheck_Doctor_test",
   "Mode": "Default",
@@ -1511,6 +1511,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\logo\\Logo.png"
+    },
+    {
+      "Identity": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\sound\\ping.mp3",
+      "SourceId": "HartCheck_Doctor_test",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\",
+      "BasePath": "_content/HartCheck_Doctor_test",
+      "RelativePath": "sound/ping.mp3",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\sound\\ping.mp3"
     }
   ]
 }
