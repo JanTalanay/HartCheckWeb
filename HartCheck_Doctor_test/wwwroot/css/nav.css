@@ -110,6 +110,7 @@ body{
     transition: 0.5s;
 }
 
+
 .sidebar ul li.active a .text{
     color: var(--bg);
 }
@@ -170,4 +171,56 @@ body{
 }
 .menuToggle.active::after{
     transform: translate(0px) rotate(-45deg);
+}
+
+@media (max-width:  768px) {
+    .sidebar {
+        bottom:  0;
+        width:  100vw;
+        height: 5rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+     /* Ensure it stays on top of other content */
+
+    .sidebar ul {
+        display: flex;
+        flex-direction: row;
+        /* Stack items vertically */
+    }
+
+    .sidebar ul li.logo .text{
+        display: none;
+
+    }
+
+    .sidebar ul li.logo{
+        display: none;
+    }
+    .sidebar ul li.logo .icon img{
+        height: 50px;
+        width:50px;
+        color: var(--clr);
+        left: 0;
+    }
+    #notif,#home{
+        display: none;
+    }
+    
+    #notifx .text, #chat .text, #consul .text, #bp .text,#edit .text{
+        display: none;
+    }
+    #notifx .icon, #chat .icon, #consul .icon, #bp .icon,#edit .icon{
+        margin-right: 10px;
+    }
+    .Menulist {
+        display: flex;
+        flex-direction: row;
+        /* Hide the toggle button on larger screens */
+    }
+    .sidebar ul li.active{
+        background: white;
+    }
+    
 }

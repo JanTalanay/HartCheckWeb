@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ti40ydkb2f/m5YDSy9seYDQgvErYE6nZ0qsh0d87Dnk=",
+  "Hash": "AtmIQVEeSBdBI7UTdRjNGDEwKlLQ9fTugf1RSqVdAgE=",
   "Source": "HartCheck_Doctor_test",
   "BasePath": "_content/HartCheck_Doctor_test",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\HartCheck_Doctor_test.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\css\\chat.css",
+      "SourceId": "HartCheck_Doctor_test",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\",
+      "BasePath": "_content/HartCheck_Doctor_test",
+      "RelativePath": "css/chat.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\chat.css"
     },
     {
       "Identity": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\css\\datatables.min.css",

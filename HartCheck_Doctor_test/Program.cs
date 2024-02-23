@@ -12,6 +12,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
 builder.Services.AddScoped<IFileUploadService, LocalFileUploadService>();
 builder.Services.AddDistributedMemoryCache();
+builder.Services.AddHttpClient();
 builder.Services.AddAuthentication("Doctor")
     .AddCookie("Doctor",options =>
     {

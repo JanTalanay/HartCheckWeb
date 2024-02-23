@@ -30,11 +30,19 @@
                                 <td>@item.LastName</td>
                                 <td>@item.Email</td>
                                 <td>@item.Phone</td>
-                                <td>
-                                    <a asp-controller="Patient" asp-action="AddCondition" asp-route-patientID="@item.PatientID" class="btn_primary" style="height: 30px; width: 90%;">Add Condition</a>
-                                    <a asp-controller="Patient" asp-action="AddDiagnosis" asp-route-patientID="@item.PatientID" class="btn_primary" style="height: 30px; width: 90%;">Add Diagnosis</a>
-                                    <a asp-controller="Patient" asp-action="AddMedicine" asp-route-patientID="@item.PatientID" class="btn_primary" style="height: 30px; width: 90%;">Add Medicine</a>
-                                    <a asp-controller="Patient" asp-action="ViewPatient" asp-route-patientID="@item.PatientID" class="btn_secondary" style="height: 30px; width: 90%;">View Patient Info</a>
+                                <td style="display: flex; flex-direction: row">
+                                    <form method="get" enctype="multipart/form-data" asp-controller="Patient" asp-action="ViewPatient">
+                                        <input type="hidden" name="patientID" value="@item.PatientID" />
+                                        <button type="submit" class="btn_primary" style="height:  30px; width:  120px; padding: 2%; margin-top: 0; margin-right: 10px">View Patient Info</button>
+                                    </form>
+                                    
+                                    <select id="actionDropdown_@item.PatientID" class="inp_log_pass" style="height:  30px; width:  35%;" onchange="handleActionChange(this, '@item.PatientID')">
+                                        <option value="">Select Action</option>
+                                        <option value="AddCondition">Add Condition</option>
+                                        <option value="AddDiagnosis">Add Diagnosis</option>
+                                        <option value="AddMedicine">Add Medicine</option>
+                                        <option value="Payment">Send Invoice</option>
+                                    </select>
                                 </td>
                             </tr>
                         }
@@ -51,6 +59,16 @@
     <script>
     new DataTable('#example');
     </script>
+    
+    <script>
+    function handleActionChange(selectElement, patientId) {
+        var action = selectElement.value;
+        if (action) {
+            window.location.href = `/Patient/${action}?patientID=${patientId}`;
+        }
+    }
+    </script>
+    
 
 }
 else{

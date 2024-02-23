@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\HartCheck_Doctor_test.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\css\\chat.css",
+      "PackagePath": "staticwebassets\\css\\chat.css"
+    },
+    {
       "Id": "C:\\Users\\james\\source\\repos\\HartCheckWeb\\HartCheck_Doctor_test\\wwwroot\\css\\datatables.min.css",
       "PackagePath": "staticwebassets\\css\\datatables.min.css"
     },
