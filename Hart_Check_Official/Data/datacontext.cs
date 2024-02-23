@@ -78,13 +78,13 @@ namespace Hart_Check_Official.Data
                 .HasOne(e => e.BloodPressureThreshold)
                 .WithOne(e => e.doctor)
                 .HasForeignKey<BloodPressureThreshold>(e => e.doctorID)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<PatientsDoctor>()
                 .HasOne(e => e.doctor)
                 .WithMany(e => e.patientDoctor)
                 .HasForeignKey(e => e.doctorID)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<HealthCareProfessional>()//goods
                 .HasOne(e => e.Doctorlicense)
@@ -96,7 +96,7 @@ namespace Hart_Check_Official.Data
                 .HasOne(e => e.doctor)
                 .WithMany(e => e.DoctorSchedule)
                 .HasForeignKey(e => e.doctorID)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             //modelBuilder.Entity<AuditLog>()//goods
             //    .HasOne(e => e.doctor)
@@ -121,7 +121,7 @@ namespace Hart_Check_Official.Data
                 .HasOne(e => e.patient)
                 .WithOne(e => e.patientDoctor)
                 .HasForeignKey<PatientsDoctor>(e => e.patientID)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<BodyMass>()
                 .HasOne(e => e.patient)
@@ -133,7 +133,7 @@ namespace Hart_Check_Official.Data
                 .HasOne(e => e.patients)
                 .WithOne(e => e.BloodPressureThreshold)
                 .HasForeignKey<BloodPressureThreshold>(e => e.patientID)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<MedicalCondition>()
                 .HasOne(e => e.patients)

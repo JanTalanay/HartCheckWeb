@@ -9,6 +9,7 @@
         public string password { get; set; }
         public DateTime birthdate { get; set; }
         public int gender { get; set; }
+        public bool isPregnant { get; set; }
         public long phoneNumber { get; set; }
         public int role { get; set; }
     }

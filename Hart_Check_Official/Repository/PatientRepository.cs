@@ -50,5 +50,24 @@ namespace Hart_Check_Official.Repository
             _context.Update(patient);
             return Save();
         }
+        public string GetEmailByPatientId(int patientId)
+        {
+            var patient = _context.Patients.FirstOrDefault(p => p.patientID == patientId);
+
+            if (patient == null)
+            {
+                throw new Exception("Patient not found");
+            }
+
+            var user = _context.Users.FirstOrDefault(u => u.usersID == patient.usersID);
+
+            if (user == null)
+            {
+                throw new Exception("User not found");
+            }
+
+            return user.email;
+        }
+
     }
 }

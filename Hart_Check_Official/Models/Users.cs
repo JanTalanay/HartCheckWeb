@@ -21,6 +21,7 @@ namespace Hart_Check_Official.Models
         public string password { get; set; }
         public DateTime birthdate { get; set; }
         public int gender { get; set; }
+        public bool isPregnant { get; set; }
 
         [Display(Name = "Phone Number")]
         public long phoneNumber { get; set; }

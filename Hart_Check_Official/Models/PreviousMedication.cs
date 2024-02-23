@@ -8,7 +8,8 @@ namespace Hart_Check_Official.Models
         public int prevMedID { get; set; }
         public int patientID { get; set; }
         public string previousMed {  get; set; }
-
+        public double dosage { get; set; }
+        public DateTime date { get; set; }
         public Patients patients { get; set; }
     }
 }

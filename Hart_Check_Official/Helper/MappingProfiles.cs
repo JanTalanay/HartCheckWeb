@@ -62,6 +62,15 @@ namespace Hart_Check_Official.Helper
 
             CreateMap<BloodPressureThreshold, BloodPressureThresholdDto>();
             CreateMap<BloodPressureThresholdDto, BloodPressureThreshold>();
+
+            CreateMap<Medicine, MedicineDto>();
+            CreateMap<MedicineDto, Medicine>();
+
+            CreateMap<Diagnosis, DiagnosisDto>();
+            CreateMap<DiagnosisDto, Diagnosis>();
+
+            CreateMap<Condition, ConditionDto>();
+            CreateMap<ConditionDto, Condition>();
         }
     }
    

@@ -8,6 +8,7 @@ namespace Hart_Check_Official.Models
         public int diagnosisID { get; set; }
         public int consultationID { get; set; }
         public string diagnosis { get; set; }
+        public DateTime dateTime { get; set; }
 
         public Consultation consultation { get; set; }
     }

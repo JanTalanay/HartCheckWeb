@@ -26,10 +26,9 @@ body {
 :root {
     --header-height: 3rem;
     --nav-width: 68px;
-    --first-color: #4723D9;
-    --first-color-light: #AFA5D9;
+    --first-color: #009D68;
+    --first-color-light: #F7F6FB;
     --white-color: #F7F6FB;
-
     --z-fixed: 100
 }
 
@@ -59,7 +58,14 @@ a.nav_link {
     text-decoration: none;
 }
 
-
+.b1 {
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin: 0;
+    color:white;
+    padding: 0;
+}
 .header {
     width: 100%;
     height: var(--header-height);
@@ -78,7 +84,11 @@ a.nav_link {
 .header_toggle {
     color: var(--first-color);
     font-size: 1.5rem;
-    cursor: pointer
+    cursor: pointer;
+    margin-right: -100px;
+    position: relative;
+    left: 35px;
+    top: 5px;
 }
 
 .header_img {
@@ -145,7 +155,7 @@ a.nav_link {
 }
 
     .nav_link:hover {
-        color: var(--white-color)
+        color: #000000;
     }
 
 .nav_icon {

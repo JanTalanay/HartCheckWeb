@@ -9,101 +9,105 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = HartCheck_Admin
 build_property.RootNamespace = HartCheck_Admin
-build_property.ProjectDir = C:\Users\james\source\repos\HartCheckWeb\HartCheck-Admin\
+build_property.ProjectDir = C:\Users\janta\source\repos\Hart_Check_Official\HartCheck-Admin\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\james\source\repos\HartCheckWeb\HartCheck-Admin
+build_property.MSBuildProjectDirectory = C:\Users\janta\source\repos\Hart_Check_Official\HartCheck-Admin
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/james/source/repos/HartCheckWeb/HartCheck-Admin/Views/Account/Login.cshtml]
+[C:/Users/janta/source/repos/Hart_Check_Official/HartCheck-Admin/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/james/source/repos/HartCheckWeb/HartCheck-Admin/Views/Account/Register.cshtml]
+[C:/Users/janta/source/repos/Hart_Check_Official/HartCheck-Admin/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/james/source/repos/HartCheckWeb/HartCheck-Admin/Views/Analytics/Index.cshtml]
+[C:/Users/janta/source/repos/Hart_Check_Official/HartCheck-Admin/Views/Analytics/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW5hbHl0aWNzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/james/source/repos/HartCheckWeb/HartCheck-Admin/Views/BugReport/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnVnUmVwb3J0XERlbGV0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/james/source/repos/HartCheckWeb/HartCheck-Admin/Views/BugReport/Index.cshtml]
+[C:/Users/janta/source/repos/Hart_Check_Official/HartCheck-Admin/Views/BugReport/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQnVnUmVwb3J0XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/james/source/repos/HartCheckWeb/HartCheck-Admin/Views/EducationalResource/Create.cshtml]
+[C:/Users/janta/source/repos/Hart_Check_Official/HartCheck-Admin/Views/Doctor/Approve.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXEFwcHJvdmUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/janta/source/repos/Hart_Check_Official/HartCheck-Admin/Views/Doctor/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/janta/source/repos/Hart_Check_Official/HartCheck-Admin/Views/Doctor/Deny.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXERlbnkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/janta/source/repos/Hart_Check_Official/HartCheck-Admin/Views/Doctor/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/janta/source/repos/Hart_Check_Official/HartCheck-Admin/Views/Doctor/View.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXFZpZXcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/janta/source/repos/Hart_Check_Official/HartCheck-Admin/Views/Doctor/ViewApproved.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXFZpZXdBcHByb3ZlZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/janta/source/repos/Hart_Check_Official/HartCheck-Admin/Views/Doctor/ViewDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXFZpZXdEZW5pZWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/janta/source/repos/Hart_Check_Official/HartCheck-Admin/Views/Doctor/ViewPending.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXFZpZXdQZW5kaW5nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/janta/source/repos/Hart_Check_Official/HartCheck-Admin/Views/EducationalResource/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWR1Y2F0aW9uYWxSZXNvdXJjZVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/james/source/repos/HartCheckWeb/HartCheck-Admin/Views/EducationalResource/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWR1Y2F0aW9uYWxSZXNvdXJjZVxEZWxldGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/james/source/repos/HartCheckWeb/HartCheck-Admin/Views/EducationalResource/Edit.cshtml]
+[C:/Users/janta/source/repos/Hart_Check_Official/HartCheck-Admin/Views/EducationalResource/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWR1Y2F0aW9uYWxSZXNvdXJjZVxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/james/source/repos/HartCheckWeb/HartCheck-Admin/Views/EducationalResource/Index.cshtml]
+[C:/Users/janta/source/repos/Hart_Check_Official/HartCheck-Admin/Views/EducationalResource/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRWR1Y2F0aW9uYWxSZXNvdXJjZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/james/source/repos/HartCheckWeb/HartCheck-Admin/Views/Home/Index.cshtml]
+[C:/Users/janta/source/repos/Hart_Check_Official/HartCheck-Admin/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/james/source/repos/HartCheckWeb/HartCheck-Admin/Views/Home/Privacy.cshtml]
+[C:/Users/janta/source/repos/Hart_Check_Official/HartCheck-Admin/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/james/source/repos/HartCheckWeb/HartCheck-Admin/Views/Shared/Error.cshtml]
+[C:/Users/janta/source/repos/Hart_Check_Official/HartCheck-Admin/Views/Patient/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/janta/source/repos/Hart_Check_Official/HartCheck-Admin/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/james/source/repos/HartCheckWeb/HartCheck-Admin/Views/Shared/_LoginPartial.cshtml]
+[C:/Users/janta/source/repos/Hart_Check_Official/HartCheck-Admin/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/james/source/repos/HartCheckWeb/HartCheck-Admin/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/janta/source/repos/Hart_Check_Official/HartCheck-Admin/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/james/source/repos/HartCheckWeb/HartCheck-Admin/Views/User/Approve.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxBcHByb3ZlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/james/source/repos/HartCheckWeb/HartCheck-Admin/Views/User/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxEZWxldGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/james/source/repos/HartCheckWeb/HartCheck-Admin/Views/User/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/james/source/repos/HartCheckWeb/HartCheck-Admin/Views/User/ViewApproved.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxWaWV3QXBwcm92ZWQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/james/source/repos/HartCheckWeb/HartCheck-Admin/Views/User/ViewDeclined.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxWaWV3RGVjbGluZWQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/james/source/repos/HartCheckWeb/HartCheck-Admin/Views/User/ViewPending.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxWaWV3UGVuZGluZy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/james/source/repos/HartCheckWeb/HartCheck-Admin/Views/_ViewImports.cshtml]
+[C:/Users/janta/source/repos/Hart_Check_Official/HartCheck-Admin/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/james/source/repos/HartCheckWeb/HartCheck-Admin/Views/_ViewStart.cshtml]
+[C:/Users/janta/source/repos/Hart_Check_Official/HartCheck-Admin/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/james/source/repos/HartCheckWeb/HartCheck-Admin/Views/Shared/_Layout.cshtml]
+[C:/Users/janta/source/repos/Hart_Check_Official/HartCheck-Admin/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-ugcri45ixj

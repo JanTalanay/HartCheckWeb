@@ -61,7 +61,7 @@ namespace Hart_Check_Official.Controllers
                 return BadRequest(ModelState);
             }
             var bugReport = _medicalHistoryRepository.GetMedicalHistories()
-                .Where(e => e.pastSurgicalHistory.Trim().ToUpper() == medicalHistoryCreate.pastSurgicalHistory.TrimEnd().ToUpper())
+                .Where(e => e.medicalHistory.Trim().ToUpper() == medicalHistoryCreate.medicalHistory.TrimEnd().ToUpper())
                 .FirstOrDefault();
 
             if (bugReport != null)

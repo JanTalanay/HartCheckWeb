@@ -76,12 +76,6 @@ namespace Hart_Check_Official.Controllers
             }
             var bloodpressureMap = _mapper.Map<BloodPressure>(bloodPressureCreate);
 
-            //if (!_bloodPressureRepository.CreateBloodPressure(bloodpressureMap))
-            //{
-            //    ModelState.AddModelError("", "Something Went Wrong while saving");
-            //    return StatusCode(500, ModelState);
-            //}
-            //return Ok("Successfully created");
             try
             {
                 _bloodPressureRepository.CreateBloodPressure(bloodpressureMap);

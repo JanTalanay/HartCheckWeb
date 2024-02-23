@@ -41,6 +41,9 @@ builder.Services.AddScoped<IViewPatientListsRepository, ViewPatientListsReposito
 builder.Services.AddScoped<IDoctorEditProfileRepository, DoctorEditProfileRepository>();
 
 builder.Services.AddScoped<IBloodPressureThresholdRepository, BloodPressureThresholdRepository>();
+builder.Services.AddScoped<IMedicineRepository, MedicineRepository>();
+builder.Services.AddScoped<IDiagnosisRepository, DiagnosisRepository>();
+builder.Services.AddScoped<IConditionRepository, ConditionRepository>();
 
 
 

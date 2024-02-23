@@ -47,6 +47,16 @@ namespace Hart_Check_Official.Repository
         {
             _context.Add(consultation);
             _context.SaveChanges();
+
+            int consultationID = consultation.consultationID;
+
+            var chat = new Chat
+            {
+                consultationID = consultationID
+            };
+            _context.Add(chat);
+            _context.SaveChanges();
+
             return (consultation);
         }
 
@@ -68,7 +78,7 @@ namespace Hart_Check_Official.Repository
 
         public HealthCareProfessional GetHealthCareProfessionalByID(int doctorID)
         {
-            return _context.HealthCareProfessional.FirstOrDefault(hcp => hcp.doctorID == doctorID);
+            return _context.HealthCareProfessional.FirstOrDefault(hcp => hcp.doctorID == doctorID); 
         }
 
 
