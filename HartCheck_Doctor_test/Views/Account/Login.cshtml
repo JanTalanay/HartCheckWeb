@@ -1,0 +1,35 @@
+﻿@model HartCheck_Doctor_test.DTO.UserDto
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "_Layout";
+}
+
+   
+    <div class="main_container">
+        <div class="loginform">
+            <h2>Login</h2>
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                
+                @Html.TextBoxFor(model => model.email, new { @class = "inp_log",placeholder="Email" })
+                @Html.ValidationMessageFor(model => model.email)
+                
+                @Html.PasswordFor(model => model.password, new { @class = "inp_log_pass",placeholder="Password" })
+                @Html.ValidationMessageFor(model => model.password)
+                
+                <a href="@Url.Action("ForgotPassword", "Account")">Forgot Password?</a>
+                <button type="submit" class="btn_primary">Login</button>
+            }
+            
+            <button class="btn_secondary" onclick="window.location.href='@Url.Action("Register", "Account")'">Register Here!</button>
+        </div>
+        @if (!string.IsNullOrEmpty(ViewBag.Message))
+        {
+            <div class="alert alert-info">
+                @ViewBag.Message
+            </div>
+        }
+        <div class="footer">© 2023 - 2025 All Rights Reserved. HartCheck</div>
+    </div>

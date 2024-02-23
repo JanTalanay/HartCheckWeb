@@ -1,0 +1,20 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+    
+}
+
+@using (Html.BeginForm("RegisterClinic", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("id", "string id", new { @class = "form-control" })
+    <input type="submit" value="Submit" id="sksks" hidden/>
+                                                     
+}
+
+<script>
+  // Simulate button click
+  document.getElementById("sksks").click();
+</script>

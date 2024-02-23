@@ -1,0 +1,38 @@
+﻿@model HartCheck_Doctor_test.DTO.BugReportDto
+
+@{
+    ViewBag.Title = "Bug Report";
+    Layout = "_Layout";
+}
+
+    <div class="main_container" style="margin-left: 50%">
+        <div class="loginform c" style="height: 550px;background-color: white; border-radius:  10px; box-shadow:  0  4px  8px  0 rgba(0,  0,  0,  0.2),  0  6px  20px  0 rgba(0,  0,  0,  0.19); ">
+            <h2>Report a Problem</h2>
+                <p>Please select a feature where you encountered the problem and input its description.
+                </p>
+            @using (Html.BeginForm("ReportABug", "Home", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.DropDownListFor(model => model.featureID, new List<SelectListItem>
+                {
+                    new SelectListItem { Text = "Login", Value = "1" },
+                    new SelectListItem { Text = "Register", Value = "2" },
+                    new SelectListItem { Text = "EditProfile", Value = "3" },
+                    new SelectListItem { Text = "Manage/View Appointment", Value = "4" },
+                    new SelectListItem { Text = "Home", Value = "5" },
+                    new SelectListItem { Text = "Chat", Value = "6" },
+                    new SelectListItem { Text = "BP Data", Value = "7" },
+                    new SelectListItem { Text = "BP Threshold", Value = "8" },
+                    new SelectListItem { Text = "Patient Management", Value = "9" },
+                }, "Select Feature", new { @class = "inp_log_pass" })
+                @Html.ValidationMessageFor(model => model.featureID)
+
+                @Html.TextAreaFor(model => model.description, new { @class = "inp_log_pass", placeholder = "Problem Description" })
+                @Html.ValidationMessageFor(model => model.description)
+
+                <button type="submit" class="btn_primary">Submit</button>
+            }
+        </div>
+    </div>
+
+

@@ -1,0 +1,37 @@
+﻿@model LicenseViewModel
+
+@{
+    ViewBag.Title = "License Upload";
+    Layout = null;
+}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist&display=swap" rel="stylesheet" asp-append-version="true">
+</head>
+<body style="height: 100vh;">
+@if (ViewData.ModelState.IsValid)
+{
+    <div class="main_container b" style="margin-left: 15%; margin-bottom: 10%;">
+        <div class="loginform c" style="height: 500px;">
+            <h2>License Upload</h2>
+            <p>Please enter your license ID and upload your license photo.
+            </p>
+            <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="uploadLicense">
+            <input class="inp_log" placeholder="License ID" type="text" name="LicenseID" id="LicenseID">
+            <input class="inp_log_pass" type="file" name="licenseFile" id="LicenseFile">
+            <div style="margin-bottom: 5%;">
+                <button type="submit" class="btn_primary">Upload</button>
+            </div>
+            </form>
+        </div>
+        <div class="footer">© 2023 - 2025 All Rights Reserved. HartCheck</div>
+    </div>
+}
+else
+{
+    <p>Invalid model state. Please correct the errors.</p>
+}
+
+</body>

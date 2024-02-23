@@ -1,0 +1,59 @@
+﻿@model List<PatientDoctorViewModel>
+
+@{
+    ViewBag.Title = "View Patient";
+    Layout = "_Layout";
+}
+    <div class="main_container" style="margin-left: 50%">
+        <div class="loginform e" style="background-color: white; border-radius:  10px; box-shadow:  0  4px  8px  0 rgba(0,  0,  0,  0.2),  0  6px  20px  0 rgba(0,  0,  0,  0.19);">
+            <h1 style="margin-top:10%">Patient Info</h1>
+                
+            @if (Model != null)
+            {
+                <div class="patinfo">
+                    @foreach (var item in Model)
+                    {
+                        <div class="pat-item">
+                            <h3>First Name:</h3>
+                            <p>@item.FirstName</p>
+                        </div>
+                        
+                        <div class="pat-item">
+                            <h3>Last Name:</h3>
+                            <p>@item.LastName</p>
+                        </div>        
+                        
+                        <div class="pat-item">
+                            <h3>Phone:</h3>
+                            <p>@item.Phone</p>
+                        </div>     
+                        
+                        <div class="pat-item">
+                            <h3>Current Condition:</h3>
+                            <p>@item.CurrentCondition</p>
+                        </div>      
+                        
+                        <div class="pat-item">
+                            <h3>Previous Conditions:</h3>
+                            <p>@item.PreviousCondition</p>
+                        </div>      
+                        
+                        <div class="pat-item">
+                            <h3>Previous Medications:</h3>
+                            <p>@item.PreviousMedications</p>
+                        </div>       
+                        
+                        <div class="pat-item">
+                            <h3>Surgical History:</h3>
+                            <p>@item.SurgicalHistory</p>
+                        </div>
+                    }
+                </div>
+            }
+                
+            else
+            {
+                <h2>No Info.</h2>
+            }
+        </div>
+    </div>

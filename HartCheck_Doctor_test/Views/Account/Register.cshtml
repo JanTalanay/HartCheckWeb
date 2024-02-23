@@ -1,0 +1,43 @@
+﻿@model HartCheck_Doctor_test.DTO.UserDto
+@{
+    ViewBag.Title = "Register";
+    Layout = "_Layout";
+}
+   <div class="main_container">
+       <div class="loginform b">
+           <h2>Register</h2>
+           @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+           {
+               @Html.AntiForgeryToken()
+               
+               @Html.TextBoxFor(model => model.email, new { @class = "inp_log" ,placeholder="Email"})
+               @Html.ValidationMessageFor(model => model.email)
+               
+               @Html.TextBoxFor(model => model.firstName, new { @class = "inp_log" ,placeholder="First Name"})
+               @Html.ValidationMessageFor(model => model.firstName)
+               
+               @Html.TextBoxFor(model => model.lastName, new { @class = "inp_log" ,placeholder="Last Name" })
+               @Html.ValidationMessageFor(model => model.lastName)
+               
+               @Html.PasswordFor(model => model.password, new { @class = "inp_log" ,placeholder="Password" })
+               @Html.ValidationMessageFor(model => model.password)
+               
+               @Html.TextBoxFor(model => model.birthdate, new { @class = "inp_log" ,placeholder="Birthdate [YY/MM/DD]" })
+               @Html.ValidationMessageFor(model => model.birthdate)
+               
+               @Html.DropDownListFor(model => model.gender, new List<SelectListItem>
+               {
+                   new SelectListItem { Text = "Male", Value = "0" },
+                   new SelectListItem { Text = "Female", Value = "1" }
+               }, "Select Gender", new { @class ="inp_log"})
+               @Html.ValidationMessageFor(model => model.gender)
+               
+               @Html.TextBoxFor(model => model.phoneNumber, new { @class = "inp_log_pass" ,placeholder="Phone Number" })
+               @Html.ValidationMessageFor(model => model.phoneNumber)
+               <a href="@Url.Action("Login", "Account")">Already have an account?</a>
+               <button type="submit" class="btn_primary">Register</button>
+           }
+       </div>
+   </div>
+
+

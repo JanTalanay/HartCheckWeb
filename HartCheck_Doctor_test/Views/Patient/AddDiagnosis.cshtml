@@ -1,0 +1,20 @@
+﻿@model HartCheck_Doctor_test.DTO.DiagnosisDto
+
+@{
+    ViewBag.Title = "AddCondition";
+    Layout = "_Layout";
+}
+<div class="main_container" style="margin-left: 50%; margin-bottom: 10%">
+    <div class="loginform c" style="height:450px;background-color: white; border-radius:  10px; box-shadow:  0  4px  8px  0 rgba(0,  0,  0,  0.2),  0  6px  20px  0 rgba(0,  0,  0,  0.19); ">
+        <h2 style="margin-top: 5%">Add Diagnosis</h2>
+        @using (Html.BeginForm("AddDiagnosis", "Patient", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.TextAreaFor(model => model.Diagnosis, new { @class = "inp_log_pass", placeholder="Diagnosis"})
+            @Html.ValidationMessageFor(model => model.Diagnosis)
+            <input type="hidden" name="patientID" value="@Model.patientID" />
+            <button type="submit" class="btn_primary">Add Diagnosis</button>
+                                                         
+        }
+    </div>
+</div>

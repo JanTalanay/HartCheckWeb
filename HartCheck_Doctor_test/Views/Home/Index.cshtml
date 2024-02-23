@@ -1,8 +1,77 @@
-﻿@{
+﻿@model List<PatientDoctorViewModel>
+@{
     ViewData["Title"] = "Home Page";
 }
+@if (Model != null && Model.Count > 0)
+{
+    <head>
+        <link rel="stylesheet" href="~/css/datatables.min.css" asp-append-version="true"/>
+    </head>
+    <!--style="border: solid #212121 2px;  background-color: white; border-radius:  10px; box-shadow:  0  4px  8px  0 rgba(0,  0,  0,  0.2),  0  6px  20px  0 rgba(0,  0,  0,  0.19);-->
+    <div class="main_container_x" style="width: 55vw;margin-left: 50%; margin-top: 10%;border: solid #212121 2px;  background-color: white; border-radius:  10px; box-shadow:  0  4px  8px  0 rgba(0,  0,  0,  0.2),  0  6px  20px  0 rgba(0,  0,  0,  0.19);">
+        <h1 style="margin-top: 10%">Patient List</h1>
+        <div class="table_container" >
+        
+                 <table id="example" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Phone No.</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.FirstName</td>
+                                <td>@item.LastName</td>
+                                <td>@item.Email</td>
+                                <td>@item.Phone</td>
+                                <td style="display: flex; flex-direction: row">
+                                    <form method="get" enctype="multipart/form-data" asp-controller="Patient" asp-action="ViewPatient">
+                                        <input type="hidden" name="patientID" value="@item.PatientID" />
+                                        <button type="submit" class="btn_primary" style="height:  30px; width:  120px; padding: 2%; margin-top: 0; margin-right: 10px">View Patient Info</button>
+                                    </form>
+                                    
+                                    <select id="actionDropdown_@item.PatientID" class="inp_log_pass" style="height:  30px; width:  35%;" onchange="handleActionChange(this, '@item.PatientID')">
+                                        <option value="">Select Action</option>
+                                        <option value="AddCondition">Add Condition</option>
+                                        <option value="AddDiagnosis">Add Diagnosis</option>
+                                        <option value="AddMedicine">Add Medicine</option>
+                                        <option value="Payment">Send Invoice</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+            </div>
+    </div>
+    
+   
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="~/js/datatables.min.js" asp-append-version="true"></script>
+
+    <script>
+    new DataTable('#example');
+    </script>
+    
+    <script>
+    function handleActionChange(selectElement, patientId) {
+        var action = selectElement.value;
+        if (action) {
+            window.location.href = `/Patient/${action}?patientID=${patientId}`;
+        }
+    }
+    </script>
+    
+
+}
+else{
+    <h1 style="margin-left: 40%;">You have no Patients</h1>
+}
+

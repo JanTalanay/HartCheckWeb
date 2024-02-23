@@ -1,0 +1,48 @@
+﻿@page
+@{
+    ViewBag.Title = "Chat";
+    Layout = "_Layout";//disable layout if recording for mobile (Layout="";)
+}
+<head>
+    <link rel="stylesheet" href="~/css/chat.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    
+</head>
+<body style="background: #EDF2F4; color: black;">
+<div class="container-fluid h-100" style="margin-top:10%;">
+    <div class="row justify-content-center h-100">
+        <div class="col-md-8 col-xl-6 chat">
+            <div class="card" style="height:600px;border: 2px solid black;border-radius:  10px; box-shadow:  0  4px  8px  0 rgba(0,  0,  0,  0.2),  0  6px  20px  0 rgba(0,  0,  0,  0.19);">
+                <div class="card-header msg_head">
+                    <div class="d-flex bd-highlight">
+                        <div class="user_info">
+                            <!--replace with patient name-->
+                            <span class="user_name">Doctor</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body msg_card_body" style="border-top: 1px solid black;border-bottom: 1px solid black;">
+                    <ul id="messagesList"></ul>
+                </div>
+                <!--you can put form here-->
+                <div class="card-footer">
+                    <div class="input-group">
+                        <!--<input type="text" id="userInput" hidden/>-->
+                        <input name="" type="text" class="form-control type_msg" placeholder="Type your message..." id="messageInput"/>
+                        <div class="input-group-append">
+                            <input class="input-group-text send_btn" type="button" id="sendButton" value="Send"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="text" id="userInput" style="margin-right: 80%;width:1%; border: 0; background:#EDF2F4; color:#EDF2F4;  "/>
+</body>
+
+
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js" ></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

@@ -1,0 +1,58 @@
+﻿@model List<ConsultationViewModel>
+@{
+    ViewData["Title"] = "View Consultation";
+}
+@if (Model != null && Model.Count > 0)
+{
+    <head>
+        <link rel="stylesheet" href="~/css/datatables.min.css" asp-append-version="true"/>
+    </head>
+    <div class="main_container_x" style="width: 55vw;margin-left: 50%; margin-top: 10%;border: solid #212121 2px;  background-color: white; border-radius:  10px; box-shadow:  0  4px  8px  0 rgba(0,  0,  0,  0.2),  0  6px  20px  0 rgba(0,  0,  0,  0.19);">
+        <h1 style="margin-top: 10%">Consultation Requests</h1>
+        <div class="table_container">
+            <table id="example" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone No.</th>
+                    <th>Consultation Sched</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.FirstName</td>
+                        <td>@item.LastName</td>
+                        <td>@item.Email</td>
+                        <td>@item.Phone</td>
+                        <td>@item.schedDateTime</td>
+                        <td>
+                            <form asp-controller="Patient" asp-action="ViewConsultation">
+                                <input type="hidden" name="consultationId" value="@item.consultationID"/>
+                                <button type="submit" class="btn_secondary" style="height: 25px; width: 80%;">Deny Request</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+   
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="~/js/datatables.min.js" asp-append-version="true"></script>
+
+    <script>
+    new DataTable('#example');
+    </script>
+
+}
+else{
+    <h1 style="margin-left: 40%;">You have no Patients</h1>
+}
+

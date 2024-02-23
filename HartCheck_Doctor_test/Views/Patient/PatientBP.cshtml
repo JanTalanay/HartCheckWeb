@@ -1,0 +1,70 @@
+﻿@model IEnumerable<HartCheck_Doctor_test.Models.BpViewModel>
+
+@{
+    ViewBag.Title = "Patient BP";
+    Layout = "_Layout";
+}
+<div class="main_container" style="width:55vw;margin-left: 50%;height:70%; border: solid #212121 2px;  background-color: white; border-radius:  10px; box-shadow:  0  4px  8px  0 rgba(0,  0,  0,  0.2),  0  6px  20px  0 rgba(0,  0,  0,  0.19);">
+    <div class="main_container_x">
+        <h2 style="margin-bottom: 5%; margin-top: 3%;">Patient BP</h2>
+            <select id="patientDropdown" class="inp_log_pass" style="margin-bottom: 5%">
+                @foreach (var patient in Model)
+                {
+                    <option value="@patient.PatientID">@patient.FirstName @patient.LastName</option>
+                }
+            </select>
+        
+            <canvas id="myChart" style="width: 80%; margin-bottom: 5%;"></canvas>
+    </div>
+</div>
+
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+   type: 'line',
+   data: {
+       labels: [],
+       datasets: [
+           {
+               label: 'Systolic',
+               data: [],
+               backgroundColor: 'rgba(75, 192, 192, 0.2)',
+               borderColor: 'rgba(75, 192, 192, 1)',
+               borderWidth: 1
+           },
+           {
+               label: 'Diastolic',
+               data: [],
+               backgroundColor: 'rgba(255, 99, 132, 0.2)',
+               borderColor: 'rgba(255, 99, 132, 1)',
+               borderWidth: 1
+           }
+       ]
+   },
+   options: {
+       scales: {
+           y: {
+               beginAtZero: true
+           }
+       }
+   }
+});
+
+document.getElementById('patientDropdown').addEventListener('change', function() {
+  var patientId = this.value;
+  console.log('Selected patient ID:', patientId);
+
+  var url = '/Patient/GetPatientBP/' + patientId;
+  console.log('Fetch API call URL:', url);
+
+  fetch(url)
+      .then(response => response.json())
+      .then(data => {
+          myChart.data.labels = data.map(bp => bp.dateTaken);
+          myChart.data.datasets[0].data = data.map(bp => bp.systolic);
+          myChart.data.datasets[1].data = data.map(bp => bp.diastolic);
+          myChart.update();
+      });
+});
+</script>
+
