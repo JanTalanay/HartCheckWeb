@@ -32,11 +32,11 @@ namespace Hart_Check_Official.Controllers
             }
             return Ok(condition);
         }
-        [HttpGet("{patientID}")]
+        [HttpGet("{patientID}/{doctorID}")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<ConditionDto>))]
-        public IActionResult GetConditionsByPatientId(int patientID)
+        public IActionResult GetConditionsByPatientId(int patientID, int doctorID)
         {
-            var conditions = _mapper.Map<List<ConditionDto>>(_conditionRepository.GetConditionsByPatientId(patientID));
+            var conditions = _mapper.Map<List<ConditionDto>>(_conditionRepository.GetConditionsByPatientId(patientID, doctorID));
 
             if (!ModelState.IsValid)
             {

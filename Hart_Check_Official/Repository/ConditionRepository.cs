@@ -26,18 +26,20 @@ namespace Hart_Check_Official.Repository
         {
             return _context.Condition.Any(e => e.conditionID == conditionID);
         }
-        public ICollection<Condition> GetConditionsByPatientId(int patientID)
+        public ICollection<Condition> GetConditionsByPatientId(int patientID, int doctorID)
         {
-            // Join the Condition and Consultation tables on consultationID and filter by patientId
             return _context.Condition
-                           .Join(_context.Consultation,
-                                 condition => condition.consultationID,
-                                 consultation => consultation.consultationID,
-                                 (condition, consultation) => new { condition, consultation })
-                           .Where(x => x.consultation.patientID == patientID)
-                           .Select(x => x.condition)
-                           .ToList();
+                .Join(_context.Consultation,
+                    condition => condition.consultationID,
+                    consultation => consultation.consultationID,
+                    (condition, consultation) => new { condition, consultation })
+                .Join(_context.DoctorSchedule,
+                    conditionConsultation => conditionConsultation.consultation.doctorSchedID,
+                    doctorSchedule => doctorSchedule.doctorSchedID,
+                    (conditionConsultation, doctorSchedule) => new { conditionConsultation.condition, conditionConsultation.consultation, doctorSchedule })
+                .Where(x => x.consultation.patientID == patientID && x.doctorSchedule.doctorID == doctorID)
+                .Select(x => x.condition)
+                .ToList();
         }
-
     }
 }

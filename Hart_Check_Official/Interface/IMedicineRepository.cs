@@ -7,6 +7,6 @@ namespace Hart_Check_Official.Interface
         ICollection<Medicine> GetMedicines();
         Medicine GetMedicine(int medicineID);
         bool MedicineExist(int medicineID);
-        ICollection<Medicine> GetMedicinesByPatientID(int patientID);
+        public ICollection<Medicine> GetMedicinesByPatientID(int patientID, int doctorID);
     }
 }

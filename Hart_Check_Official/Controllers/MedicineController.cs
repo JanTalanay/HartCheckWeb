@@ -31,11 +31,11 @@ namespace Hart_Check_Official.Controllers
             }
             return Ok(meds);
         }
-        [HttpGet("{patientID}")]
+        [HttpGet("{patientID}/{doctorID}")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<MedicineDto>))]
-        public IActionResult GetMedicinesByPatientId(int patientID)
+        public IActionResult GetMedicinesByPatientId(int patientID, int doctorID)
         {
-            var medicines = _mapper.Map<List<MedicineDto>>(_medicineRepository.GetMedicinesByPatientID(patientID));
+            var medicines = _mapper.Map<List<MedicineDto>>(_medicineRepository.GetMedicinesByPatientID(patientID, doctorID));
 
             if (!ModelState.IsValid)
             {

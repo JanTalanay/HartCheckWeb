@@ -16,16 +16,20 @@ namespace Hart_Check_Official.Repository
             return _context.Medicine.Where(e => e.medicineID == medicineID).FirstOrDefault();
         }
 
-        public ICollection<Medicine> GetMedicinesByPatientID(int patientID)
+        public ICollection<Medicine> GetMedicinesByPatientID(int patientID, int doctorID)
         {
             return _context.Medicine
-               .Join(_context.Consultation,
-                     medicine => medicine.consultationID,
-                     consultation => consultation.consultationID,
-                     (medicine, consultation) => new { medicine, consultation })
-               .Where(x => x.consultation.patientID == patientID)
-               .Select(x => x.medicine)
-               .ToList();
+                .Join(_context.Consultation,
+                    medicine => medicine.consultationID,
+                    consultation => consultation.consultationID,
+                    (medicine, consultation) => new { medicine, consultation })
+                .Join(_context.DoctorSchedule,
+                    medicineConsultation => medicineConsultation.consultation.doctorSchedID,
+                    doctorSchedule => doctorSchedule.doctorSchedID,
+                    (medicineConsultation, doctorSchedule) => new { medicineConsultation.medicine, medicineConsultation.consultation, doctorSchedule })
+                .Where(x => x.consultation.patientID == patientID && x.doctorSchedule.doctorID == doctorID)
+                .Select(x => x.medicine)
+                .ToList();
         }
 
         public ICollection<Medicine> GetMedicines()

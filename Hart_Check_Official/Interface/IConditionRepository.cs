@@ -7,7 +7,7 @@ namespace Hart_Check_Official.Interface
         ICollection<Condition> GetConditions();
         Condition GetCondition(int conditionID);
         bool ConditionExist(int conditionID);
-        ICollection<Condition> GetConditionsByPatientId(int patientId);
+        ICollection<Condition> GetConditionsByPatientId(int patientID, int doctorID);
 
     }
 }

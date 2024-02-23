@@ -32,11 +32,11 @@ namespace Hart_Check_Official.Controllers
             }
             return Ok(diagnosis);
         }
-        [HttpGet("{patientID}")]
+        [HttpGet("{patientID}/{doctorID}")] // Updated route to include doctorID
         [ProducesResponseType(200, Type = typeof(IEnumerable<DiagnosisDto>))]
-        public IActionResult GetDiagnosesByPatientId(int patientID)
+        public IActionResult GetDiagnosesByPatientId(int patientID, int doctorID) // Updated method to include doctorID
         {
-            var diagnoses = _mapper.Map<List<DiagnosisDto>>(_diagnosisRepository.GetDiagnosisByPatientId(patientID));
+            var diagnoses = _mapper.Map<List<DiagnosisDto>>(_diagnosisRepository.GetDiagnosisByPatientId(patientID, doctorID));
 
             if (!ModelState.IsValid)
             {
