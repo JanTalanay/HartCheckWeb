@@ -9,6 +9,11 @@
     
 </head>
 <body style="background: #EDF2F4; color: black;">
+<div class="notif_box" id="notif_box">
+    <div class="notif_mes">
+        Patient X has sent you a message.
+    </div>
+</div>
 <div class="container-fluid h-100" style="margin-top:10%;">
     <div class="row justify-content-center h-100">
         <div class="col-md-8 col-xl-6 chat">
@@ -41,6 +46,12 @@
 <input type="text" id="userInput" style="margin-right: 80%;width:1%; border: 0; background:#EDF2F4; color:#EDF2F4;  "/>
 </body>
 
+<script>
+    let notif_box = document.getElementById("notif_box");
+    function toggleNotif(){
+        notif_box.classList.toggle("open-box");
+    }
+</script>
 
 <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/chat.js"></script>

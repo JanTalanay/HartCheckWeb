@@ -8,6 +8,13 @@ public class PatientDoctorViewModel
     public string Email { get; set; }
     public long Phone { get; set; }
     
+    public int DiagnosisID  {get; set; }
+    public string Diagnosis {get; set; }
+    
+    public int DoctorScheduleID { get; set; }
+    
+    public DateTime SchedDateTime { get; set; }
+    
     public string CurrentCondition { get; set; }
     
     public string PreviousCondition { get; set; }

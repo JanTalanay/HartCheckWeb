@@ -76,13 +76,18 @@ function changeTitle(newTitle) {
     document.title = newTitle;
 }
 
+function toggleNotif(){
+    let notif_box = document.getElementById("notif_box");
+    notif_box.classList.toggle("open-box");
+}
+
 
 function toggleNav(){
     let subMenu = document.getElementById("submenu");
     subMenu.classList.toggle("open-menu");
 
     var notifs = document.getElementById("notifications");
-    notifs.innerHTML = "Patient X has sent you a message"
+    notifs.innerHTML = "Patient X has sent you a message"//alter here
     console.log("toggled!")
 }
 

@@ -233,6 +233,7 @@ public class PatientController : Controller
     {
         if (int.TryParse(Request.Query["patientID"], out int patientID))
         {
+            var userID = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var patId = _dbContext.Patients.FirstOrDefault(p => p.patientID == patientID);
             if (patId == null)
             {
@@ -242,6 +243,102 @@ public class PatientController : Controller
             {
                 patientID = patId.patientID
             };
+            if (int.TryParse(userID, out int userIDInt))
+            {
+                var doctor = _dbContext.HealthCareProfessional.FirstOrDefault(u => u.usersID == userIDInt);
+                Console.WriteLine(doctor.doctorID);
+                if (doctor != null)
+                {
+                    var isAssociated = _dbContext.PatientsDoctor
+                        .Any(pd => pd.doctorID == doctor.doctorID && pd.patientID == patientID);
+                    if (isAssociated)
+                    {
+                        var consultationID = _dbContext.Consultation
+                            .Where(c => c.patientID == patId.patientID) // Replace patientID with the actual patient ID you want to retrieve the consultationID for
+                            .Join(_dbContext.PatientsDoctor,
+                                c => c.patientID,
+                                pd => pd.patientID,
+                                (c, pd) => new { Consultation = c, PatientsDoctor = pd })
+                            .Where(cp => cp.PatientsDoctor.doctorID == doctor.doctorID) // Replace doctorID with the actual doctor ID from the claims
+                            .Select(cp => cp.Consultation.consultationID)
+                            .FirstOrDefault();
+                        
+                        
+                        var schedDateTime = _dbContext.Consultation
+                            .Where(c => c.consultationID == consultationID) // Use the consultationID obtained
+                            .Join(_dbContext.DoctorSchedule,
+                                c => c.doctorSchedID, // Assuming doctorSchedID is the key to join Consultation and DoctorSchedule
+                                ds => ds.doctorSchedID,
+                                (c, ds) => new { Consultation = c, DoctorSchedule = ds })
+                            .Select(result => result.DoctorSchedule.schedDateTime)
+                            .FirstOrDefault();
+                        
+                        var patientsDoctors = _dbContext.Patients
+                            .Where(p => p.patientID == patId.patientID)
+                            .Join(_dbContext.Users,
+                                p => p.usersID,
+                                u => u.usersID,
+                                (p, u) => new { Patient = p, User = u })
+                            .Join(_dbContext.PreviousMedication,
+                                pu => pu.Patient.patientID,
+                                pm => pm.patientID,
+                                (pu, pm) => new { PatientUser = pu, PreviousMedication = pm })
+                            .Join(_dbContext.MedicalCondition,
+                                pum => pum.PatientUser.Patient.patientID,
+                                mc => mc.patientID,
+                                (pum, mc) => new
+                                {
+                                    PatientUser = pum.PatientUser,
+                                    PreviousMedication = pum.PreviousMedication,
+                                    MedicalCondition = mc
+                                })
+                            .Join(_dbContext.MedicalHistory,
+                                pumc => pumc.PatientUser.Patient.patientID,
+                                mh => mh.patientID,
+                                (pumc, mh) => new PatientDoctorViewModel
+                                {
+                                    PatientID = pumc.PatientUser.Patient.patientID,
+                                    FirstName = pumc.PatientUser.User.firstName,
+                                    LastName = pumc.PatientUser.User.lastName,
+                                    Email = pumc.PatientUser.User.email,
+                                    Phone = pumc.PatientUser.User.phoneNumber,
+                                    CurrentCondition = pumc.MedicalCondition.medicalCondition,
+                                    PreviousCondition = pumc.MedicalCondition.conditionName,
+                                    PreviousMedications = pumc.PreviousMedication.previousMed,
+                                    SurgicalHistory = mh.pastSurgicalHistory
+                                })
+                            .Join(_dbContext.Consultation,
+                                p => p.PatientID,
+                                c => c.patientID,
+                                (p, c) => new { PatientDoctorViewModel = p, Consultation = c })
+                            .Join(_dbContext.Diagnosis,
+                                pc => pc.Consultation.consultationID,
+                                d => d.consultationID,
+                                (pc, d) => new PatientDoctorViewModel
+                                {
+                                    PatientID = pc.PatientDoctorViewModel.PatientID,
+                                    FirstName = pc.PatientDoctorViewModel.FirstName,
+                                    LastName = pc.PatientDoctorViewModel.LastName,
+                                    Email = pc.PatientDoctorViewModel.Email,
+                                    Phone = pc.PatientDoctorViewModel.Phone,
+                                    CurrentCondition = pc.PatientDoctorViewModel.CurrentCondition,
+                                    PreviousCondition = pc.PatientDoctorViewModel.PreviousCondition,
+                                    PreviousMedications = pc.PatientDoctorViewModel.PreviousMedications,
+                                    SchedDateTime = schedDateTime,
+                                    SurgicalHistory = pc.PatientDoctorViewModel.SurgicalHistory,
+                                    DiagnosisID = d.diagnosisID,
+                                    Diagnosis = d.diagnosis
+                                })
+                            .ToList();
+                        // use viewbag ViewBag.model2 = model2.PreviousCondition;
+                        ViewBag.PatientsDoctors = patientsDoctors;
+                    return View(model);
+                    }
+                    
+                }
+            }
+            
+            
             return View(model);
         }
         return BadRequest();

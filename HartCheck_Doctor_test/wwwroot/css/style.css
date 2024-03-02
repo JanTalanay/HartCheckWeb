@@ -12,7 +12,7 @@
 }
 body{
 	min-height: 100vh;
-	display: flex;
+	display:flex;
 }
 h1,
 h2,
@@ -50,8 +50,11 @@ h1,h2{
 
 .main_container{
 	width: 50vw;
+	height:  100vh;
+	display: flex;
 	margin-left: 20%;
-	margin-top: 10%;
+	overflow-y: auto;
+	flex-direction:column ;
 	justify-content: center;
 }
 .main_container.b{
@@ -232,4 +235,76 @@ h1,h2{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+
+
+
+.alt_container{
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	width: 50vw;
+	margin-left: 25%;
+	overflow-y: auto;
+}
+
+.action_form{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow-y: auto;
+	background-color: white;
+	border: solid var(--black) 2px;
+	border-radius:  10px;
+	box-shadow:  0  4px  8px  0 rgba(0,  0,  0,  0.2),  0  6px  20px  0 rgba(0,  0,  0,  0.19);
+	height: 450px;
+	width: 500px;
+}
+
+
+.inp_log_pass{
+	margin-top: 2%;
+}
+.inp_log_pass{
+	border: solid var(--grey) 1px;
+	width: 380px;
+	height: 70px;
+	padding: 2%;
+
+}
+
+#condition_{
+	display: flex;
+	flex-direction: column;
+	width: 350px;
+}
+
+.patient_info{
+	display: flex;
+	flex-direction: row;
+	margin-top: 5%;
+}
+
+.patient_info p{
+	margin-top: .8%;
+	margin-left: 2%;
+}
+
+.inp_label{
+	width: 380px;
+}
+
+#conditionsContainer{
+	margin-top: 5%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.btn_container{
+	margin-left: 5.5%;
 }
